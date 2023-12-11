@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
   title: "Products-FlavorWave",
@@ -17,7 +18,15 @@ export const metadata: Metadata = {
 };
 
 const ProductsLayout = ({ children }: { children: React.ReactNode }) => {
-  return <main>{children}</main>;
+  return (
+    <main>
+      <Navbar
+        linkClassName="bg-white rounded-lg"
+        linkHoverClassName="hover:bg-white/80"
+      />
+      {children}
+    </main>
+  );
 };
 
 export default ProductsLayout;

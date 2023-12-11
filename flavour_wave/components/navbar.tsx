@@ -9,22 +9,65 @@ import { SignInButton, UserButton } from "@clerk/nextjs";
 import { useCurrentUser } from "@/hook/use-current-user";
 import { Button } from "./ui/button";
 import MobileToggle from "./mobile-toggle";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
-const Navbar = () => {
+interface NavbarProps {
+  className?: string;
+  linkClassName?: string;
+  linkHoverClassName?: string;
+}
+
+const Navbar = ({
+  className,
+  linkClassName,
+  linkHoverClassName,
+}: NavbarProps) => {
   const currentUser = useCurrentUser();
+  const path = usePathname();
 
   return (
-    <header className="bg-yellow-400/60 py-2.5 px-8 sm:px-16 md:px-24">
+    <header
+      className={cn(
+        "bg-yellow-400/60 py-2.5 px-8 sm:px-16 md:px-24",
+        className
+      )}
+    >
       <nav className="flex justify-between items-center">
-        <Link href={"/"} className="flex items-center gap-x-1">
-          <Flower /> FlavorWave
+        <Link href={"/"} className="group flex items-center gap-x-1">
+          <Flower className="group-hover:animate-spin" /> Flavor
+          <span>Wave</span>
         </Link>
         <div className="flex items-center gap-x-2">
           <div className="hidden items-center gap-x-2  md:flex">
-            <Link href={"/products"} className="hover:underline transition-all">
+            <Link
+              href={"/"}
+              className={cn(
+                "transition-all px-2 py-1 rounded-xl hover:rounded-lg",
+                linkHoverClassName,
+                path === "/" && linkClassName
+              )}
+            >
+              Home
+            </Link>
+            <Link
+              href={"/products"}
+              className={cn(
+                "transition-all px-2 py-1 rounded-xl hover:rounded-lg",
+                linkHoverClassName,
+                path === "/products" && linkClassName
+              )}
+            >
               Products
             </Link>
-            <Link href={"/products"} className="hover:underline transition-all">
+            <Link
+              href={"/my-orders"}
+              className={cn(
+                "transition-all px-2 py-1 rounded-xl hover:rounded-lg",
+                linkHoverClassName,
+                path === "my-orders" && linkClassName
+              )}
+            >
               My orders
             </Link>
           </div>
