@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import Navbar from "./navbar";
-import { Button } from "./ui/button";
+import Navbar from "../navbar/navbar";
+import { Button } from "../ui/button";
 import { CupSoda, Star, StarHalf } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Banner = () => {
   return (

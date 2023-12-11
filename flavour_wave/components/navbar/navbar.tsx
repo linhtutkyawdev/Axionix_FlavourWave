@@ -3,11 +3,11 @@
 import { Flower, LogIn, ShoppingCartIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { ModeToggle } from "./mode-toggle";
-import ActionTooltip from "./action-tooltip";
+import { ModeToggle } from "../mode-toggle";
+import ActionTooltip from "../action-tooltip";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { useCurrentUser } from "@/hook/use-current-user";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import MobileToggle from "./mobile-toggle";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";

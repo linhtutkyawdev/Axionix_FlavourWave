@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
 
 export const metadata: Metadata = {
   title: "Products-FlavorWave",
