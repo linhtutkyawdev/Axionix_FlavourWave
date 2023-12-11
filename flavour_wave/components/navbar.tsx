@@ -1,5 +1,6 @@
 "use client";
-import { Flower, LogIn, ShoppingCartIcon, User } from "lucide-react";
+
+import { Flower, LogIn, ShoppingCartIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { ModeToggle } from "./mode-toggle";
@@ -7,6 +8,7 @@ import ActionTooltip from "./action-tooltip";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { useCurrentUser } from "@/hook/use-current-user";
 import { Button } from "./ui/button";
+import MobileToggle from "./mobile-toggle";
 
 const Navbar = () => {
   const currentUser = useCurrentUser();
@@ -18,12 +20,13 @@ const Navbar = () => {
           <Flower /> FlavorWave
         </Link>
         <div className="flex items-center gap-x-2">
-          <ActionTooltip label="Shopping Cart">
-            <ShoppingCartIcon className="w-10 h-10 p-2 bg-black text-white rounded-full" />
-          </ActionTooltip>
-          <div className="flex items-center gap-x-2">
-            <Link href={"/products"}>Products</Link>
-            <Link href={"/products"}>My orders</Link>
+          <div className="hidden items-center gap-x-2  md:flex">
+            <Link href={"/products"} className="hover:underline transition-all">
+              Products
+            </Link>
+            <Link href={"/products"} className="hover:underline transition-all">
+              My orders
+            </Link>
           </div>
           {currentUser ? (
             <UserButton
@@ -41,7 +44,11 @@ const Navbar = () => {
               </Button>
             </SignInButton>
           )}
+          <ActionTooltip label="Shopping Cart">
+            <ShoppingCartIcon className="hidden md:block w-8 h-8 p-1 bg-black text-white rounded-full" />
+          </ActionTooltip>
           <ModeToggle />
+          <MobileToggle />
         </div>
       </nav>
     </header>

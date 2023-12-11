@@ -4,8 +4,7 @@ import { useUser } from "@clerk/nextjs";
 interface IUser {
   userId: string;
   email: string;
-  firstName?: string | null;
-  lastName?: string | null;
+  fullName?: string | null;
   imageUrl: string;
 }
 
@@ -22,8 +21,7 @@ export function useCurrentUser() {
 
   const result: IUser = {
     userId: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
+    fullName: `${user.firstName} ${user.lastName}`,
     email: user.emailAddresses[0].emailAddress,
     imageUrl: user.imageUrl,
   };
