@@ -29,7 +29,7 @@ const Navbar = ({
   return (
     <header
       className={cn(
-        "bg-yellow-400/60 py-2.5 px-8 sm:px-16 md:px-24",
+        "bg-yellow-500/50 py-2.5 px-8 sm:px-16 md:px-24",
         className
       )}
     >

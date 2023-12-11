@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Banner = () => {
   return (
-    <div className="bg-yellow-400/50 relative w-full h-auto  md:h-[550px]">
+    <div className="bg-yellow-500/50 relative w-full h-auto  md:h-[550px]">
       <Navbar
         className="bg-transparent z-10"
         linkClassName="bg-yellow-400 rounded-lg"
@@ -19,7 +19,11 @@ const Banner = () => {
           <h1 className="sm:text-4xl lg:text-4xl xl:text-5xl font-semibold mb-4">
             Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet.
           </h1>
-          <Button variant={"primary"}>
+          <Button
+            variant={"primary"}
+            size={"lg"}
+            className="transition-all duration-300 text-lg md:text-xl rounded-3xl hover:rounded-xl active:scale-95"
+          >
             <CupSoda className="mr-1" /> View our products
           </Button>
           <div className="mt-3">

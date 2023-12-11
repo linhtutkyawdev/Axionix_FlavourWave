@@ -9,7 +9,7 @@ export default function Home() {
       <Banner />
 
       {/* scroll velocity section to display our products */}
-      <div className="my-12">
+      <div className="my-24">
         <h2 className="text-center text-3xl md:text-4xl mb-8 font-bold ">
           Our delicious <span className="text-emerald-600">Products</span>
         </h2>
@@ -17,7 +17,7 @@ export default function Home() {
       </div>
 
       {/* hero section */}
-      <div className="my-12">
+      <div className="my-24">
         <h2 className="text-center text-3xl md:text-4xl mb-8 font-bold ">
           Our delicious <span className="text-emerald-600">Products</span>
         </h2>

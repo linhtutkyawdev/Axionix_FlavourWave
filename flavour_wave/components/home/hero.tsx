@@ -24,7 +24,11 @@ const HeroSection = () => {
           distinctio nostrum delectus veniam aspernatur minima, labore provident
           dolore excepturi!
         </p>
-        <Button variant={"primary"}>
+        <Button
+          variant={"primary"}
+          size={"lg"}
+          className="transition-all duration-300 text-lg md:text-xl rounded-3xl hover:rounded-xl active:scale-95"
+        >
           <CupSoda className="mr-1" /> View our products
         </Button>
       </div>
