@@ -14,4 +14,13 @@ class ProductController extends Controller
             'products' => $products,
         ]);
     }
+
+    // import 4 random products to frontend
+    public function get4Products(){
+        $randomProducts = Product::inRandomOrder()->limit(4)->get();
+        return response()->json([
+            'randomProducts' => $randomProducts,
+            'randomProductsCount' => '4',
+        ]);
+    }
 }

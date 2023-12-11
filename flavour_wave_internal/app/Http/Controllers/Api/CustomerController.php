@@ -25,6 +25,12 @@ class CustomerController extends Controller
         ]);
     }
 
+    // edit customer account
+    public function editCustomer($id, Request $request){
+        $data = $this->inputEditCustomerDetails($request);
+        Customer::where('customer_id', $id)->update($data);
+    }
+
     // delete customer account
     public function deleteCustomer($id){
         Customer::where('customer_id', $id)->first()->delete();
@@ -38,6 +44,16 @@ class CustomerController extends Controller
         return [
             'name' => $request->name,
             'email' => $request->email,
+            'imageUrl' => $request->imageUrl,
+            'password' => $request->password,
+        ];
+    }
+
+    // edit customer details
+    private function inputEditCustomerDetails($request){
+        return [
+            'name' => $request->name,
+            'imageUrl' => $request->imageUrl,
         ];
     }
 }

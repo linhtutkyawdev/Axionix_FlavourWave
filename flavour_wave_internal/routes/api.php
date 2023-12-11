@@ -29,9 +29,14 @@ Route::post('customer/create', [CustomerController::class, 'createCustomer']);
 Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
 
 //  order
-Route::get('order/allOrders', [OrderController::class, 'getAllOrder']);
-Route::post('order/details/create', [OrderDetailsController::class, 'createOrderDetails']);
+Route::post('order/allorders/customer', [OrderController::class, 'getAllOrders']);
 Route::post('order/create', [OrderController::class, 'createOrder']);
+Route::post('order/editPageOrder', [OrderController::class, 'editOrderPage']);
+Route::post('order/editOrder', [OrderController::class, 'editPage']);
 
-// prodcut
+Route::post('order/details/create', [OrderDetailsController::class, 'createOrderDetails']);
+Route::post('order/eachOrder/customer', [OrderDetailsController::class, 'eachOrderDetails']);
+Route::post('order/details/update', [OrderDetailsController::class, 'editOrderDetails']);
+
+// product
 Route::get('product/all', [ProductController::class, 'getAllProducts']);
