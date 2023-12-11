@@ -77,14 +77,14 @@ const Footer = () => {
         </div>
       </div>
       <div className="mt-16">
-        <p className="text-center text-xl md:text-2xl font-thin">
+        <p className="text-center text-xl md:text-2xl ">
           Copyright ©{" "}
           {new Date().toLocaleDateString("en-US", {
             year: "numeric",
           })}{" "}
           Foodhut.
         </p>
-        <p className="text-center text-lg md:text-xl font-thin">
+        <p className="text-center text-lg md:text-xl ">
           Created and published with 💙 by Axionix
         </p>
       </div>

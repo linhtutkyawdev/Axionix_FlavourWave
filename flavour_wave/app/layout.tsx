@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import TanstackProvider from "@/provider/tanstack-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="flavorWave-theme"
           >
-            {children}
+            <TanstackProvider>{children}</TanstackProvider>
           </ThemeProvider>
         </ClerkProvider>
       </body>
