@@ -28,7 +28,22 @@ class UserCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
-        CRUD::setEntityNameStrings('user', 'users');
+
+        if(backpack_user()->department != "ADMIN") 
+            CRUD::setEntityNameStrings('Staff', 'My Department');
+        else
+            CRUD::setEntityNameStrings('Staff', 'All Staffs');
+        
+        CRUD::field('name');
+        CRUD::field('email');
+        CRUD::field('password');
+        CRUD::field([   // select_from_array
+            'name'        => 'department',
+            'label'       => "Department",
+            'type'        => 'select_from_array',
+            'options'     => array_combine(__('messages.DEPARTMENTS'),__('messages.DEPARTMENTS')),
+            'allows_null' => false,
+        ]);
     }
 
     /**
@@ -39,8 +54,14 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        if(backpack_user()->department != "ADMIN") {
+            CRUD::removeAllButtonsFromStack('top');
+            CRUD::removeButtonFromStack('update','line');
+            CRUD::removeButtonFromStack('delete','line');
+            $this->crud->addClause('where', 'department', backpack_user()->department);
+        }
 
+        CRUD::setFromDb(); // set columns from db columns.
         /**
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
