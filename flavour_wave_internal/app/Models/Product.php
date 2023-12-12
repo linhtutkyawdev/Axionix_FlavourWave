@@ -22,4 +22,8 @@ class Product extends Model
     public function detials(){
         return $this->hasOne(Factory::class);
     }
+
+    public function receipes(){
+        return $this->hasMany(Receipe::class);
+    }
 }

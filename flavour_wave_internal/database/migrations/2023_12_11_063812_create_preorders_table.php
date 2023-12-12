@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('customer_id');
             $table->string('order_id')->unique();
             $table->text('location');
+            $table->integer('order_quantity');
+            $table->timestamp('preorder_date');
             $table->boolean('is_urgent')->nullable();
             $table->string('truck_number')->nullable();
             $table->string('date')->nullable();
@@ -23,6 +25,7 @@ return new class extends Migration
             $table->string('driver_nrc')->nullable();
             $table->string('status')->default('pending');
             $table->integer('delivered_quantity');
+            $table->text('cancel_reason')->nullable();
             $table->timestamps();
         });
     }
