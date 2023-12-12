@@ -23,7 +23,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
         Customer::factory(5)
                 ->hasPreOrders(3)
                 ->create();
@@ -35,5 +34,11 @@ class DatabaseSeeder extends Seeder
         Receipe::factory(5)->create();
         Warehouse::factory(5)->create();
         Product::factory(5)->create();
+
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => 'admin123'
+        ]);
     }
 }
