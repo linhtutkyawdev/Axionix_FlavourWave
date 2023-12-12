@@ -70,8 +70,6 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
             </Tooltip>
           </TooltipProvider>
           <p className="line-clamp-3 my-2">{description}</p>
-          {/* <div className="flex justify-between items-center">
-          C</div> */}
         </div>
       </CardContent>
       <CardFooter className="px-2 flex justify-between items-center">
@@ -105,62 +103,6 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
         <span className="text-base">{price}</span>
       </Badge>
     </Card>
-    // <div className="bg-background cursor-pointer relative m-auto sm:m-0 w-[350px] sm:w-full h-[420px] sm:max-h-[520px] border border-neutral-500">
-    //   <div className="group overflow-hidden w-full h-1/2 transition-all duration-300">
-    //     <Image
-    //       src={image}
-    //       alt={title}
-    //       width={100}
-    //       height={50}
-    //       className="transition-all duration-300 w-full h-full object-contain group-hover:scale-105 "
-    //     />
-    //   </div>
-    //   <Separator className="my-3" />
-    //   <div className="px-3 ">
-    //     <TooltipProvider>
-    //       <Tooltip>
-    //         <TooltipTrigger asChild>
-    //           <h2 className="line-clamp-2 font-bold">{title}</h2>
-    //         </TooltipTrigger>
-    //         <TooltipContent>
-    //           <p>{title}</p>
-    //         </TooltipContent>
-    //       </Tooltip>
-    //     </TooltipProvider>
-    //     <p className="line-clamp-3 my-2">{description}</p>
-    //     <div className="flex justify-between items-center">
-    //       <Button
-    //         disabled={checkItemAlreadyInShoppingCart(id) ? true : false}
-    //         variant={"primary"}
-    //         onClick={() =>
-    //           onClickAddToShoppingCart({
-    //             id,
-    //             image,
-    //             price,
-    //             quantity: 1,
-    //             title,
-    //           })
-    //         }
-    //       >
-    //         <ShoppingCart />
-    //         Add to Cart
-    //       </Button>
-    //       <Button
-    //         size={"sm"}
-    //         onClick={() => {
-    //           router.push(`/products/${id}`);
-    //         }}
-    //       >
-    //         <Inspect /> View Detail
-    //       </Button>
-    //     </div>
-    //   </div>
-
-    //   <Badge className="absolute top-1 left-1 ">
-    //     <DollarSign className="w-5 h-5" />
-    //     <span className="text-base">{price}</span>
-    //   </Badge>
-    // </div>
   );
 };
 

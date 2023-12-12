@@ -45,7 +45,12 @@ export default function Home() {
         <h2 className="text-center text-3xl md:text-4xl mb-8 font-bold ">
           Our Popular <span className="text-emerald-600">Products</span>
         </h2>
-        <ProductsGrid products={products} status={status} />
+        <ProductsGrid
+          products={products}
+          status={status}
+          showLoading={false}
+          skeletonNumber={4}
+        />
       </div>
     </main>
   );

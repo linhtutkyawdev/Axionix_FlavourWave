@@ -25,7 +25,7 @@ const Products = () => {
         <SearchProduct status={status} products={products} />
       </div>
 
-      <ProductsGrid products={products} status={status} />
+      <ProductsGrid products={products} status={status} showLoading={true} />
     </div>
   );
 };

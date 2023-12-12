@@ -16,6 +16,7 @@ import useShoppingCartStore, {
 } from "@/hook/use-shopping-cart-store";
 import { toast } from "../ui/use-toast";
 import { Badge } from "../ui/badge";
+import ProductsDetailsTabs from "./products-details-tabs";
 
 interface ProductDetailsHeroProps {
   product?: IProduct;
@@ -116,6 +117,7 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
             </div>
 
             <Button
+              size={"lg"}
               disabled={
                 checkItemAlreadyInShoppingCart(product?.id as number)
                   ? true
@@ -131,6 +133,7 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
                   title: product?.title as string,
                 })
               }
+              className="text-base sm:text-lg transition-all duration-300 rounded-3xl hover:rounded-xl active:scale-95"
             >
               <ShoppingCartIcon />
               Add to Cart
@@ -138,6 +141,7 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
           </div>
         </div>
       </div>
+      <ProductsDetailsTabs description={product?.description} />
     </div>
   );
 };
