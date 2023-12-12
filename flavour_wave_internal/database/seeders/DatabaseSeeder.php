@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\User;
 use App\Models\Customer;
 use App\Models\Driver;
 use App\Models\Factory;
@@ -35,7 +36,7 @@ class DatabaseSeeder extends Seeder
         Warehouse::factory(5)->create();
         Product::factory(5)->create();
 
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => 'admin123',
