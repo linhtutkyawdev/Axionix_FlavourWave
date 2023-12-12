@@ -25,6 +25,7 @@ class CustomerController extends Controller
             'message' => 'Your account has successfully been created'
         ]);
     }
+    // kdfjksdf
 
     // edit customer account
     public function editCustomer($id, Request $request){
@@ -43,9 +44,10 @@ class CustomerController extends Controller
     // input customer details
     private function inputCustomerDetails($request){
         return [
+            'customer_id' => $request -> customer_id,
             'name' => $request->name,
             'email' => $request->email,
-            'imageUrl' => $request->imageUrl,
+            'image_url' => $request->imageUrl,
             'password' => $request->password,
         ];
     }

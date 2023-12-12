@@ -18,12 +18,14 @@ class StatusController extends Controller
 
     public function cancelOrder($id, Request $request){
 
-
+        
         $cancel = $this->cancelOrderStatus();
         Preorder::where('order_id', $id)->update($cancel);
         return back()->with(['message' => 'The order has been cancelled.']);
     }
 
+    // put cancel reason
+    // private function cancel
     // accept status
     private function acceptOrderStatus(){
         return [ 'status' => 'accepted' ];
