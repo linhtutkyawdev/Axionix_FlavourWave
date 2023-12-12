@@ -42,8 +42,8 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
 
   return (
     <div>
-      <div className="mt-8 flex flex-col md:flex-row gap-y-6 md:gap-y-0 items-start justify-between w-[100%] px-8 sm:px-16 md:px-24 lg:px-40 xl:px-48">
-        <div className="w-full md:w-[30%] flex items-center justify-center pb-10 md:pb-0 h-[580px] bg-red-300">
+      <div className="mt-8 flex flex-col md:flex-row gap-y-6 md:gap-y-0 md:gap-x-5 items-start justify-between w-[100%] px-8  lg:px-40 xl:px-48">
+        <div className="w-[80%] sm:w-[55%] mx-auto md:w-[37%] lg:w-[33%] xl:w-[25%] flex items-center justify-center pb-10 md:pb-0 h-[370px] md:h-[400px] bg-red-500">
           <Image
             src={product?.image as string}
             alt={product?.title as string}
@@ -52,14 +52,15 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
             className="h-full w-full"
           />
         </div>
-        <div className="w-full md:w-[60%] flex justify-start items-start flex-col">
-          <h2 className="text-emerald-500 text-2xl md:text-3xl lg:text-4xl font-semibold">
+        <div className="w-full md:w-[60%] flex justify-start items-start flex-col ">
+          <h2 className="text-emerald-500 text-2xl md:text-3xl lg:text-4xl font-semibold mb-2">
             {product?.title}
           </h2>
           <h3 className="flex items-center text-xl md:text-2xl lg:text-3xl">
-            <DollarSign /> {product?.price}
+            <DollarSign />{" "}
+            <span className="text-rose-600 font-bold">{product?.price}</span>
           </h3>
-          <div className="flex items-center gap-x-1">
+          <div className="flex items-center gap-x-1 mt-4">
             <div className="flex">
               <Star className="fill-yellow-500 text-yellow-500" />
               <Star className="fill-yellow-500 text-yellow-500" />
@@ -67,13 +68,17 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
               <Star className="fill-yellow-500 text-yellow-500" />
               <StarHalf className="fill-yellow-500 text-yellow-500" />
             </div>
-            <h3> {product?.rating.rate}</h3>
+            <h3 className="font-bold"> ({product?.rating.rate})</h3>
           </div>
           <div>
-            <h3>Reviewed by {product?.rating.count} people</h3>
+            <h3 className="text-lg font-bold">
+              Reviewed by {product?.rating.count} people
+            </h3>
           </div>
-          <p className="line-clamp-2">{product?.description}</p>
-          <div>
+          <p className="line-clamp-2 my-2 text-slate-700 text-lg  md:text-xl ">
+            {product?.description}
+          </p>
+          <div className="flex items-center justify-between gap-x-24 mt-6">
             <div className=" flex items-center gap-4">
               <Button
                 size={"icon"}
