@@ -18,9 +18,13 @@ import {
 } from "@/components/ui/tooltip";
 import { DollarSign, Inspect, Shirt, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
+import { toast } from "../ui/use-toast";
+import useShoppingCartStore, {
+  ShoppingCartItem,
+} from "@/hook/use-shopping-cart-store";
 
 export interface IProduct {
-  id: string;
+  id: number;
   title: string;
   price: number;
   description: string;
@@ -34,12 +38,26 @@ export interface IProduct {
 
 const ProductCard = ({
   category,
+  id,
   description,
   image,
   price,
   rating,
   title,
 }: IProduct) => {
+  const { onAddItem, products } = useShoppingCartStore();
+
+  function checkItemAlreadyInShoppingCart(id: number) {
+    return products.some((item) => item.id === id);
+  }
+
+  function onClickAddToShoppingCart(item: ShoppingCartItem) {
+    onAddItem(item);
+    toast({
+      description: "Successfully added new item to shopping cart",
+    });
+  }
+
   return (
     <div className="bg-background cursor-pointer relative m-auto sm:m-0 w-[350px] sm:w-full h-[420px] sm:max-h-[520px] border border-neutral-500">
       <div className="group overflow-hidden w-full h-1/2 transition-all duration-300">
@@ -65,7 +83,19 @@ const ProductCard = ({
         </TooltipProvider>
         <p className="line-clamp-3 my-2">{description}</p>
         <div className="flex justify-between items-center">
-          <Button variant={"primary"}>
+          <Button
+            disabled={checkItemAlreadyInShoppingCart(id) ? true : false}
+            variant={"primary"}
+            onClick={() =>
+              onClickAddToShoppingCart({
+                id,
+                image,
+                price,
+                quantity: 1,
+                title,
+              })
+            }
+          >
             <ShoppingCart />
             Add to Cart
           </Button>

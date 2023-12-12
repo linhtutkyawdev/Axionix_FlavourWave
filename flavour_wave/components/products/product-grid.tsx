@@ -1,22 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import ProductCard, { IProduct } from "./product-card";
 
-const ProductsGrid = () => {
-  const { data: products, status } = useQuery({
-    queryKey: ["products", "all"],
-    queryFn: async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      if (!res.ok) {
-        return Promise.reject(new Error("Could not fetch products"));
-      }
-      return res.json() as Promise<IProduct[]>;
-    },
-  });
+interface ProductsGridProps {
+  products?: IProduct[];
+  status: "error" | "success" | "pending";
+}
 
+const ProductsGrid = ({ products, status }: ProductsGridProps) => {
   if (status === "error") {
     return <div>Could not fetch products</div>;
   }
@@ -46,7 +39,7 @@ const ProductsGrid = () => {
                 </div>
               </div>
             ))
-          : products.map((product) => (
+          : products?.map((product) => (
               <ProductCard
                 key={product.id}
                 id={product.id}
