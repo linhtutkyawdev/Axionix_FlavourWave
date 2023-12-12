@@ -21,14 +21,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useToast } from "@/components/ui/use-toast";
 import useShoppingCartStore from "@/hook/use-shopping-cart-store";
+import { useRouter } from "next/navigation";
+import ShoppingCartItem from "./shopping-cart-item";
 
 const ShoppingCart = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { products, onRest, onQuantityInc, onQuantityDec } =
-    useShoppingCartStore();
-  const { toast } = useToast();
+  const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
 
   // total quantity
   const totalQuantity = products.length
@@ -82,11 +82,7 @@ const ShoppingCart = () => {
               <Button
                 className="w-full"
                 onClick={() => {
-                  onRest();
-                  toast({
-                    title: "Successfully Purchased items",
-                  });
-                  localStorage.removeItem("shoppingCartState");
+                  router.push("/check-out");
                 }}
               >
                 <CheckCircle /> Check out
@@ -99,45 +95,11 @@ const ShoppingCart = () => {
         {products?.length ? (
           <ScrollArea className="w-full h-72 sm:h-96">
             {products?.map((item) => (
-              <DropdownMenuItem
+              <ShoppingCartItem
                 key={item.id}
-                className="flex flex-col justify-start items-start border-b border-b-neutral-300 last:border-b-0"
-              >
-                <div className="flex items-center gap-4 mb-2">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={50}
-                    height={50}
-                    className="w-[80px] h-[60px]"
-                  />
-                  <h3>{item.title}</h3>
-                </div>
-                <div className=" flex items-center gap-4">
-                  <Button
-                    size={"icon"}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsOpen(true);
-                      onQuantityInc(item.id);
-                    }}
-                  >
-                    <Plus />
-                  </Button>
-                  <Badge>{item.quantity}</Badge>
-                  <Button
-                    size={"icon"}
-                    variant={"destructive"}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsOpen(true);
-                      onQuantityDec(item.id);
-                    }}
-                  >
-                    <Minus />
-                  </Button>
-                </div>
-              </DropdownMenuItem>
+                item={item}
+                setIsOpen={setIsOpen}
+              />
             ))}
           </ScrollArea>
         ) : (
