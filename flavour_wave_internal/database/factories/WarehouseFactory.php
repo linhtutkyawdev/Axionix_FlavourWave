@@ -21,7 +21,7 @@ class WarehouseFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => Product::factory(),
+            'product_id' => 1,
             'opening_balance'=>$this->faker->randomNumber(),
             'sales_issue' =>$this->faker->randomNumber(),
             'received' =>$this->faker->randomNumber(),

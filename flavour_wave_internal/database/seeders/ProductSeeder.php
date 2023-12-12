@@ -33,8 +33,7 @@ class ProductSeeder extends Seeder
             array('Coconut Cream Dream',
             'Indulge in the velvety allure of Coconut Cream Dream Tea. Immerse your senses in a tropical symphony of rich coconut and delicate tea, creating a luscious, creamy escape that transcends ordinary sipping experiences. Elevate your tea ritual with this heavenly blend.'
             ,5000,28,'hellokal'),
-            array('Jasmine Serenade Soda',
-            'Indulge in the enchanting allure of Jasmine Serenade Soda Tea—a harmonious blend of fragrant jasmine blossoms and effervescent bubbles. Immerse your senses in this exquisite fusion, where floral notes dance with a refreshing twist. Elevate your tea experience with a symphony of flavor in every sip.'
+            array('Jasmine Serenade Soda','Indulge in the enchanting allure of Jasmine Serenade Soda Tea—a harmonious blend of fragrant jasmine blossoms and effervescent bubbles. Immerse your senses in this exquisite fusion, where floral notes dance with a refreshing twist. Elevate your tea experience with a symphony of flavor in every sip.'
             ,2700,15,'hellokal'),
             array('Papaya Paradise Punch',
             'Indulge in the tropical bliss of Papaya Paradise Punch Tea. A symphony of exotic papaya, luscious fruits, and premium tea leaves, creating a refreshing infusion that transports you to a paradise of flavor with every sip. Elevate your tea experience with this vibrant and rejuvenating blend.'

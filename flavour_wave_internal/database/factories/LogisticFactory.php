@@ -24,7 +24,7 @@ class LogisticFactory extends Factory
         return [
             'preorder_id' => Preorder::factory(),
             'quantity' => $this->faker->randomNumber(),
-            'driver_id' => Driver::factory()
+            'driver_id' => 1
         ];
     }
 }
