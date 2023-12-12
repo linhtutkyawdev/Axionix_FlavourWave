@@ -29,7 +29,7 @@ class OrderController extends Controller
 
     // edit page order
     public function editOrderPage(Request $request){
-        $order = Preorder_Details::where('order_id', $request->order_id)->first();
+        $order = Preorder::where('order_id', $request->order_id)->first();
         return response()->json([
             'order' => $order,
         ]);
@@ -38,7 +38,7 @@ class OrderController extends Controller
     // edit order list
     public function editOrder(Request $request){
         $data = $this->updateOrderDetails($request);
-        Preorder_Details::where('order_id', $id)->update($data);
+        Preorder::where('order_id', $request->order_id)->update($data);
         return response()->json([
             'message' => 'Your order has been updated successfully.'
         ]);

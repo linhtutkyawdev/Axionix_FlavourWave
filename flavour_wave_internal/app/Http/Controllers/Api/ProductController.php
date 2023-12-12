@@ -23,4 +23,17 @@ class ProductController extends Controller
             'randomProductsCount' => '4',
         ]);
     }
+
+    // get product details
+    public function detailProduct($id){
+        $product = Product::where('product_id', $id)->first();
+        return response()->json([
+            'product' => $product
+        ]);
+    }
+
+    // get trending products
+    public function trendProducts(){
+        $trending = Warehouse::orderBy('')->select('sales_issues')->limit(5)->get();
+    }
 }

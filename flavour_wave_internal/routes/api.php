@@ -23,20 +23,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// customer
-Route::get('customer/allCustomers', [CustomerController::class, 'getAllCustomer']);
-Route::post('customer/create', [CustomerController::class, 'createCustomer']);
-Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
+// frontend
 
-//  order
-Route::post('order/allorders/customer', [OrderController::class, 'getAllOrders']);
-Route::post('order/create', [OrderController::class, 'createOrder']);
-Route::post('order/editPageOrder', [OrderController::class, 'editOrderPage']);
-Route::post('order/editOrder', [OrderController::class, 'editPage']);
+    // customer
+    Route::get('customer/allCustomers', [CustomerController::class, 'getAllCustomer']);
+    Route::post('customer/create', [CustomerController::class, 'createCustomer']);
+    Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
 
-Route::post('order/details/create', [OrderDetailsController::class, 'createOrderDetails']);
-Route::post('order/eachOrder/customer', [OrderDetailsController::class, 'eachOrderDetails']);
-Route::post('order/details/update', [OrderDetailsController::class, 'editOrderDetails']);
+    //  order
+    Route::post('order/allorders/customer', [OrderController::class, 'getAllOrders']);
+    Route::post('order/create', [OrderController::class, 'createOrder']);
+    Route::post('order/editPageOrder', [OrderController::class, 'editOrderPage']);
+    Route::post('order/editOrder', [OrderController::class, 'editPage']);
 
-// product
-Route::get('product/all', [ProductController::class, 'getAllProducts']);
+    Route::post('order/details/create', [OrderDetailsController::class, 'createOrderDetails']);
+    Route::post('order/eachOrder/customer', [OrderDetailsController::class, 'eachOrderDetails']);
+    Route::post('order/details/update', [OrderDetailsController::class, 'editOrderDetails']);
+
+    // product
+    Route::get('product/all', [ProductController::class, 'getAllProducts']);
