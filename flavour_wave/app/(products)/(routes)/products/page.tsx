@@ -22,7 +22,7 @@ const Products = () => {
   return (
     <div className="my-16">
       <div className="my-5 mb-10">
-        <SearchProduct products={products} />
+        <SearchProduct status={status} products={products} />
       </div>
 
       <ProductsGrid products={products} status={status} />

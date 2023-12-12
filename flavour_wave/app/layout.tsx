@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import TanstackProvider from "@/provider/tanstack-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,10 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="flavorWave-theme"
           >
-            <TanstackProvider>{children}</TanstackProvider>
+            <TanstackProvider>
+              {children}
+              <Toaster />
+            </TanstackProvider>
           </ThemeProvider>
         </ClerkProvider>
       </body>

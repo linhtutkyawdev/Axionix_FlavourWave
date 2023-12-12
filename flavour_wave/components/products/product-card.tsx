@@ -1,14 +1,6 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -22,6 +14,7 @@ import { toast } from "../ui/use-toast";
 import useShoppingCartStore, {
   ShoppingCartItem,
 } from "@/hook/use-shopping-cart-store";
+import { useRouter } from "next/navigation";
 
 export interface IProduct {
   id: number;
@@ -45,17 +38,18 @@ const ProductCard = ({
   rating,
   title,
 }: IProduct) => {
+  const router = useRouter();
   const { onAddItem, products } = useShoppingCartStore();
-
-  function checkItemAlreadyInShoppingCart(id: number) {
-    return products.some((item) => item.id === id);
-  }
 
   function onClickAddToShoppingCart(item: ShoppingCartItem) {
     onAddItem(item);
     toast({
       description: "Successfully added new item to shopping cart",
     });
+  }
+
+  function checkItemAlreadyInShoppingCart(id: number) {
+    return products?.some((item) => item.id === id);
   }
 
   return (
@@ -99,45 +93,14 @@ const ProductCard = ({
             <ShoppingCart />
             Add to Cart
           </Button>
-          <Dialog>
-            <DialogTrigger>
-              <Button size={"sm"}>
-                <Inspect /> View Detail
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>{title}</DialogTitle>
-                <Image
-                  src={image}
-                  alt={title}
-                  width={100}
-                  height={50}
-                  className="w-[200px] h-[200px] m-auto object-cover"
-                />
-                <DialogDescription className="text-slate-800">
-                  {description}
-                </DialogDescription>
-              </DialogHeader>
-              <div>
-                <h3 className="flex items-center">
-                  <DollarSign className="w-5 h-5" />
-                  {price}
-                </h3>
-                <h3 className="flex items-center">
-                  <Shirt />
-                  {category}
-                </h3>
-                <h3 className="flex items-center">
-                  <Star /> {rating.rate}
-                </h3>
-                <Button variant={"primary"} className="mt-4">
-                  <ShoppingCart />
-                  Add to Cart
-                </Button>
-              </div>
-            </DialogContent>
-          </Dialog>
+          <Button
+            size={"sm"}
+            onClick={() => {
+              router.push(`/products/${id}`);
+            }}
+          >
+            <Inspect /> View Detail
+          </Button>
         </div>
       </div>
 
