@@ -19,7 +19,8 @@ import {
 import { DollarSign, Inspect, Shirt, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
 
-interface ProductCardProps {
+export interface IProduct {
+  id: string;
   title: string;
   price: number;
   description: string;
@@ -38,16 +39,18 @@ const ProductCard = ({
   price,
   rating,
   title,
-}: ProductCardProps) => {
+}: IProduct) => {
   return (
-    <div className="bg-background cursor-pointer relative m-auto sm:m-0 w-[320px] sm:w-full h-[420px] sm:max-h-[470px] border border-neutral-500">
-      <Image
-        src={image}
-        alt={title}
-        width={100}
-        height={50}
-        className="w-full h-1/2"
-      />
+    <div className="bg-background cursor-pointer relative m-auto sm:m-0 w-[350px] sm:w-full h-[420px] sm:max-h-[520px] border border-neutral-500">
+      <div className="group overflow-hidden w-full h-1/2 transition-all duration-300">
+        <Image
+          src={image}
+          alt={title}
+          width={100}
+          height={50}
+          className="transition-all duration-300 w-full h-full object-contain group-hover:scale-105 "
+        />
+      </div>
       <Separator className="my-3" />
       <div className="px-3 ">
         <TooltipProvider>
@@ -80,7 +83,7 @@ const ProductCard = ({
                   alt={title}
                   width={100}
                   height={50}
-                  className="w-[200px] h-[200px] m-auto"
+                  className="w-[200px] h-[200px] m-auto object-cover"
                 />
                 <DialogDescription className="text-slate-800">
                   {description}

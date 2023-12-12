@@ -1,46 +1,9 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useQuery } from "@tanstack/react-query";
-import {
-  DollarSign,
-  Inspect,
-  Loader2,
-  Shirt,
-  ShoppingCart,
-  Star,
-} from "lucide-react";
-import Image from "next/image";
-import ProductCard from "./product-card";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-}
+import { Loader2 } from "lucide-react";
+import ProductCard, { IProduct } from "./product-card";
 
 const ProductsGrid = () => {
   const { data: products, status } = useQuery({
@@ -50,7 +13,7 @@ const ProductsGrid = () => {
       if (!res.ok) {
         return Promise.reject(new Error("Could not fetch products"));
       }
-      return res.json() as Promise<Product[]>;
+      return res.json() as Promise<IProduct[]>;
     },
   });
 
@@ -65,7 +28,7 @@ const ProductsGrid = () => {
           <Loader2 className="animate-spin" />
         </Button>
       )}
-      <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  my-4 mx-4 md:mx-10 lg:mx-14 xl:mx-12">
+      <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4  my-4 mx-4 md:mx-10 lg:mx-9 xl:mx-20">
         {status === "pending"
           ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((s) => (
               <div
@@ -86,6 +49,7 @@ const ProductsGrid = () => {
           : products.map((product) => (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 category={product.category}
                 description={product.description}
                 image={product.image}
