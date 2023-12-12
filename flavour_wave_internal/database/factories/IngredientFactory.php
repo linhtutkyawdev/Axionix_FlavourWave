@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Ingredient;
 use App\Models\Receipe;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,11 +16,13 @@ class IngredientFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+     protected $model = Ingredient::class;
+
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'receipe_id' => Receipe::factory()
+            'name' => fake()->name()
         ];
     }
 }

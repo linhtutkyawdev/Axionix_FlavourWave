@@ -12,4 +12,8 @@ class Logistic extends Model
     public function received_orders(){
         return $this->belongsTo(Preorder::class,'preorder_id');
     }
+
+    public function driver_info(){
+        return $this->belongsTo(Driver::class,'driver_id');
+    }
 }

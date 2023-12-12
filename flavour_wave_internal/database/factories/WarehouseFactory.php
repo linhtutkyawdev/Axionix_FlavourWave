@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+use App\Models\Warehouse;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,16 +16,18 @@ class WarehouseFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Warehouse::class;
+
     public function definition(): array
     {
         return [
             'product_id' => Product::factory(),
-            'opening_balance'=>fake()->sentence(),
-            'sales_issue' =>fake()->sentence(),
-            'received' =>fake()->sentence(),
-            'sales_return' =>fake()->sentence(),
-            'damage' =>fake()->sentence(),
-            'closing_balance' =>fake()->sentence()
+            'opening_balance'=>$this->faker->randomNumber(),
+            'sales_issue' =>$this->faker->randomNumber(),
+            'received' =>$this->faker->randomNumber(),
+            'sales_return' =>$this->faker->randomNumber(),
+            'damage' =>$this->faker->randomNumber(),
+            'closing_balance' =>$this->faker->randomNumber()
         ];
     }
 }

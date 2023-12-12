@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,11 +15,13 @@ class CustomerFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Customer::class;
+
     public function definition(): array
     {
         return [
-            'customer_id' => fake()->sentence(),
-            'name' => fake()->sentence(),
+            'customer_id' => 'fw' . $this->faker->randomNumber(3,true),
+            'name' => fake()->name(),
             'email' => fake()->email(),
             'image_url' => fake()->image(),
         ];

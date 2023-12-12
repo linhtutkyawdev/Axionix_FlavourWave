@@ -2,25 +2,28 @@
 
 namespace Database\Factories;
 
+use App\Models\Factory as ModelsFactory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class RawM_PurcahseFactory extends Factory
+class FactoryFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
+    protected $model = ModelsFactory::class;
+
     public function definition(): array
     {
         return [
-            'source' => fake()->sentence(),
-            'amount' => fake()->sentence(),
-            'unit_price' => fake()->sentence(),
-            'purchased_date' => fake()->sentence()
+            'product_id' => Product::factory(),
+            'expected' => 1,
+            'actual' => 2
         ];
     }
 }

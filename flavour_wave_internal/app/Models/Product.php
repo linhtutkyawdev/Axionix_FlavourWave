@@ -9,15 +9,17 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $table = 'products';
+
     public function orders(){
-        return $this->belongsToMany(Preorder::class);
+        return $this->belongsToMany(Preorder::class,'preorder_details','order_id','product_id');
     }
 
-    public function store(){
-        return $this->belongsTo(Warehouse::class);
+    public function inventory(){
+        return $this->hasOne(Warehouse::class);
     }
 
-    public function factory(){
+    public function detials(){
         return $this->hasOne(Factory::class);
     }
 }

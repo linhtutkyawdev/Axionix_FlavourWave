@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Ingredient;
+use App\Models\Receipe;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,11 +16,13 @@ class ReceipeFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Receipe::class;
+
     public function definition(): array
     {
         return [
             'ingredient_id' => Ingredient::factory(),
-            'amount_grams' => fake()->sentence()
+            'amount_grams' => $this->faker->randomNumber()
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Customer;
+use App\Models\Preorder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,12 +16,16 @@ class PreorderFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+     protected $model = Preorder::class;
+
     public function definition(): array
     {
         return [
             'customer_id' => Customer::factory(),
-            'order_id' => fake()->sentence(),
-            'location' => fake()->sentence()
+            'order_id' => $this->faker->randomNumber(5,true),
+            'location' => fake()->sentence(),
+            'delivered_quantity' => 20
         ];
     }
 }

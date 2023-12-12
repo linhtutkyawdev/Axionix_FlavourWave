@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Driver;
+use App\Models\Logistic;
 use App\Models\Preorder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,11 +17,13 @@ class LogisticFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Logistic::class;
+
     public function definition(): array
     {
         return [
             'preorder_id' => Preorder::factory(),
-            'quantity' => fake()->sentence(),
+            'quantity' => $this->faker->randomNumber(),
             'driver_id' => Driver::factory()
         ];
     }
