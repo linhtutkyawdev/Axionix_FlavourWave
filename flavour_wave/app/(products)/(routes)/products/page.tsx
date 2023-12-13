@@ -5,17 +5,24 @@ import ProductsGrid from "@/components/products/product-grid";
 import React from "react";
 import { IProduct } from "@/components/products/product-card";
 import { SearchProduct } from "@/components/products/search-product";
+import { getProducts } from "@/services/product.service";
+
+type AddTitle<Obj> = Obj extends { title: string }
+  ? Omit<Obj, "title"> & { name: string }
+  : Obj;
+type APIProduct = AddTitle<IProduct>;
 
 const Products = () => {
   // fetch from api-endpoint
   const { data: products, status } = useQuery({
     queryKey: ["products", "all"],
     queryFn: async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      if (!res.ok) {
-        return Promise.reject(new Error("Could not fetch products"));
-      }
-      return res.json() as Promise<IProduct[]>;
+      const products = await getProducts();
+      return products.map((p: APIProduct) => ({
+        ...p,
+        title: p.name,
+        // name: undefined,
+      })) as IProduct[];
     },
   });
 
