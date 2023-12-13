@@ -24,23 +24,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Customer::factory(5)
-                ->hasPreOrders(3)
-                ->create();
-        Factory::factory(5)->create();
-        RawM_Purchase::factory(5)->create();
-        Driver::factory(5)->create();
-        Ingredient::factory(5)->create();
-        Logistic::factory(5)->create();
-        Receipe::factory(5)->create();
-        Warehouse::factory(5)->create();
-        Product::factory(5)->create();
-
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => 'admin123',
-            'department'=> 'ADMIN'
+        
+        // Customer::factory(5)
+        //         ->hasPreOrders(3)
+        //         ->create();
+        // Factory::factory(5)->create();
+        // RawM_Purchase::factory(5)->create();
+        // Driver::factory(5)->create();
+        // Ingredient::factory(5)->create();
+        // Logistic::factory(5)->create();
+        // Receipe::factory(5)->create();
+        // Warehouse::factory(5)->create();
+        // Product::factory(5)->create();
+        $this->call([
+            ProductSeeder::class,
+            IngredientSeeder::class,
+            DriverSeeder::class
         ]);
     }
 }

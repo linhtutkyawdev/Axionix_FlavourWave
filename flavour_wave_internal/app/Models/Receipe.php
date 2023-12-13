@@ -12,4 +12,8 @@ class Receipe extends Model
     public function ingredient(){
         return $this->belongsTo(Ingredient::class);
     }
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 }
