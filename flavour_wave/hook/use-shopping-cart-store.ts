@@ -36,16 +36,6 @@ const useShoppingCartStore = create<State & Action>((set) => ({
       products: state.products.filter((item) => item.id !== itemId),
     })),
 
-  // // increment quantity of product
-  // onQuantityDec: (itemId: number) =>
-  //   set((state) => ({
-  //     products: state.products.map((item) =>
-  //       item.id === itemId && item.quantity > 0
-  //         ? { ...item, quantity: item.quantity - 1 }
-  //         : item
-  //     ),
-  //   })),
-
   // decrement quantity of product and remove item if quantity becomes 0
   onQuantityDec: (itemId: number) =>
     set((state) => ({

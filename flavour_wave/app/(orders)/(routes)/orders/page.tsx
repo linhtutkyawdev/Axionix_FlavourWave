@@ -1,4 +1,4 @@
-import Map from "@/components/ui/map";
+import Map from "@/components/check-out/map";
 import React from "react";
 
 const Orders = () => {

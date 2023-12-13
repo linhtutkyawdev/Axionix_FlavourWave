@@ -18,15 +18,15 @@ const CheckOutItem = ({ item }: CheckOutItemProps) => {
   return (
     <div
       key={item.id}
-      className="lg:w-[74%] mx-auto flex justify-start items-start gap-x-3 border-b border-b-neutral-300 last:border-b-0 my-2"
+      className="bg-neutral-300 px-3 py-2 lg:w-[74%] mx-auto flex justify-start items-start gap-x-3 border-b border-b-neutral-300 last:border-b-0 my-2 rounded-lg"
     >
-      <div className="flex items-center gap-4 mb-2">
+      <div className="flex justify-center items-center gap-4 mb-2">
         <Image
           src={item.image}
           alt={item.title}
           width={50}
           height={50}
-          className="w-[160px] h-[120px]"
+          className="w-[200px] h-[150px]"
         />
       </div>
       <div className="flex flex-col   items-start gap-4 mb-2 w-full">
