@@ -1,5 +1,6 @@
 "use client";
 
+import CheckOutForm from "@/components/check-out/check-out-form";
 import CheckOutItem from "@/components/check-out/check-out-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
@@ -40,17 +41,13 @@ const CheckOutPage = () => {
   ).toFixed(2);
 
   return (
-    <div className="flex items-start justify-between w-full mt-10">
-      <div>
-        <h2>Pre-order Summary</h2>
-      </div>
-      <div className="bg-neutral-200 p-4 px-6">
+    <div className="flex items- justify-center w-full mt-10 px-4 md:px-10 lg:px-9 xl:px-20">
+      {/* <div className="w-[60%] bg-red-300">
+        <CheckOutForm />
+      </div> */}
+      <div className="bg-neutral-200 p-4 px-6 w-[88%] mx-auto">
         <div className="flex items-center justify-between">
           <h2 className="text-xl md:text-2xl lg:text-3xl">Pre-order Summary</h2>
-          {/* <h3 className="flex items-center text-xl md:text-2xl font-semibold">
-            <DollarSign className="w-4 h-4" />
-            {totalPrice}
-          </h3> */}
         </div>
         <Separator className="mx-auto w-full h-[1.6px] bg-neutral-300 my-5" />
         <ScrollArea className="h-96">
