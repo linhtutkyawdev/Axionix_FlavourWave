@@ -16,6 +16,7 @@ import useShoppingCartStore, {
 } from "@/hook/use-shopping-cart-store";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import { getData, storeData, updateData } from "@/lib/local-storage";
 
 export interface IProduct {
   id: number;
@@ -34,11 +35,19 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
   const router = useRouter();
   const { onAddItem, products } = useShoppingCartStore();
 
+  const data = getData("flavorWave_store") ?? [];
+
   function onClickAddToShoppingCart(item: ShoppingCartItem) {
     onAddItem(item);
     toast({
-      description: "Successfully added new item to shopping cart",
+      description: "Successfully added new product.",
     });
+
+    // if (!getData("flavorWave_store")) {
+    //   storeData("flavorWave_store", products);
+    // }
+
+    // updateData("flavorWave_store", item);
   }
 
   function checkItemAlreadyInShoppingCart(id: number) {
@@ -76,15 +85,15 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
         <Button
           disabled={checkItemAlreadyInShoppingCart(id) ? true : false}
           variant={"primary"}
-          onClick={() =>
+          onClick={() => {
             onClickAddToShoppingCart({
               id,
               image,
               price,
               quantity: 1,
               title,
-            })
-          }
+            });
+          }}
         >
           <ShoppingCart />
           Add to Cart

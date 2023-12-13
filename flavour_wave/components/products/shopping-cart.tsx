@@ -10,27 +10,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  CheckCircle,
-  DollarSign,
-  Minus,
-  Plus,
-  ShoppingCartIcon,
-} from "lucide-react";
+import { CheckCircle, DollarSign, ShoppingCartIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useShoppingCartStore from "@/hook/use-shopping-cart-store";
 import { useRouter } from "next/navigation";
 import ShoppingCartItem from "./shopping-cart-item";
+import { getData } from "@/lib/local-storage";
 
 const ShoppingCart = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
 
-  // total quantity
+  const data = getData("flavorWave_store") ?? [];
+
   const totalQuantity = products.length
     ? products.reduce((acc, curr) => {
         const quantity = curr.quantity;
