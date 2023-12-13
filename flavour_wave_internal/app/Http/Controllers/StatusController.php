@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Preorder;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
