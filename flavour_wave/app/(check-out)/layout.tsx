@@ -5,9 +5,8 @@ import Footer from "@/components/footer/footer";
 import { Flower } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Products-FlavorWave",
-  description:
-    "Products page that show and provide every products that available in FlavourWave",
+  title: "Check-out",
+  description: "Check out page to purchase and make pre-order",
   keywords: [
     "FlavorWave",
     "Products",
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
   ],
 };
 
-const ProductsLayout = ({ children }: { children: React.ReactNode }) => {
+const CheckOutLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
       <Navbar
@@ -38,4 +37,4 @@ const ProductsLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default ProductsLayout;
+export default CheckOutLayout;

@@ -1,36 +1,44 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import ProductCard, { IProduct } from "./product-card";
 
-const ProductsGrid = () => {
-  const { data: products, status } = useQuery({
-    queryKey: ["products", "all"],
-    queryFn: async () => {
-      const res = await fetch("https://fakestoreapi.com/products");
-      if (!res.ok) {
-        return Promise.reject(new Error("Could not fetch products"));
-      }
-      return res.json() as Promise<IProduct[]>;
-    },
-  });
+interface ProductsGridProps {
+  products?: IProduct[];
+  status: "error" | "success" | "pending";
+  showLoading?: boolean;
+  skeletonNumber?: number;
+}
 
+const ProductsGrid = ({
+  products,
+  status,
+  showLoading,
+  skeletonNumber = 10,
+}: ProductsGridProps) => {
   if (status === "error") {
     return <div>Could not fetch products</div>;
   }
 
+  let customArr: Array<number> = [];
+
+  for (let i = 0; i < skeletonNumber; i++) {
+    if (!customArr.includes(i)) {
+      customArr.push(i);
+    }
+  }
+
   return (
     <>
-      {status === "pending" && (
+      {showLoading && status === "pending" && (
         <Button className="z-30 fixed top-16 left-[50%] translate-y-[-50%]">
           <Loader2 className="animate-spin" />
         </Button>
       )}
       <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4  my-4 mx-4 md:mx-10 lg:mx-9 xl:mx-20">
         {status === "pending"
-          ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((s) => (
+          ? customArr.map((s) => (
               <div
                 key={s}
                 className="bg-background cursor-pointer relative m-auto sm:m-0 w-[320px] sm:w-full h-[420px] sm:max-h-[470px]"
@@ -46,7 +54,7 @@ const ProductsGrid = () => {
                 </div>
               </div>
             ))
-          : products.map((product) => (
+          : products?.map((product) => (
               <ProductCard
                 key={product.id}
                 id={product.id}
