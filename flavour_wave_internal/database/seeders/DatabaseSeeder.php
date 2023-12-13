@@ -36,5 +36,12 @@ class DatabaseSeeder extends Seeder
             IngredientSeeder::class,
             DriverSeeder::class
         ]);
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => 'admin123',
+            'department'=> 'ADMIN'
+        ]);
+
     }
 }
