@@ -24,7 +24,7 @@ const ShoppingCartItem = ({ item, setIsOpen }: ShoppingCartItemProps) => {
       className="flex flex-col justify-start items-start border-b border-b-neutral-300 last:border-b-0"
     >
       <div className="flex items-center gap-4 mb-2">
-        <Image
+        <img
           src={item.image}
           alt={item.title}
           width={50}

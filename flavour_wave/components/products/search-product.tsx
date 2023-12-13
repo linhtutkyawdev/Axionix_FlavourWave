@@ -64,7 +64,7 @@ export function SearchProduct({ products, status }: SearchProductProps) {
                   router.push(`/products/${product.id}`);
                 }}
               >
-                <Image
+                <img
                   src={product.image}
                   alt={product.title}
                   width={100}
