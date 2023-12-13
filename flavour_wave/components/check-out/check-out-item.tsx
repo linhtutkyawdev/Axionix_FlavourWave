@@ -21,12 +21,12 @@ const CheckOutItem = ({ item }: CheckOutItemProps) => {
       className="lg:w-[74%] mx-auto flex justify-start items-start gap-x-3 border-b border-b-neutral-300 last:border-b-0 my-2"
     >
       <div className="flex items-center gap-4 mb-2">
-        <Image
+        <img
           src={item.image}
           alt={item.title}
           width={50}
           height={50}
-          className="w-[160px] h-[120px]"
+          className="w-[160px] h-[120px] rounded-sm"
         />
       </div>
       <div className="flex flex-col   items-start gap-4 mb-2 w-full">

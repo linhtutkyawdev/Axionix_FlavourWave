@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         // Customer::factory(5)
         //         ->hasPreOrders(3)
         //         ->create();
@@ -35,6 +35,13 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             IngredientSeeder::class,
             DriverSeeder::class
+        ]);
+
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => 'admin123',
+            'department' => 'ADMIN'
         ]);
     }
 }

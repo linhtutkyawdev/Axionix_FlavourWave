@@ -7,7 +7,7 @@ import { IProduct } from "@/components/products/product-card";
 import { SearchProduct } from "@/components/products/search-product";
 import { getProducts } from "@/services/product.service";
 
-const APIURL = "http://0.0.0.0:8000/storage";
+const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
 
 type APIProduct = {
   id: number;
@@ -31,7 +31,7 @@ const Products = () => {
         title: p.name,
         price: p.unit_price * p.quantity_per_box,
         description: p.description,
-        image: APIURL + p.image_url,
+        image: PRODUCT_IMAGE_API_URL + "/" + p.image_url,
       })) as IProduct[];
     },
   });

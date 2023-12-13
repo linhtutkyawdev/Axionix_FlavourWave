@@ -62,10 +62,10 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
           alt={title}
           width={100}
           height={50}
-          className="transition-all duration-300 w-full h-full object-contain group-hover:scale-105 "
+          className="transition-all duration-300 w-full h-full group-hover:scale-105 object-cover rounded-t-sm"
         />
       </CardHeader>
-      <Separator className="my-3" />
+      <Separator className="mb-3" />
       <CardContent>
         <div>
           <TooltipProvider>
