@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',[
+        'products'=>Product::all()
+    ]);
+});
+
+Route::post('/products/{product}/update',function(Product $product){
+    $cleandata = request()->validate([
+        'image'=>'required|image'
+    ]);
+    $url = request()->file('image')->store('product-images');
+    $product->update([
+        'image_url' => $url
+    ]);
+    return back();
 });

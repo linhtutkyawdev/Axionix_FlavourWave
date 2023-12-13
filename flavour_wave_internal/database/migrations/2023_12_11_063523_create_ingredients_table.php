@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('source');
             $table->integer('amount');
             $table->integer('unit_price');
-            $table->string('purchased_date');
+            $table->timestamp('purchased_date');
             $table->timestamps();
         });
     }
