@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('capacity')->nullable();
             $table->string('driver_nrc')->nullable();
             $table->string('status')->default('pending');
-            $table->integer('delivered_quantity')->default(0)
+            $table->integer('delivered_quantity')->default(0);
             $table->text('cancel_reason')->nullable();
             $table->timestamps();
         });
