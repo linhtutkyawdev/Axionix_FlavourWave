@@ -7,31 +7,21 @@ import { IProduct } from "@/components/products/product-card";
 import { SearchProduct } from "@/components/products/search-product";
 import { getProducts } from "@/services/product.service";
 
-const APIURL = "http://0.0.0.0:8000/storage";
-
-type APIProduct = {
-  id: number;
-  name: string;
-  description: string;
-  image_url: string;
-  unit_price: number;
-  quantity_per_box: number;
-};
+type AddTitle<Obj> = Obj extends { title: string }
+  ? Omit<Obj, "title"> & { name: string }
+  : Obj;
+type APIProduct = AddTitle<IProduct>;
 
 const Products = () => {
   // fetch from api-endpoint
   const { data: products, status } = useQuery({
     queryKey: ["products", "all"],
     queryFn: async () => {
-      const products: APIProduct[] = await getProducts();
-      console.log(products);
-
-      return products.map((p) => ({
-        id: p.id,
+      const products = await getProducts();
+      return products.map((p: APIProduct) => ({
+        ...p,
         title: p.name,
-        price: p.unit_price * p.quantity_per_box,
-        description: p.description,
-        image: APIURL + p.image_url,
+        // name: undefined,
       })) as IProduct[];
     },
   });

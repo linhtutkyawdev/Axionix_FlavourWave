@@ -57,7 +57,7 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
   return (
     <Card className="bg-background cursor-pointer relative m-auto sm:m-0 w-[350px] sm:w-full h-[420px] sm:max-h-[520px] border border-neutral-500">
       <CardHeader className="group overflow-hidden w-full h-1/2 transition-all duration-300">
-        <img
+        <Image
           src={image}
           alt={title}
           width={100}
