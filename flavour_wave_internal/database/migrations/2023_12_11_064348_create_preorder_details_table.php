@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('order_id');
             $table->string('product_id');
-            $table->integer('order_quantity');
-            $table->integer('total_price');
-            $table->string('preorder_date')->nullable();
             $table->timestamps();
         });
     }

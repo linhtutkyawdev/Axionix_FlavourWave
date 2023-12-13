@@ -21,7 +21,7 @@ class FactoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => Product::factory(),
+            'product_id' => 1,
             'expected' => 1,
             'actual' => 2
         ];

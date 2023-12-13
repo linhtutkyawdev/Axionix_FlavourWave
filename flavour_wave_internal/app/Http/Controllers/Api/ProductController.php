@@ -3,13 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductsRequest;
+use App\Models\Product;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    public function create(ProductsRequest $request){
+        $cleanData = $request->validated();
+        Product::create($cleanData);
+        return response()->json([
+            'message'=>'Create Product is successful.'
+        ]);
+    }
+
     // import all products to frontend
-    public function getAllProduct(){
-        $products = Product::latest();
+    public function all(){
+        $products = Product::latest()->get();
         return response()->json([
             'products' => $products,
         ]);
