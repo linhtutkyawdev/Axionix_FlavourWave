@@ -1,6 +1,10 @@
 import { create } from "zustand";
 
 type State = {
+  driverNRC?: string;
+  trackNumber?: string;
+  dateToPickUp?: Date;
+  trackCapacity?: string;
   address: {
     distance: string;
     userLocation: string;
@@ -8,6 +12,7 @@ type State = {
 };
 
 type Action = {
+  onUpdateState: (newState: Partial<State>) => void;
   onAddedLocation: ({
     distance,
     userLocation,
@@ -18,11 +23,19 @@ type Action = {
   onRest: () => void;
 };
 
-const useAddressUserStore = create<State & Action>((set) => ({
+const useCheckoutStore = create<State & Action>((set) => ({
   address: {
     distance: "",
     userLocation: "",
   },
+  dateToPickUp: new Date(),
+  driverNRC: "",
+  trackCapacity: "",
+  trackNumber: "",
+
+  onUpdateState: (newState: Partial<State>) =>
+    set((state) => ({ ...state, ...newState })),
+
   onAddedLocation: ({
     distance,
     userLocation,
@@ -39,11 +52,11 @@ const useAddressUserStore = create<State & Action>((set) => ({
   onRest: () =>
     set((state) => ({
       address: {
-        ...state.address, // Keep the initial structure
-        distance: "", // Reset distance to an empty string
-        userLocation: "", // Reset userLocation to an empty string
+        ...state.address,
+        distance: "",
+        userLocation: "",
       },
     })),
 }));
 
-export default useAddressUserStore;
+export default useCheckoutStore;

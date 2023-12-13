@@ -35,7 +35,7 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
   const router = useRouter();
   const { onAddItem, products } = useShoppingCartStore();
 
-  const data = getData("flavorWave_store") ?? [];
+  // const data = getData("flavorWave_store") ?? [];
 
   function onClickAddToShoppingCart(item: ShoppingCartItem) {
     onAddItem(item);

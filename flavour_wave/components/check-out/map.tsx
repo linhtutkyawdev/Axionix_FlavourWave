@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { Map as Mapp, Marker, Overlay } from "pigeon-maps";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "../ui/button";
-import useAddressUserStore from "@/hook/use-address-user";
+import useCheckoutStore from "@/hook/use-checkout-store";
 
-// flavourwave's location
+// flavourWave's location
 const defaultLat = 16.82,
   defaultLng = 96.16;
 
@@ -38,7 +38,7 @@ const Map = () => {
   ]);
 
   const [isPicked, setIsPicked] = useState<boolean>(false);
-  const { onAddedLocation, address, onRest } = useAddressUserStore();
+  const { onAddedLocation, address, onRest } = useCheckoutStore();
 
   const handleMarkerSelect = ({ latLng }: { latLng: [number, number] }) => {
     setLocation(latLng);
@@ -82,16 +82,16 @@ const Map = () => {
           </Overlay>
         )}
       </Mapp>
-      <div>
+      <div className="flex items-center gap-x-3 mt-3">
         <Button
           disabled={isPicked || address.distance !== "" ? false : true}
           onClick={handleLocationPick}
         >
-          Pick
+          Pick location
         </Button>
 
         <Button disabled={isPicked ? false : true} onClick={onRest}>
-          Remove
+          Remove location
         </Button>
       </div>
     </div>

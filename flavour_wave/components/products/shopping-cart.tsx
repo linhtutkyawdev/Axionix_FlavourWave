@@ -24,7 +24,7 @@ const ShoppingCart = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
 
-  const data = getData("flavorWave_store") ?? [];
+  // const data = getData("flavorWave_store") ?? [];
 
   const totalQuantity = products.length
     ? products.reduce((acc, curr) => {

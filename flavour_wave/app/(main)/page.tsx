@@ -5,9 +5,22 @@ import HeroSection from "@/components/home/hero";
 import ScrollVelocity from "@/components/home/scroll-velocity";
 import { IProduct } from "@/components/products/product-card";
 import ProductsGrid from "@/components/products/product-grid";
+import { useInitialSetup } from "@/lib/initial-setup";
+import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
+  const { user } = useUser();
+
+  useInitialSetup({
+    customer_id: user?.id as string,
+    email: user?.emailAddresses[0].emailAddress as string,
+    imageUrl: user?.imageUrl as string,
+    name: user?.lastName
+      ? `${user.firstName} ${user.lastName}`
+      : (user?.firstName as string),
+  });
+
   const { data: products, status } = useQuery({
     queryKey: ["products", "limit"],
     queryFn: async () => {
