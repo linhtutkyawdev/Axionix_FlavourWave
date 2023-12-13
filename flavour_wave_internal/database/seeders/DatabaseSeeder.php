@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         Logistic::factory(5)->create();
         Receipe::factory(5)->create();
         Warehouse::factory(5)->create();
+        // test
     }
 }
