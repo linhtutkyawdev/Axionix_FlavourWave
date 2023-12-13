@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('source');
+            $table->integer('amount');
+            $table->integer('unit_price');
+            $table->timestamp('purchased_date');
             $table->timestamps();
         });
     }
