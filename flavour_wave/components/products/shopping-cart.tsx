@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   DropdownMenu,
@@ -18,15 +18,17 @@ import useShoppingCartStore from "@/hook/use-shopping-cart-store";
 import { useRouter } from "next/navigation";
 import ShoppingCartItem from "./shopping-cart-item";
 import { getData } from "@/lib/local-storage";
+import usePreventHydration from "@/hook/use-prevent-hydration";
 
 const ShoppingCart = () => {
+  usePreventHydration();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [totalQuantity, setTotalQuantity] = useState<number>(0);
   const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
 
   // const data = getData("flavorWave_store") ?? [];
-
-  const totalQuantity = products.length
+  const totalQu = products.length
     ? products.reduce((acc, curr) => {
         const quantity = curr.quantity;
 
@@ -35,6 +37,10 @@ const ShoppingCart = () => {
         return acc;
       }, 0)
     : 0;
+
+  useEffect(() => {
+    setTotalQuantity(totalQu);
+  }, [totalQu, products]);
 
   // total quantity price
   const totalPrice = parseFloat(

@@ -9,6 +9,7 @@ import { Badge } from "../ui/badge";
 import useShoppingCartStore, {
   ShoppingCartItem as ShoppingCartType,
 } from "@/hook/use-shopping-cart-store";
+import usePreventHydration from "@/hook/use-prevent-hydration";
 
 interface ShoppingCartItemProps {
   item: ShoppingCartType;
@@ -16,6 +17,8 @@ interface ShoppingCartItemProps {
 }
 
 const ShoppingCartItem = ({ item, setIsOpen }: ShoppingCartItemProps) => {
+  usePreventHydration();
+
   const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
 
   return (

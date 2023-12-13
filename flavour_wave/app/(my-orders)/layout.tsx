@@ -5,8 +5,8 @@ import Footer from "@/components/footer/footer";
 import { Flower } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Check-out",
-  description: "Check out page to purchase and make pre-order",
+  title: "My orders",
+  description: "Customer orders page to check their pre-order transitions",
   keywords: [
     "FlavorWave",
     "Products",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   ],
 };
 
-const CheckOutLayout = ({ children }: { children: React.ReactNode }) => {
+const MyOrdersLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
       <Navbar
@@ -37,4 +37,4 @@ const CheckOutLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default CheckOutLayout;
+export default MyOrdersLayout;

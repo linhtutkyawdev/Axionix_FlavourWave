@@ -18,6 +18,7 @@ import { toast } from "../ui/use-toast";
 import { Badge } from "../ui/badge";
 import ProductsDetailsTabs from "./products-details-tabs";
 import { Skeleton } from "../ui/skeleton";
+import usePreventHydration from "@/hook/use-prevent-hydration";
 
 interface ProductDetailsHeroProps {
   product?: IProduct;
@@ -25,6 +26,8 @@ interface ProductDetailsHeroProps {
 }
 
 const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
+  usePreventHydration();
+
   const { onQuantityDec, onQuantityInc, onAddItem, products } =
     useShoppingCartStore();
 
@@ -118,7 +121,7 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
               {/* Skeleton for Add to Cart button */}
             </div>
           ) : (
-            <div className="flex items-center justify-between gap-x-24 mt-6">
+            <div className="flex flex-col gap-y-4 md:flex-row items-center justify-between gap-x-24 mt-6">
               <div className=" flex items-center gap-4">
                 <Button
                   size={"icon"}

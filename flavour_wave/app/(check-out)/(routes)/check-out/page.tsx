@@ -5,10 +5,10 @@ import CheckOutItem from "@/components/check-out/check-out-item";
 import Map from "@/components/check-out/map";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import useCheckoutStore from "@/hook/use-checkout-store";
+import usePreventHydration from "@/hook/use-prevent-hydration";
 import useShoppingCartStore from "@/hook/use-shopping-cart-store";
 import { useUser } from "@clerk/nextjs";
 import { DollarSign } from "lucide-react";
@@ -16,16 +16,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const CheckOutPage = () => {
+  usePreventHydration();
   const { user } = useUser();
   const router = useRouter();
   const [isCheck, setIsCheck] = useState<boolean>(false);
-  const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
+  const { products } = useShoppingCartStore();
   const { address, driverNRC, trackCapacity, trackNumber, dateToPickUp } =
     useCheckoutStore();
 
-  // if (!products.length) {
-  //   return router.push("/products");
-  // }
+  if (!products.length) {
+    return router.push("/products");
+  }
 
   // total quantity
   const totalQuantity = products.length

@@ -4,13 +4,14 @@ import { Flower, LogIn } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { ModeToggle } from "../mode-toggle";
-import { SignInButton, UserButton } from "@clerk/nextjs";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { useCurrentUser } from "@/hook/use-current-user";
 import { Button } from "../ui/button";
 import MobileToggle from "./mobile-toggle";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import ShoppingCart from "../products/shopping-cart";
+import { Skeleton } from "../ui/skeleton";
 
 interface NavbarProps {
   className?: string;
@@ -23,6 +24,7 @@ const Navbar = ({
   linkClassName,
   linkHoverClassName,
 }: NavbarProps) => {
+  const { user, isLoaded } = useUser();
   const currentUser = useCurrentUser();
   const path = usePathname();
 
@@ -65,12 +67,13 @@ const Navbar = ({
               className={cn(
                 "transition-all px-2 py-1 rounded-xl hover:rounded-lg",
                 linkHoverClassName,
-                path === "my-orders" && linkClassName
+                path === "/my-orders" && linkClassName
               )}
             >
               My orders
             </Link>
           </div>
+
           {currentUser ? (
             <UserButton
               afterSignOutUrl="/"
@@ -87,7 +90,6 @@ const Navbar = ({
               </Button>
             </SignInButton>
           )}
-
           <ShoppingCart />
 
           <ModeToggle />

@@ -6,12 +6,14 @@ import React from "react";
 import { Button } from "../ui/button";
 import { DollarSign, Minus, Plus, Trash } from "lucide-react";
 import { Badge } from "../ui/badge";
+import usePreventHydration from "@/hook/use-prevent-hydration";
 
 interface CheckOutItemProps {
   item: ShoppingCartItem;
 }
 
 const CheckOutItem = ({ item }: CheckOutItemProps) => {
+  usePreventHydration();
   const { products, onQuantityInc, onQuantityDec, onRemoveItem } =
     useShoppingCartStore();
 
