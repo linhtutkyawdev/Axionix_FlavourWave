@@ -21,7 +21,8 @@ class ReceipeFactory extends Factory
     public function definition(): array
     {
         return [
-            'ingredient_id' => Ingredient::factory(),
+            'ingredient_id' => 1,
+            'product_id' => 1,
             'amount_grams' => $this->faker->randomNumber()
         ];
     }

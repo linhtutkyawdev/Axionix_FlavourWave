@@ -6,13 +6,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Customer;
-use App\Models\Driver;
 use App\Models\Factory;
-use App\Models\Ingredient;
 use App\Models\Logistic;
-use App\Models\Preorder;
-use App\Models\Product;
-use App\Models\RawM_Purchase;
 use App\Models\Receipe;
 use App\Models\Warehouse;
 use Illuminate\Database\Seeder;
