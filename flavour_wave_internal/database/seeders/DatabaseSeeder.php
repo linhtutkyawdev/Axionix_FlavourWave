@@ -19,19 +19,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
         $this->call([
             ProductSeeder::class,
             IngredientSeeder::class,
             DriverSeeder::class
         ]);
-        Customer::factory(5)
-                ->hasPreOrders(3)
-                ->create();
-        Factory::factory(5)->create();
-        Logistic::factory(5)->create();
-        Receipe::factory(5)->create();
-        Warehouse::factory(5)->create();
+        // Customer::factory(5)
+        //         ->hasPreOrders(3)
+        //         ->create();
+        // Factory::factory(5)->create();
+        // Logistic::factory(5)->create();
+        // Receipe::factory(5)->create();
+        // Warehouse::factory(5)->create();
         // test
     }
 }
