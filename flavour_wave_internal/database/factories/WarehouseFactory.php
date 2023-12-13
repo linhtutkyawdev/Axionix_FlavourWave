@@ -27,7 +27,8 @@ class WarehouseFactory extends Factory
             'received' =>$this->faker->randomNumber(),
             'sales_return' =>$this->faker->randomNumber(),
             'damage' =>$this->faker->randomNumber(),
-            'closing_balance' =>$this->faker->randomNumber()
+            'closing_balance' =>$this->faker->randomNumber(),
+            'availability' => $this->faker->randomNumber()
         ];
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('opening_balance');
             $table->integer('sales_issue');
             $table->integer('received');
+            $table->integer('availability');
             $table->integer('sales_return');
             $table->integer('damage');
             $table->integer('closing_balance');

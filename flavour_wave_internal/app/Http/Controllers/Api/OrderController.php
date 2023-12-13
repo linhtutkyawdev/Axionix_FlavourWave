@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Preorder;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
     // get all orders' list from the customer
-    public function getAllOrders(Request $request){
+    public function getAllOrders($id){
         $perPage = 12;
         $pageCount = ceil(count(Preorder::all())/$perPage);
-        $id = $request->id;
-        $orders = Preorder::where('customer_id', $id)->latest()->paginate(12);
+        $orders = Preorder::where('customer_id', $id)->paginate(10);
 
         return response()->json([
             'orders' => $orders,
@@ -22,7 +22,8 @@ class OrderController extends Controller
 
     // create order
     public function createOrder(Request $request){
-        $data = $this->inputOrder($request);
+        $random = rand(0, 999999);
+        $data = $this->inputOrder($request, $random);
         Preorder::create($data);
     }
 
@@ -62,14 +63,14 @@ class OrderController extends Controller
     }
 
     // input orders
-    private function inputOrder($request){
+    private function inputOrder($request, $random){
         return [
             'customer_id' => $request->customer_id,
-            'order_id' => $request->order_id,
+            'order_id' => $random,
             'location' => $request->location,
             'is_urgent' => $request->is_urgent,
             'truck_number' => $request->truck_number,
-            'data' => $request->data,
+            'date' => $request->date,
             'capacity' => $request->capacity,
             'driver_nrc' => $request->driver_nrc,
             'status' => 'pending',
