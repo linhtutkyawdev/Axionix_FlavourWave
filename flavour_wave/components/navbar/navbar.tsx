@@ -1,16 +1,16 @@
 "use client";
 
-import { Flower, LogIn, ShoppingCartIcon } from "lucide-react";
+import { Flower, LogIn } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { ModeToggle } from "../mode-toggle";
-import ActionTooltip from "../action-tooltip";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { useCurrentUser } from "@/hook/use-current-user";
 import { Button } from "../ui/button";
 import MobileToggle from "./mobile-toggle";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import ShoppingCart from "../products/shopping-cart";
 
 interface NavbarProps {
   className?: string;
@@ -87,9 +87,9 @@ const Navbar = ({
               </Button>
             </SignInButton>
           )}
-          <ActionTooltip label="Shopping Cart">
-            <ShoppingCartIcon className="hidden md:block w-8 h-8 p-1 bg-black text-white rounded-full" />
-          </ActionTooltip>
+
+          <ShoppingCart />
+
           <ModeToggle />
           <MobileToggle />
         </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+
+use App\Http\Requests\ProductsRequest;
 use App\Models\Product;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
@@ -9,12 +11,19 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    // import all products to frontend
-    public function getAllProducts(){
-        $products = Product::get();
+
+    public function create(ProductsRequest $request){
+        $cleanData = $request->validated();
+        Product::create($cleanData);
         return response()->json([
-            'products' => $products,
+            'message'=>'Create Product is successful.'
         ]);
+    }
+
+    // import all products to frontend
+    public function all(){
+       return Product::latest()->get();
+       
     }
 
     // import 4 random products to frontend
@@ -28,17 +37,12 @@ class ProductController extends Controller
 
     // get product details
     public function detailProduct($id){
-        $product = Product::where('product_id', $id)->first();
-        return response()->json([
-            'product' => $product
-        ]);
+        return Product::where('product_id', $id)->first();
+        
     }
 
     // get trending products
     public function trendProducts(){
-        $trending = Warehouse::orderBy('sales_issue', 'desc')->take(3)->get();
-        return response()->json([
-            'trending' => $trending,
-        ]);
+       return Warehouse::orderBy('sales_issue', 'desc')->take(3)->get();
     }
 }

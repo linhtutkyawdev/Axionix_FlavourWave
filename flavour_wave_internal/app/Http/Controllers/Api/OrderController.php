@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\PreorderRequest;
 use App\Models\Preorder;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
     // get all orders' list from the customer
-    public function getAllOrders($id){
+    public function getPreorders($id){
         $perPage = 12;
         $pageCount = ceil(count(Preorder::all())/$perPage);
-        $orders = Preorder::where('customer_id', $id)->paginate(10);
+        $orders = Preorder::where('customer_id', $id)->latest()->paginate(12);
 
         return response()->json([
             'orders' => $orders,
@@ -21,25 +23,35 @@ class OrderController extends Controller
     }
 
     // create order
-    public function createOrder(Request $request){
-        $random = rand(0, 999999);
-        $data = $this->inputOrder($request, $random);
-        Preorder::create($data);
+    public function createPreorder(PreorderRequest $request){
+        $pId = request('product_id');
+        if($pId){
+            $preorderCleanData = $request->validated();
+            Preorder::create($preorderCleanData);
+            foreach($pId as $id){
+                Product::find($id)->orders()->attach($request->order_id);
+            }
+            return response()->json([
+                'message' => 'create preorder is successful.'
+            ]);
+        }else{
+            return response()->json(['product_id'=>'products field is required']);
+        }
     }
 
 
     // edit page order
-    public function editOrderPage(Request $request){
-        $order = Preorder::where('order_id', $request->order_id)->first();
+    public function getPreOrder($id){
+        $preorder = Preorder::where('order_id', $id)->get();
         return response()->json([
-            'order' => $order,
+            'preorder' => $preorder,
         ]);
     }
 
     // edit order list
-    public function editOrder(Request $request){
-        $data = $this->updateOrderDetails($request);
-        Preorder::where('order_id', $request->order_id)->update($data);
+    public function update(Preorder $preorder,PreorderRequest $request){
+        $cleandata = $request->validated();
+        $preorder->update($cleandata);
         return response()->json([
             'message' => 'Your order has been updated successfully.'
         ]);

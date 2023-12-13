@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use CrudTrait;
     use HasFactory;
 
     protected $table = 'products';
@@ -21,5 +23,9 @@ class Product extends Model
 
     public function detials(){
         return $this->hasOne(Factory::class);
+    }
+
+    public function receipes(){
+        return $this->hasMany(Receipe::class);
     }
 }

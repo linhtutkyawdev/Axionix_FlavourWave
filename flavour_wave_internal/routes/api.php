@@ -8,6 +8,14 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\OrderDetailsController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\FactoryController;
+use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\LogisticsController;
+use App\Http\Controllers\ReceipesController;
+use App\Http\Controllers\WarehouseController;
+use App\Models\Driver;
+use App\Models\Warehouse;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,25 +35,35 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // frontend
 
     // customer
-    Route::get('customer/allCustomers', [CustomerController::class, 'getAllCustomer']);
+    Route::get('/customers', [CustomerController::class, 'show']);
     Route::post('customer/create', [CustomerController::class, 'createCustomer']);
     Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
 
     //  order
-    Route::post('order/allorders/customer', [OrderController::class, 'getAllOrders']);
-    Route::post('order/create', [OrderController::class, 'createOrder']);
-    Route::post('order/editPageOrder', [OrderController::class, 'editOrderPage']);
-    Route::post('order/editOrder', [OrderController::class, 'editOrderPage']);
-
-    Route::post('order/details/create', [OrderDetailsController::class, 'createOrderDetails']);
-    Route::post('order/eachOrder/customer', [OrderDetailsController::class, 'eachOrderDetails']);
-    Route::post('order/details/update', [OrderDetailsController::class, 'editOrderDetails']);
+    Route::get('customers/{id}/preorders', [OrderController::class, 'getPreorders']);
+    Route::post('preorders/create', [OrderController::class, 'createPreorder']);
+    Route::get('preorders/{id}', [OrderController::class, 'getPreOrder']);
+    Route::post('preorders/{preorder:order_id}/update', [OrderController::class, 'update']);
 
     // product
-    Route::get('product/all', [ProductController::class, 'getAllProducts']);
-    Route::get('product/four', [ProductController::class, 'get4Products']);
-    Route::post('product/details', [ProductController::class, 'detailProduct']);
-    Route::get('product/trending', [ProductController::class, 'trendProducts']);
+    Route::get('/products', [ProductController::class, 'all']);
+    Route::post('/product/create', [ProductController::class, 'create']);
 
-    Route::post('/acceptOrder/{id}', [StatusController::class, 'acceptOrder']);
+    //driver
+    Route::get('/drivers',[DriverController::class,'show']);
 
+    //ingredients
+    Route::get('/ingredients',[IngredientsController::class,'show']);
+    Route::post('/ingredient/create',[IngredientsController::class,'create']);
+
+    //factories
+    Route::post('/factories',[FactoryController::class,'store']);
+
+    //logistics
+    Route::post('/deliver',[LogisticsController::class,'make']);
+
+    //receipe
+    Route::post('/receipe/create',[ReceipesController::class,'create']);
+
+    //warehouse
+    Route::post('/warehouse/create',[WarehouseController::class,'create']);

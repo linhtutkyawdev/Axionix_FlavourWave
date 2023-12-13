@@ -2,25 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
+
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
     // get all customers' info
-    public function getAllCustomer(){
-        $customers = Customer::get();
+    public function show(){
+        $customers = Customer::all();
         return response()->json([
             'customers' => $customers,
         ]);
     }
 
     // create customer account
-    public function createCustomer(Request $request){
-        $data = $this->inputCustomerDetails($request);
-        Customer::create($data);
-
+    public function createCustomer(CustomerRequest $request){
+        $cleanData = $request->validated();
+        Customer::create($cleanData);
         return response()->json([
             'message' => 'Your account has successfully been created'
         ]);
@@ -33,8 +36,15 @@ class CustomerController extends Controller
     }
 
     // delete customer account
-    public function deleteCustomer($id){
-        Customer::where('customer_id', $id)->first()->delete();
+    public function deleteCustomer(Request $request){
+        $validator = Validator::make($request->all(),[
+            'customer_id' => ['required',Rule::exists('customers','customer_id')]
+        ]);
+        if($validator->fails()){
+            return response()->json(['error'=>$validator->errors()]);
+        }
+
+        Customer::where('customer_id', $validator->validate())->delete();
         return response()->json([
             'message' => 'We will miss you. Your account has been permanently deleted.'
         ]);
@@ -43,9 +53,10 @@ class CustomerController extends Controller
     // input customer details
     private function inputCustomerDetails($request){
         return [
+            'customer_id' => $request->customer_id,
             'name' => $request->name,
             'email' => $request->email,
-            'imageUrl' => $request->imageUrl,
+            'image_url' => $request->image_url,
             'password' => $request->password,
         ];
     }

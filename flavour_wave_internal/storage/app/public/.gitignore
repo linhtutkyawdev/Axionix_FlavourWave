@@ -1,2 +1,4 @@
 *
 !.gitignore
+!product-images
+!product-images/*
