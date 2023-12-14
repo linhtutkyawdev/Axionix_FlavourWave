@@ -34,7 +34,7 @@ return [
     */
 
     // Date & Datetime Format Syntax: https://carbon.nesbot.com/docs/#api-localization
-    'default_date_format'     => 'D MMM YYYY',
+    'default_date_format' => 'D MMM YYYY',
     'default_datetime_format' => 'D MMM YYYY, HH:mm',
 
     // Direction, according to language
@@ -63,7 +63,7 @@ return [
     'home_link' => '',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo'   => '<b>Flavour</b>Wave',
+    'project_logo' => '<b>Flavour</b>Wave',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
@@ -94,6 +94,8 @@ return [
 
     // CSS files that are loaded in all pages, using Laravel's asset() helper
     'styles' => [
+        'black/css/nucleo-icons.css',
+        'black/css/black-dashboard.css'
         // 'styles/example.css',
         // 'https://some-cdn.com/example.css',
     ],
@@ -115,6 +117,11 @@ return [
 
     // JS files that are loaded in all pages, using Laravel's asset() helper
     'scripts' => [
+        'black/js/core/jquery.min.js',
+        'black/js/core/bootstrap.min.js',
+        'black/js/plugins/chartjs.min.js',
+        'black/js/theme.js',
+        'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'
         // 'js/example.js',
         // 'https://unpkg.com/vue@2.4.4/dist/vue.min.js',
         // 'https://unpkg.com/react@16/umd/react.production.min.js',
