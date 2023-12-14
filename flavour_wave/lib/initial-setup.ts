@@ -6,8 +6,6 @@ export interface IUser {
 }
 
 export async function useInitialSetup(user: IUser) {
-  console.log("call");
-
   if (!user) return;
 
   const customer = await getCustomer(user.customer_id);

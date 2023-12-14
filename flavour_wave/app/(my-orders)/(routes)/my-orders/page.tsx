@@ -1,7 +1,5 @@
 import OrderListItem from "@/components/my-orders/order-list-item";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
-import { Check, Clock } from "lucide-react";
 import React from "react";
 
 export type OrderHistoryType = {
