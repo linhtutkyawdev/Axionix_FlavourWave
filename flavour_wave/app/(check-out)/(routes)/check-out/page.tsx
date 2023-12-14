@@ -14,6 +14,14 @@ import { useUser } from "@clerk/nextjs";
 import { DollarSign } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import StripeCheckout from "@/components/check-out/stripe-checkout";
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 const CheckOutPage = () => {
   usePreventHydration();
@@ -141,6 +149,9 @@ const CheckOutPage = () => {
           >
             Confirm pre-order
           </Button>
+          <Elements stripe={stripePromise}>
+            <StripeCheckout />
+          </Elements>
         </div>
       </div>
     </div>
