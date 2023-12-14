@@ -20,8 +20,8 @@ class StatusController extends Controller
 
             $product = Warehouse::where('product_id', $product_id)->get()[0];
 
-            $sales_issue = $this->inputSalesQty($product->product_id, $sales_issue);
-            Warehouse::where('product_id', $product->$product_id)->update($sales_issue);
+            $sale_issue = $this->inputSalesQty($product->product_id, $sales_issue);
+            Warehouse::where('product_id', $product->$product_id)->update($sale_issue);
 
             $aval = $this->subtractSales($product->$product_id, $sales_issue);
             Warehouse::where('product_id', $product->$product_id)->update($aval);
