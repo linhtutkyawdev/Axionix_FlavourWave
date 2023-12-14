@@ -33,36 +33,37 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // frontend
 
-    // customer
-    Route::get('/customers', [CustomerController::class, 'show']);
-    Route::post('customer/create', [CustomerController::class, 'createCustomer']);
-    Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
+// customer
+Route::get('/customers', [CustomerController::class, 'show']);
+Route::post('customer/create', [CustomerController::class, 'createCustomer']);
+Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
 
-    //  order
-    Route::get('customers/{id}/preorders', [OrderController::class, 'getPreorders']);
-    Route::post('preorders/create', [OrderController::class, 'createPreorder']);
-    Route::get('preorders/{id}', [OrderController::class, 'getPreOrder']);
-    Route::post('preorders/{preorder:order_id}/update', [OrderController::class, 'update']);
+//  order
+Route::get('customers/{id}/preorders', [OrderController::class, 'getPreorders']);
+Route::post('preorders/create', [OrderController::class, 'createPreorder']);
+Route::get('preorders/{id}', [OrderController::class, 'getPreOrder']);
+Route::post('preorders/{preorder:order_id}/update', [OrderController::class, 'update']);
+Route::get('getLastWeekSellingData', [OrderController::class, 'getLastWeekSellingData']);
 
-    // product
-    Route::get('/products', [ProductController::class, 'all']);
-    Route::post('/product/create', [ProductController::class, 'create']);
+// product
+Route::get('/products', [ProductController::class, 'all']);
+Route::post('/product/create', [ProductController::class, 'create']);
 
-    //driver
-    Route::get('/drivers',[DriverController::class,'show']);
+//driver
+Route::get('/drivers', [DriverController::class, 'show']);
 
-    //ingredients
-    Route::get('/ingredients',[IngredientsController::class,'show']);
-    Route::post('/ingredient/create',[IngredientsController::class,'create']);
+//ingredients
+Route::get('/ingredients', [IngredientsController::class, 'show']);
+Route::post('/ingredient/create', [IngredientsController::class, 'create']);
 
-    //factories
-    Route::post('/factories',[FactoryController::class,'store']);
+//factories
+Route::post('/factories', [FactoryController::class, 'store']);
 
-    //logistics
-    Route::post('/deliver',[LogisticsController::class,'make']);
+//logistics
+Route::post('/deliver', [LogisticsController::class, 'make']);
 
-    //receipe
-    Route::post('/receipe/create',[ReceipesController::class,'create']);
+//receipe
+Route::post('/receipe/create', [ReceipesController::class, 'create']);
 
-    //warehouse
-    Route::post('/warehouse/create',[WarehouseController::class,'create']);
+//warehouse
+Route::post('/warehouse/create', [WarehouseController::class, 'create']);

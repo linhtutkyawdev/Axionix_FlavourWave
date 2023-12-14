@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         // Receipe::factory(5)->create();
         // Warehouse::factory(5)->create();
         // Product::factory(5)->create();
+
         $this->call([
             ProductSeeder::class,
             IngredientSeeder::class,
