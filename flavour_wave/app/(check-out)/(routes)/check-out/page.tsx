@@ -16,8 +16,25 @@ import { useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import StripeCheckout from "@/components/check-out/stripe-checkout";
+import { useMutation } from "@tanstack/react-query";
+import { createPreOrder } from "@/services/product.service";
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
+
+export type CreatePreOrderType = {
+  is_urgent?: boolean;
+  location?: string;
+  driver_nrc?: string;
+  date?: Date;
+  capacity?: string;
+  track_number?: string;
+  productsId: Array<string>;
+  customer_id?: string;
+  order_quantity: number;
+  delivered_quantity: number;
+  order_id: string;
+};
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
@@ -30,10 +47,6 @@ const CheckOutPage = () => {
   const { products } = useShoppingCartStore();
   const { address, driverNRC, trackCapacity, trackNumber, dateToPickUp } =
     useCheckoutStore();
-
-  if (!products.length) {
-    return router.push("/products");
-  }
 
   // total quantity
   const totalQuantity = products.length
@@ -59,20 +72,47 @@ const CheckOutPage = () => {
     )
   ).toFixed(2);
 
-  function handleCheckout() {
-    const checkData = {
-      address,
-      driverNRC,
-      trackCapacity,
-      trackNumber,
-      dateToPickUp,
-      productsId: products.map((product) => product.id),
-      customer_id: user?.id,
-      totalQuantity,
-      totalPrice,
-    };
+  const { mutate, status, error } = useMutation({
+    mutationFn: () => {
+      console.log("mutate");
 
-    console.log(checkData);
+      return createPreOrder({
+        location: address.userLocation,
+        capacity: trackCapacity,
+        customer_id: user?.id,
+        delivered_quantity: totalQuantity,
+        productsId: products.map((product) => product.id.toString()),
+        order_id: `${user?.id}-${new Date().toString()}`,
+        order_quantity: totalQuantity,
+        date: dateToPickUp,
+        driver_nrc: driverNRC,
+        is_urgent: driverNRC ? true : false,
+        track_number: trackNumber,
+      });
+    },
+  });
+
+  if (!products.length) {
+    return router.push("/products");
+  }
+
+  // function handleCheckout() {
+  //   const checkData = {
+  //     address,
+  //     driverNRC,
+  //     trackCapacity,
+  //     trackNumber,
+  //     dateToPickUp,
+  //     productsId: products.map((product) => product.id),
+  //     customer_id: user?.id,
+  //     totalQuantity,
+  //     totalPrice,
+  //   };
+
+  // }
+
+  if (status === "error") {
+    console.log("error", error);
   }
 
   return (
@@ -148,7 +188,8 @@ const CheckOutPage = () => {
           <Elements stripe={stripePromise}>
             <StripeCheckout
               distance={address.distance}
-              handleCheckout={handleCheckout}
+              mutate={mutate}
+              status={status}
             />
           </Elements>
         </div>

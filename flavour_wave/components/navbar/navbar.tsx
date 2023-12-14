@@ -44,7 +44,7 @@ const Navbar = ({
           </div>
           {/* <Flower className="group-hover:animate-spin" /> */}
           <p>
-            <span className="text-yellow-400">Flavor</span>
+            <span className="dark:text-yellow-400 ">Flavor</span>
             <span className="text-emerald-500">Wave</span>
           </p>
         </Link>
