@@ -1,4 +1,4 @@
-const initDashboardPageCharts = () => {
+const initDashboardPageCharts = async () => {
     gradientChartOptionsConfigurationWithTooltipBlue = {
         maintainAspectRatio: false,
         legend: {
@@ -345,8 +345,9 @@ const initDashboardPageCharts = () => {
         "NOV",
         "DEC",
     ];
-    var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
+    var chart_data = (await axios.get("/api/preorders")).data;
 
+    console.log(chart_data[1]);
     var ctx = document.getElementById("chartBig1").getContext("2d");
 
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
@@ -374,31 +375,32 @@ const initDashboardPageCharts = () => {
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: chart_data,
+                    data: chart_data[0].monthly_preorder_count,
                 },
             ],
         },
         options: gradientChartOptionsConfigurationWithTooltipPurple,
     };
     var myChartData = new Chart(ctx, config);
+    $("#product-1")[0].innerHTML = chart_data[0].product_name;
+    $("#product-2")[0].innerHTML = chart_data[1].product_name;
+    $("#product-3")[0].innerHTML = chart_data[2].product_name;
     $("#0").click(function () {
         var data = myChartData.config.data;
-        data.datasets[0].data = chart_data;
+        data.datasets[0].data = chart_data[0].monthly_preorder_count;
         data.labels = chart_labels;
         myChartData.update();
     });
     $("#1").click(function () {
-        var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
         var data = myChartData.config.data;
-        data.datasets[0].data = chart_data;
+        data.datasets[0].data = chart_data[1].monthly_preorder_count;
         data.labels = chart_labels;
         myChartData.update();
     });
 
     $("#2").click(function () {
-        var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
         var data = myChartData.config.data;
-        data.datasets[0].data = chart_data;
+        data.datasets[0].data = chart_data[2].monthly_preorder_count;
         data.labels = chart_labels;
         myChartData.update();
     });

@@ -50,27 +50,27 @@ class OrderController extends Controller
             'preorder' => $preorder,
         ]);
     }
-    public function getLastWeekSellingData()
+    public function getPreordersCountFor12Months()
     {
         return response()->json([
             [
-                'prduct_name' => 'Product-1',
-                'monthly_preorder_count' => [100, 200, 900, 400, 600, 500, 7000, 4900, 5900, 4000, 300, 1800]
+                'product_name' => 'Burmese Bliss',
+                'monthly_preorder_count' => [100, 200, 900, 400, 600, 500, 7000, 4900, 5900, 4000, 300, 1800],
             ],
             [
-                'prduct_name' => 'Product-2',
+                'product_name' => 'Product-2',
                 'monthly_preorder_count' => [4900, 5900, 4000, 300, 1800, 100, 200, 900, 400, 600, 500, 7000]
             ],
             [
-                'prduct_name' => 'Product-3',
+                'product_name' => 'Product-3',
                 'monthly_preorder_count' => [100, 200, 900, 4900, 400, 600, 500, 7000, 5900, 4000, 300, 1800]
             ],
             [
-                'prduct_name' => 'Product-4',
+                'product_name' => 'Product-4',
                 'monthly_preorder_count' => [100, 200, 900, 400, 5900, 4000, 300, 7000, 4900, 1800, 600, 500,]
             ],
             [
-                'prduct_name' => 'Product-5',
+                'product_name' => 'Product-5',
                 'monthly_preorder_count' => [500, 7000, 4900, 5900, 1800, 400, 600, 4000, 100, 200, 900, 300]
             ],
         ]);

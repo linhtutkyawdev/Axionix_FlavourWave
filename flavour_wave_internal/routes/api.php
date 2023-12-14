@@ -43,7 +43,8 @@ Route::get('customers/{id}/preorders', [OrderController::class, 'getPreorders'])
 Route::post('preorders/create', [OrderController::class, 'createPreorder']);
 Route::get('preorders/{id}', [OrderController::class, 'getPreOrder']);
 Route::post('preorders/{preorder:order_id}/update', [OrderController::class, 'update']);
-Route::get('getLastWeekSellingData', [OrderController::class, 'getLastWeekSellingData']);
+
+Route::get('preorders', [OrderController::class, 'getPreordersCountFor12Months']);
 
 // product
 Route::get('/products', [ProductController::class, 'all']);
