@@ -1,3 +1,5 @@
+import axiosInstance from "@/services/axiosInstance";
+
 export interface IUser {
   customer_id: string;
   email: string;
@@ -6,41 +8,29 @@ export interface IUser {
 }
 
 export async function useInitialSetup(user: IUser) {
-  if (!user) return;
+  if (!user.customer_id) return null;
 
   const customer = await getCustomer(user.customer_id);
   if (customer) {
     return customer;
   }
-  if (!customer) {
-    createCustomer({
-      customer_id: user.customer_id,
-      email: user.email,
-      imageUrl: user.imageUrl,
-      name: user.name,
-    });
-  }
+
+  return await createCustomer({
+    customer_id: user.customer_id,
+    email: user.email,
+    imageUrl: user.imageUrl,
+    name: user.name,
+  });
 }
+
 async function getCustomer(customerID: string) {
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/customer/login", {
-      method: "POST",
-      body: JSON.stringify({
-        customer_id: customerID,
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    if (res.ok) return data;
-    return null;
+    return (await axiosInstance.get(`customer/${customerID}`)).data;
   } catch (e: any) {
-    console.log();
     return null;
   }
 }
+
 async function createCustomer({
   customer_id,
   email,
@@ -53,22 +43,15 @@ async function createCustomer({
   imageUrl: string;
 }) {
   try {
-    const res = await fetch("http://127.0.0.1:8000/api/customer/login", {
-      method: "POST",
-      body: JSON.stringify({
+    return (
+      await axiosInstance.post("customer/create", {
         customer_id,
         name,
         email,
         imageUrl,
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    if (res.ok) return data;
+      })
+    ).data;
   } catch (e: any) {
-    console.log(e);
+    return null;
   }
 }

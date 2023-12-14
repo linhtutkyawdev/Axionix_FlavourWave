@@ -6,30 +6,33 @@ import ScrollVelocity from "@/components/home/scroll-velocity";
 import Navbar from "@/components/navbar/navbar";
 import { IProduct } from "@/components/products/product-card";
 import ProductsGrid from "@/components/products/product-grid";
+import { Button } from "@/components/ui/button";
 import { useInitialSetup } from "@/lib/initial-setup";
+import { getProducts } from "@/services/product.service";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
   const { user } = useUser();
 
-  useInitialSetup({
-    customer_id: user?.id as string,
-    email: user?.emailAddresses[0].emailAddress as string,
-    imageUrl: user?.imageUrl as string,
-    name: user?.lastName
-      ? `${user.firstName} ${user.lastName}`
-      : (user?.firstName as string),
-  });
+  user &&
+    useInitialSetup({
+      customer_id: user?.id as string,
+      email: user?.emailAddresses[0].emailAddress as string,
+      imageUrl: user?.imageUrl as string,
+      name: user?.lastName
+        ? `${user.firstName} ${user.lastName}`
+        : (user?.firstName as string),
+    });
 
   const { data: products, status } = useQuery({
     queryKey: ["products", "limit"],
     queryFn: async () => {
-      const res = await fetch("https://fakestoreapi.com/products?limit=4");
-      if (!res.ok) {
-        return Promise.reject(new Error("Could not fetch products"));
+      try {
+        return await getProducts();
+      } catch (error) {
+        throw error;
       }
-      return res.json() as Promise<IProduct[]>;
     },
   });
 
@@ -37,7 +40,6 @@ export default function Home() {
     <main>
       {/* main banner that including header */}
       <Banner />
-
       {/* scroll velocity section to display our products */}
       <div className="my-24">
         <h2 className="text-center text-3xl md:text-4xl mb-8 font-bold ">

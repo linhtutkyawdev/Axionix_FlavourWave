@@ -36,7 +36,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // frontend
 
 // customer
-Route::get('/customers', [CustomerController::class, 'show']);
+Route::get('customers', [CustomerController::class, 'show']);
+Route::get('customers/{id}', [CustomerController::class, 'show_one']);
 Route::post('customer/create', [CustomerController::class, 'createCustomer']);
 Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
 
