@@ -3,6 +3,7 @@
 import Banner from "@/components/home/banner";
 import HeroSection from "@/components/home/hero";
 import ScrollVelocity from "@/components/home/scroll-velocity";
+import Navbar from "@/components/navbar/navbar";
 import { IProduct } from "@/components/products/product-card";
 import ProductsGrid from "@/components/products/product-grid";
 import { useInitialSetup } from "@/lib/initial-setup";

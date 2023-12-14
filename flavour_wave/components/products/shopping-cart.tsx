@@ -62,7 +62,7 @@ const ShoppingCart = () => {
           className="relative hidden md:block  p-1 bg-black text-white rounded-full"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          <ShoppingCartIcon className="w-8 h-8" />
+          <ShoppingCartIcon className="w-6 h-6" />
           <Badge className="p-1.5 py-0.5 absolute -top-3">
             {totalQuantity}
           </Badge>

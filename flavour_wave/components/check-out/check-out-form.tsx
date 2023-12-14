@@ -15,7 +15,7 @@ const CheckOutForm = () => {
   const [date, setDate] = useState<Date>();
   const { onUpdateState } = useCheckoutStore();
   return (
-    <form className="space-y-8">
+    <form className="space-y-8 mt-2 ">
       <div>
         <label htmlFor="driverNRC">Drive NRC.</label>
         <input

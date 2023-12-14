@@ -57,7 +57,7 @@ const Map = () => {
   };
 
   return (
-    <div className="container my-4">
+    <div className="container my-4 ">
       <Mapp
         height={400}
         defaultCenter={[defaultLat, defaultLng]}

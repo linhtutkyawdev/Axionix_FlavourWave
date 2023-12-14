@@ -58,7 +58,10 @@ const TextAnimation = ({ labels, className, content }: TextAnimationProps) => {
   return (
     <div className={cn("console-container", className)}>
       <span>
-        {content} {labels[currentLabelIndex].substring(0, letterCount)}
+        {content}{" "}
+        <b className="text-sky-700 dark:text-yellow-500 italic">
+          {labels[currentLabelIndex].substring(0, letterCount)}
+        </b>
       </span>
       <div className={styles["console-underscore"]}>
         {visible && <span>|</span>}

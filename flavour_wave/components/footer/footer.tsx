@@ -1,21 +1,28 @@
 import { cn } from "@/lib/utils";
 import { Facebook, Flower, Instagram, Twitter } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-yellow-500/50 py-10">
+    <footer className="w-full bg-yellow-400 dark:bg-neutral-800 py-10">
       <div className="grid  grid-cols-1  md:grid-cols-2 xl:grid-cols-4  w-full px-8 sm:px-16  md:px-20 gap-8 ">
         <div className="flex flex-col items-start">
           <Link
             href={"/"}
             className="group flex items-center gap-x-1 text-2xl md:text-3xl font-semibold"
           >
-            <Flower className="group-hover:animate-spin" /> Flavor
-            <span className="text-emerald-500">Wave</span>
+            <div className=" w-[80px] h-[80px] relative">
+              <Image src={"/main_logo.png"} alt="logo" fill />
+            </div>
+            {/* <Flower className="group-hover:animate-spin" /> */}
+            <p>
+              <span className="dark:text-yellow-500">Flavor</span>
+              <span className="text-emerald-500">Wave</span>
+            </p>
           </Link>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita,
-          sequi!
+          Savor Exquisite Flavors! Indulge in Culinary Delights and Refreshing
+          Beverages.
           <div className="flex items-center gap-2 mt-3">
             <Facebook className="w-8 h-8 transition-all fill-blue-600 cursor-pointer" />
             <Twitter className="w-8 h-8 transition-all fill-sky-600 cursor-pointer" />

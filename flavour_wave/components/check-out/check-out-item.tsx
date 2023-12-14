@@ -14,26 +14,21 @@ interface CheckOutItemProps {
 
 const CheckOutItem = ({ item }: CheckOutItemProps) => {
   usePreventHydration();
-  const { products, onQuantityInc, onQuantityDec, onRemoveItem } =
-    useShoppingCartStore();
+  const { onQuantityInc, onQuantityDec, onRemoveItem } = useShoppingCartStore();
 
   return (
     <div
       key={item.id}
-      className="bg-neutral-300 px-3 py-2 lg:w-[74%] mx-auto flex justify-start items-start gap-x-3 border-b border-b-neutral-300 last:border-b-0 my-2 rounded-lg"
+      className=" bg-neutral-300 px-3 py-2 lg:w-[74%] mx-auto flex flex-col md:flex-row justify-start items-start gap-x-3 border-b border-b-neutral-300 last:border-b-0 my-2 rounded-lg"
     >
-      <div className="flex justify-center items-center gap-4 mb-2">
-        <Image
-          src={item.image}
-          alt={item.title}
-          width={50}
-          height={50}
-          className="w-[200px] h-[150px]"
-        />
+      <div className="relative w-[200px] h-[150px] flex justify-center items-center gap-4 mb-2">
+        <Image src={item.image} alt={item.title} fill />
       </div>
-      <div className="flex flex-col   items-start gap-4 mb-2 w-full">
-        <h3 className="line-clamp-1 w-[400px] font-semibold">{item.title}</h3>
-        <div className="flex items-center justify-between w-full">
+      <div className="flex flex-col items-start gap-4 mb-2 w-full">
+        <h3 className="line-clamp-1 w-[400px] font-semibold">
+          {item.title ?? "This is title"}
+        </h3>
+        <div className="flex  items-start md:items-center flex-col md:flex-row justify-between w-full">
           <h3 className="flex items-center text-lg md:text-xl font-semibold">
             <DollarSign className="w-4 h-4" />
             {item.price}

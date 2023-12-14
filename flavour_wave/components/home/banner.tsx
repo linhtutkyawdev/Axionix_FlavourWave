@@ -5,33 +5,30 @@ import { Button } from "../ui/button";
 import { CupSoda, Star, StarHalf } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import TextAnimation from "../animation/text-animation";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
+  const router = useRouter();
   return (
     <>
-      <div className="bg-yellow-500/50 relative w-full h-auto  md:h-[550px]">
-        <Navbar
-          className="bg-transparent z-10"
-          linkClassName="bg-yellow-400 rounded-lg"
-          linkHoverClassName="hover:bg-yellow-400/50"
-        />
-        <div className="mt-8 flex flex-col md:flex-row gap-y-6 md:gap-y-0 items-start justify-between w-[100%] px-8 sm:px-16 md:px-24 lg:px-40 xl:px-48">
+      <div className="bg-yellow-400 dark:bg-neutral-800 relative w-full h-auto  md:h-[550px]">
+        <div className=" pt-20 flex flex-col md:flex-row gap-y-6 md:gap-y-0 items-start justify-between w-[100%] px-8 sm:px-16 md:px-24 lg:px-40 xl:px-48">
           <div className="w-full md:w-[55%] flex justify-start items-start flex-col">
             <div className="sm:text-4xl lg:text-4xl xl:text-5xl font-semibold mb-4">
               <TextAnimation
-                content="Lorem ipsum dolor sit amet consectetur. Lorem ipsum"
+                content="Savor Exquisite Flavors! Indulge in Culinary Delights and Refreshing Beverages that"
                 labels={[
-                  "HTML",
-                  "CSS",
-                  "JavaScript",
-                  "TypeScript",
-                  "React",
-                  "Nextjs",
+                  "feast for the Senses Awaits",
+                  "taste the Good Life!",
+                  "enjoy and delicious taste",
+                  "best experiences",
+                  "hack your life!",
                 ]}
-                className="sm:text-4xl lg:text-4xl xl:text-5xl font-semibold mb-4"
+                className="sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4"
               />
             </div>
             <Button
+              onClick={() => router.push("/products")}
               variant={"primary"}
               size={"lg"}
               className="transition-all duration-300 text-lg md:text-xl rounded-3xl hover:rounded-xl active:scale-95"
