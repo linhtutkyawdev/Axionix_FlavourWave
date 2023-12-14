@@ -93,17 +93,21 @@ const CheckOutPage = () => {
 
           <div>
             <div className="w-full flex items-center gap-x-4">
-              <h3 className="text-lg md:text-xl font-semibold">
-                User Location:
-              </h3>
+              <h3 className="text-lg md:text-xl font-semibold">Location:</h3>
               <h3 className="text-lg md:text-xl font-semibold">
                 {address.userLocation ?? ""}
               </h3>
             </div>
             <div className="w-full flex items-center gap-x-4">
-              <h3 className="text-lg md:text-xl font-semibold">Destination:</h3>
               <h3 className="text-lg md:text-xl font-semibold">
-                {address.distance ?? "-"}
+                Delivery Price:
+              </h3>
+              <h3 className="text-lg md:text-xl font-semibold">
+                {`${
+                  parseInt(address.distance, 10)
+                    ? `${parseInt(address.distance, 10) * 1.5}$`
+                    : 0
+                }` ?? "-"}
               </h3>
             </div>
             <div>
@@ -141,16 +145,12 @@ const CheckOutPage = () => {
               <DollarSign /> {totalPrice}
             </h3>
           </div>
-          <Button
-            disabled={address.distance === "" ? true : false}
-            onClick={handleCheckout}
-            size={"lg"}
-            className="text-base md:text-lg my-4"
-          >
-            Confirm pre-order
-          </Button>
+
           <Elements stripe={stripePromise}>
-            <StripeCheckout />
+            <StripeCheckout
+              distance={address.distance}
+              handleCheckout={handleCheckout}
+            />
           </Elements>
         </div>
       </div>

@@ -1,27 +1,43 @@
 "use client";
 
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import useShoppingCartStore from "@/hook/use-shopping-cart-store";
+import { useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React from "react";
+import { Button } from "../ui/button";
 
-export default function StripeCheckout() {
+interface StripeCheckoutProps {
+  distance: string;
+  handleCheckout: () => void;
+}
+
+export default function StripeCheckout({
+  distance,
+  handleCheckout,
+}: StripeCheckoutProps) {
   const stripe = useStripe();
-  const elements = useElements();
+  const { products } = useShoppingCartStore();
+  console.log(products);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const cardElement = elements?.getElement("card");
 
     try {
-      if (!stripe || !cardElement) return null;
-      const { data } = await axios.post("/api/checkout", {
-        data: { amount: 89 },
-      });
-      const clientSecret = data;
+      if (!stripe) return;
 
-      await stripe?.confirmCardPayment(clientSecret, {
-        payment_method: { card: cardElement },
+      const { data } = await axios.post("/api/checkout_sessions", {
+        products,
       });
+
+      const sessionId = data.id;
+
+      const { error } = await stripe.redirectToCheckout({
+        sessionId,
+      });
+
+      if (error) {
+        console.error(error.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,8 +45,15 @@ export default function StripeCheckout() {
 
   return (
     <form onSubmit={onSubmit}>
-      <CardElement />
-      <button type="submit">Submit</button>
+      <Button
+        type="submit"
+        disabled={distance === "" ? true : false}
+        onClick={handleCheckout}
+        size={"lg"}
+        className="text-base md:text-lg my-4"
+      >
+        Confirm pre-order
+      </Button>
     </form>
   );
 }
