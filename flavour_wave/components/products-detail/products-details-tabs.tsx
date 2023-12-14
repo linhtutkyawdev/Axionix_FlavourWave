@@ -45,7 +45,7 @@ const ProductsDetailsTabs = ({ description }: ProductsDetailsTabsProps) => {
       </TabsList>
       <TabsContent
         value="description"
-        className="text-slate-700 text-lg  md:text-xl"
+        className="text-slate-700  dark:text-slate-300  text-lg  md:text-xl"
       >
         {description}
       </TabsContent>

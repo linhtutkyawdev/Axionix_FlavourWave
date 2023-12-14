@@ -30,7 +30,7 @@ const Navbar = ({
   return (
     <header
       className={cn(
-        "bg-yellow-400 opacity-[0.98] py-4 px-8 sm:px-16 md:px-24 sticky top-0 z-20",
+        "bg-yellow-400 dark:bg-neutral-800 opacity-[0.98] py-3 px-8 sm:px-16 md:px-24 sticky top-0 z-30",
         className
       )}
     >
@@ -44,7 +44,8 @@ const Navbar = ({
           </div>
           {/* <Flower className="group-hover:animate-spin" /> */}
           <p>
-            Flavor<span className="text-emerald-500">Wave</span>
+            <span className="text-yellow-400">Flavor</span>
+            <span className="text-emerald-500">Wave</span>
           </p>
         </Link>
         <div className="flex items-center gap-x-2">

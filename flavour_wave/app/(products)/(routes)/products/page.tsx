@@ -7,9 +7,9 @@ import { IProduct } from "@/components/products/product-card";
 import { SearchProduct } from "@/components/products/search-product";
 import { getProducts } from "@/services/product.service";
 
-const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
+export const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
 
-type APIProduct = {
+export type APIProduct = {
   id: number;
   name: string;
   description: string;
@@ -19,12 +19,11 @@ type APIProduct = {
 };
 
 const Products = () => {
-  // fetch from api-endpoint
+  // fetch from api-endpoint for all products
   const { data: products, status } = useQuery({
     queryKey: ["products", "all"],
     queryFn: async () => {
       const products: APIProduct[] = await getProducts();
-      console.log(products);
 
       return products.map((p) => ({
         id: p.id,

@@ -47,7 +47,7 @@ const Banner = () => {
                 </Avatar>
                 <Avatar>
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src="https://avatars.githubusercontent.com/u/134714087?v=4"
                     alt="@shadcn"
                   />
                   <AvatarFallback>CN</AvatarFallback>
@@ -64,11 +64,11 @@ const Banner = () => {
           </div>
           <div className="w-full md:w-[40%] flex items-center justify-center pb-10 md:pb-0">
             <Image
-              src={"/tea-mug.png"}
+              src={"/lychee.jpg"}
               alt="banner image"
               width={400}
               height={400}
-              className="w-[250px] h-[220px] md:w-[370px] md:h-[280px]"
+              className="w-[250px] h-[220px] md:w-[370px] md:h-[280px] rounded-xl shadow-md shadow-neutral-700"
             />
           </div>
         </div>

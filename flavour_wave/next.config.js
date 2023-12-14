@@ -7,6 +7,11 @@ const nextConfig = {
         port: "",
         pathname: "/img/*",
       },
+      {
+        hostname: "localhost:8000",
+        port: "",
+        pathname: "/storage/product-images/*",
+      },
     ],
   },
 };

@@ -9,11 +9,11 @@ const HeroSection = () => {
     <div className="mt-8 flex flex-col md:flex-row gap-y-6 md:gap-y-0 items-start justify-between w-[100%] px-8 sm:px-16 md:px-24 lg:px-40 xl:px-48">
       <div className="w-full md:w-[40%] flex items-center justify-center pb-10 md:pb-0">
         <Image
-          src={"/tea-mug.png"}
+          src={"/starFruit.jpg"}
           alt="banner image"
           width={400}
           height={400}
-          className="w-[250px] h-[220px] md:w-[370px] md:h-[280px]"
+          className="w-[250px] h-[220px] md:w-[370px] md:h-[280px] rounded-xl shadow-md shadow-neutral-700"
         />
       </div>
       <div className="w-full md:w-[55%] flex justify-start items-start flex-col">

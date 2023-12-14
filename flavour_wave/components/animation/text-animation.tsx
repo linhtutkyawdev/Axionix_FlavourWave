@@ -58,7 +58,7 @@ const TextAnimation = ({ labels, className, content }: TextAnimationProps) => {
   return (
     <div className={cn("console-container", className)}>
       <span>
-        {content}{" "}
+        {content} <br />
         <b className="text-sky-700 dark:text-yellow-500 italic">
           {labels[currentLabelIndex].substring(0, letterCount)}
         </b>

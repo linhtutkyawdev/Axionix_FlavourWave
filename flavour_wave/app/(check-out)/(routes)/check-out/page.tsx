@@ -77,7 +77,7 @@ const CheckOutPage = () => {
 
   return (
     <div className="flex items- justify-center w-full mt-10 md:px-10 lg:px-9 xl:px-20">
-      <div className="bg-neutral-200 p-4 px-6 w-[90%] md:w-[88%] mx-auto">
+      <div className="bg-neutral-200 dark:bg-neutral-700  p-4 px-6 w-[90%] md:w-[88%] mx-auto">
         <div className="flex items-center justify-between">
           <h2 className="text-xl md:text-2xl lg:text-3xl">Pre-order Summary</h2>
         </div>

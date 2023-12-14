@@ -22,8 +22,8 @@ const CheckOutSuccessLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main>
       <Navbar
-        linkClassName="bg-white rounded-lg"
-        linkHoverClassName="hover:bg-white/80"
+        linkClassName="bg-white dark:bg-yellow-500 rounded-lg"
+        linkHoverClassName="hover:bg-white/80 dark:hover:bg-yellow-500/50"
       />
       {children}
       <div className=" flex items-center justify-center my-5 mb-10">

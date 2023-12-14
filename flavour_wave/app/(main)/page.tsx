@@ -3,33 +3,46 @@
 import Banner from "@/components/home/banner";
 import HeroSection from "@/components/home/hero";
 import ScrollVelocity from "@/components/home/scroll-velocity";
-import Navbar from "@/components/navbar/navbar";
 import { IProduct } from "@/components/products/product-card";
 import ProductsGrid from "@/components/products/product-grid";
-import { useInitialSetup } from "@/lib/initial-setup";
+import { initialSetup } from "@/lib/initial-setup";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
+import {
+  APIProduct,
+  PRODUCT_IMAGE_API_URL,
+} from "../(products)/(routes)/products/page";
+import { getProducts } from "@/services/product.service";
+import { useEffect } from "react";
 
 export default function Home() {
   const { user } = useUser();
 
-  useInitialSetup({
-    customer_id: user?.id as string,
-    email: user?.emailAddresses[0].emailAddress as string,
-    imageUrl: user?.imageUrl as string,
-    name: user?.lastName
-      ? `${user.firstName} ${user.lastName}`
-      : (user?.firstName as string),
-  });
+  useEffect(() => {
+    initialSetup({
+      customer_id: user?.id as string,
+      email: user?.emailAddresses[0].emailAddress as string,
+      imageUrl: user?.imageUrl as string,
+      name: user?.lastName
+        ? `${user.firstName} ${user.lastName}`
+        : (user?.firstName as string),
+      password: "password_FlavourWave",
+    });
+  }, [user]);
 
+  // fetch from api-endpoint for all products
   const { data: products, status } = useQuery({
-    queryKey: ["products", "limit"],
+    queryKey: ["products", "all"],
     queryFn: async () => {
-      const res = await fetch("https://fakestoreapi.com/products?limit=4");
-      if (!res.ok) {
-        return Promise.reject(new Error("Could not fetch products"));
-      }
-      return res.json() as Promise<IProduct[]>;
+      const products: APIProduct[] = await getProducts();
+
+      return products.map((p) => ({
+        id: p.id,
+        title: p.name,
+        price: p.unit_price * p.quantity_per_box,
+        description: p.description,
+        image: PRODUCT_IMAGE_API_URL + "/" + p.image_url,
+      })) as IProduct[];
     },
   });
 
@@ -60,7 +73,7 @@ export default function Home() {
           Our Popular <span className="text-emerald-600">Products</span>
         </h2>
         <ProductsGrid
-          products={products}
+          products={products?.slice(0, 4)}
           status={status}
           showLoading={false}
           skeletonNumber={4}
