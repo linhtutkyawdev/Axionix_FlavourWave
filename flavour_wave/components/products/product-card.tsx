@@ -53,15 +53,15 @@ const ProductCard = ({ id, description, image, price, title }: IProduct) => {
   return (
     <Card className="bg-background cursor-pointer relative m-auto sm:m-0 w-[350px] sm:w-full h-[420px] sm:max-h-[520px] border border-neutral-500">
       <CardHeader className="group overflow-hidden w-full h-1/2 transition-all duration-300">
-        <Image
+        <img
           src={image}
           alt={title}
           width={100}
           height={50}
-          className="transition-all duration-300 w-full h-full object-contain group-hover:scale-105 "
+          className="transition-all duration-300 w-full h-full group-hover:scale-105 object-cover rounded-t-sm"
         />
       </CardHeader>
-      <Separator className="my-3" />
+      <Separator className="mb-3" />
       <CardContent>
         <div>
           <TooltipProvider>

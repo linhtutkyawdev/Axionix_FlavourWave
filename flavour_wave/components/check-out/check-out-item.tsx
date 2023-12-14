@@ -22,7 +22,7 @@ const CheckOutItem = ({ item }: CheckOutItemProps) => {
       className=" bg-neutral-300 px-3 py-2 lg:w-[74%] mx-auto flex flex-col md:flex-row justify-start items-start gap-x-3 border-b border-b-neutral-300 last:border-b-0 my-2 rounded-lg"
     >
       <div className="relative w-[200px] h-[150px] flex justify-center items-center gap-4 mb-2">
-        <Image src={item.image} alt={item.title} fill />
+        <img src={item.image} alt={item.title} fill />
       </div>
       <div className="flex flex-col items-start gap-4 mb-2 w-full">
         <h3 className="line-clamp-1 w-[400px] font-semibold">

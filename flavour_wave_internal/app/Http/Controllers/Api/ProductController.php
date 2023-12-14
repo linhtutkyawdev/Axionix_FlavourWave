@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+
 use App\Http\Requests\ProductsRequest;
 use App\Models\Product;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
@@ -21,10 +22,8 @@ class ProductController extends Controller
 
     // import all products to frontend
     public function all(){
-        $products = Product::latest()->get();
-        return response()->json([
-            'products' => $products,
-        ]);
+       return Product::latest()->get();
+       
     }
 
     // import 4 random products to frontend
@@ -32,20 +31,18 @@ class ProductController extends Controller
         $randomProducts = Product::inRandomOrder()->limit(4)->get();
         return response()->json([
             'randomProducts' => $randomProducts,
-            'randomProductsCount' => '4',
+            'randomProductsCount' => count($randomProducts),
         ]);
     }
 
     // get product details
     public function detailProduct($id){
-        $product = Product::where('product_id', $id)->first();
-        return response()->json([
-            'product' => $product
-        ]);
+        return Product::where('product_id', $id)->first();
+        
     }
 
     // get trending products
     public function trendProducts(){
-        $trending = Warehouse::orderBy('')->select('sales_issues')->limit(5)->get();
+       return Warehouse::orderBy('sales_issue', 'desc')->take(3)->get();
     }
 }

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('order_id');
             $table->integer('opening_balance');
             $table->integer('sales_issue');
             $table->integer('received');
+            $table->integer('availability');
             $table->integer('sales_return');
             $table->integer('damage');
             $table->integer('closing_balance');

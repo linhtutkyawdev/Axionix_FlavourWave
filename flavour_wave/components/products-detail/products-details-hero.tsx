@@ -50,7 +50,7 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
       <div className="mt-8 flex flex-col md:flex-row gap-y-6 md:gap-y-0 md:gap-x-5 items-start justify-between w-[100%] px-8  lg:px-40 xl:px-48">
         <div className="w-[80%] sm:w-[55%] mx-auto md:w-[37%] lg:w-[33%] xl:w-[25%] flex items-center justify-center pb-10 md:pb-0 h-[370px] md:h-[400px] ">
           {product && product?.image ? (
-            <Image
+            <img
               src={product?.image as string}
               alt={product?.title as string}
               width={100}
