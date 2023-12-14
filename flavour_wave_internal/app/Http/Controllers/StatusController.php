@@ -13,7 +13,7 @@ class StatusController extends Controller
 
         $accept = $this->acceptOrderStatus();
         Preorder::where('order_id', $id)->update($accept);
-        $preorder = Warehouse::select('warehouse.*', 'warehouse.product_id as warehouse_p_id')->leftJoin('preorder_detail', 'warehouse.product_id', 'preorder_detail.product_id')->where('preorder_detail.order_id', $id)->first();
+        $preorder = Warehouse::select('warehouse.*', 'warehouse.product_id as warehouse_p_id')->leftJoin('preorder', 'warehouse.product_id', 'preorder.product_id')->where('preorder.order_id', $id)->first();
         foreach($preorder as $p){
             $product_id = $p->product_id;
             $sales_issue = $p->sales_issue;

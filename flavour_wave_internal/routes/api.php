@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\OrderDetailsController;
+use App\Http\Controllers\Api\PreorderCountController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FactoryController;
 use App\Http\Controllers\IngredientsController;
@@ -67,3 +68,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
     //warehouse
     Route::post('/warehouse/create',[WarehouseController::class,'create']);
+    Route::post('order/chart', [PreorderCountController::class, 'preorderCountChart']);

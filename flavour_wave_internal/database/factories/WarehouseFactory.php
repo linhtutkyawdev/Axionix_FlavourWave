@@ -22,6 +22,7 @@ class WarehouseFactory extends Factory
     {
         return [
             'product_id' => 1,
+            'order_id' => $this->faker->randomNumber(),
             'opening_balance'=>$this->faker->randomNumber(),
             'sales_issue' =>$this->faker->randomNumber(),
             'received' =>$this->faker->randomNumber(),

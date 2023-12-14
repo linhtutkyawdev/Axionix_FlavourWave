@@ -19,7 +19,7 @@ class OrderDetailsController extends Controller
 
     // orders' details from each customer
     public function eachOrderDetails(Request $request){
-        $order = Preorder_detail::where('order_id', $request->order_id)->first();
+        $order = Preorder::where('order_id', $request->order_id)->first();
         return response()->json([
             'order' => $order,
         ]);
@@ -28,7 +28,7 @@ class OrderDetailsController extends Controller
     // edit order details
     public function editOrderDetails($id, Request $request){
         $data = $this->inputEditOrderDetails($request);
-        Preorder_detail::where('order_id', $id)->update($data);
+        Preorder::where('order_id', $id)->update($data);
         return response()->json([
             'order_status' => 'Your order details have been updated.'
         ]);
@@ -37,7 +37,7 @@ class OrderDetailsController extends Controller
     // input order details
     private function inputOrderDetails($request){
         foreach($request->all() as $item){
-            Preorder_detail::create([
+            Preorder::create([
                 'order_id' => $item->order_id,
                 'product_id' => $item->product_id,
                 'order_quantity' => $item->order_quantity,
