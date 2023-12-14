@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { Map as Mapp, Marker, Overlay } from "pigeon-maps";
 import { UserButton } from "@clerk/nextjs";
+import { Button } from "../ui/button";
+import useCheckoutStore from "@/hook/use-checkout-store";
 
-// flavourwave's location
+// flavourWave's location
 const defaultLat = 16.82,
   defaultLng = 96.16;
 
@@ -36,6 +38,7 @@ const Map = () => {
   ]);
 
   const [isPicked, setIsPicked] = useState<boolean>(false);
+  const { onAddedLocation, address, onRest } = useCheckoutStore();
 
   const handleMarkerSelect = ({ latLng }: { latLng: [number, number] }) => {
     setLocation(latLng);
@@ -43,25 +46,20 @@ const Map = () => {
   };
 
   const handleLocationPick = () => {
-    // hit order api with location value
-    alert("flavourwave: " + [defaultLat, defaultLng] + "\n");
-    alert("customer: " + location + "\n");
-    alert(
-      "distance: " +
-        getDistanceFromLatLngInKm(
-          defaultLat,
-          defaultLng,
-          location[0],
-          location[1]
-        ) +
-        "km"
-    );
+    const [latitude, longitude] = location; // Assuming location is an array of [number, number]
+    const userLocation = `${latitude}, ${longitude}`; // Combining latitude and longitude into a string
+    onAddedLocation({
+      userLocation,
+      distance: String(
+        getDistanceFromLatLngInKm(defaultLat, defaultLng, latitude, longitude)
+      ),
+    });
   };
 
   return (
-    <div className="container my-4">
+    <div className="container my-4 ">
       <Mapp
-        height={500}
+        height={400}
         defaultCenter={[defaultLat, defaultLng]}
         defaultZoom={11}
         onClick={handleMarkerSelect}
@@ -74,9 +72,6 @@ const Map = () => {
         <Overlay anchor={[defaultLat, defaultLng]} offset={[40, 80]}>
           FlavourWave
         </Overlay>
-
-        {/* <Marker width={50} anchor={location} /> */}
-
         {isPicked && (
           <Overlay
             anchor={location}
@@ -87,9 +82,18 @@ const Map = () => {
           </Overlay>
         )}
       </Mapp>
-      <button className="bg-gray-200 p-3" onClick={handleLocationPick}>
-        Pick
-      </button>
+      <div className="flex items-center gap-x-3 mt-3">
+        <Button
+          disabled={isPicked || address.distance !== "" ? false : true}
+          onClick={handleLocationPick}
+        >
+          Pick location
+        </Button>
+
+        <Button disabled={isPicked ? false : true} onClick={onRest}>
+          Remove location
+        </Button>
+      </div>
     </div>
   );
 };

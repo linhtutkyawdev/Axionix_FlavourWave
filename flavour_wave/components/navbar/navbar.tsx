@@ -1,6 +1,6 @@
 "use client";
 
-import { Flower, LogIn } from "lucide-react";
+import { LogIn } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { ModeToggle } from "../mode-toggle";
@@ -11,6 +11,7 @@ import MobileToggle from "./mobile-toggle";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import ShoppingCart from "../products/shopping-cart";
+import Image from "next/image";
 
 interface NavbarProps {
   className?: string;
@@ -29,14 +30,22 @@ const Navbar = ({
   return (
     <header
       className={cn(
-        "bg-yellow-500 opacity-[0.98] py-2.5 px-8 sm:px-16 md:px-24 sticky top-0 z-20",
+        "bg-yellow-400 opacity-[0.98] py-4 px-8 sm:px-16 md:px-24 sticky top-0 z-20",
         className
       )}
     >
       <nav className="flex justify-between items-center">
-        <Link href={"/"} className="group flex items-center gap-x-1">
-          <Flower className="group-hover:animate-spin" /> Flavor
-          <span>Wave</span>
+        <Link
+          href={"/"}
+          className="group flex items-center gap-x-1 text-base md:text-lg font-bold"
+        >
+          <div className=" w-[60px] h-[60px] relative">
+            <Image src={"/main_logo.png"} alt="logo" fill />
+          </div>
+          {/* <Flower className="group-hover:animate-spin" /> */}
+          <p>
+            Flavor<span className="text-emerald-500">Wave</span>
+          </p>
         </Link>
         <div className="flex items-center gap-x-2">
           <div className="hidden items-center gap-x-2  md:flex">
@@ -65,12 +74,13 @@ const Navbar = ({
               className={cn(
                 "transition-all px-2 py-1 rounded-xl hover:rounded-lg",
                 linkHoverClassName,
-                path === "my-orders" && linkClassName
+                path === "/my-orders" && linkClassName
               )}
             >
               My orders
             </Link>
           </div>
+
           {currentUser ? (
             <UserButton
               afterSignOutUrl="/"
@@ -87,7 +97,6 @@ const Navbar = ({
               </Button>
             </SignInButton>
           )}
-
           <ShoppingCart />
 
           <ModeToggle />

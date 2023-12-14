@@ -17,6 +17,7 @@ import useShoppingCartStore, {
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { getData, storeData, updateData } from "@/lib/local-storage";
+import usePreventHydration from "@/hook/use-prevent-hydration";
 
 export interface IProduct {
   id: number;
@@ -32,22 +33,17 @@ export interface IProduct {
 }
 
 const ProductCard = ({ id, description, image, price, title }: IProduct) => {
+  usePreventHydration();
   const router = useRouter();
   const { onAddItem, products } = useShoppingCartStore();
 
-  const data = getData("flavorWave_store") ?? [];
+  // const data = getData("flavorWave_store") ?? [];
 
   function onClickAddToShoppingCart(item: ShoppingCartItem) {
     onAddItem(item);
     toast({
       description: "Successfully added new product.",
     });
-
-    // if (!getData("flavorWave_store")) {
-    //   storeData("flavorWave_store", products);
-    // }
-
-    // updateData("flavorWave_store", item);
   }
 
   function checkItemAlreadyInShoppingCart(id: number) {

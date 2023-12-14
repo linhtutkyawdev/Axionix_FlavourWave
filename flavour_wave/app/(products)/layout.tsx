@@ -28,7 +28,7 @@ const ProductsLayout = ({ children }: { children: React.ReactNode }) => {
       />
       {children}
       <div className=" flex items-center justify-center my-5 mb-10">
-        <h3 className="group text-2xl font-bold flex items-center gap-2 ">
+        <h3 className="group text-base font-bold flex items-center gap-2 ">
           <Flower className="group-hover:animate-spin" /> Very Thank You For
           Shopping With Us <Flower className="group-hover:animate-spin" />
         </h3>

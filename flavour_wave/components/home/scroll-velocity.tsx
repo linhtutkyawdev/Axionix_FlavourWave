@@ -12,13 +12,103 @@ import {
   useAnimationFrame,
 } from "framer-motion";
 import { wrap } from "@motionone/utils";
+import Image from "next/image";
+
+const ProductsArray1 = [
+  {
+    name: "blueberry",
+    image: "/blueberry1.jpg",
+  },
+  {
+    name: "burmeseBliss",
+    image: "/burmeseBliss.jpg",
+  },
+  {
+    name: "citrus",
+    image: "/citrus1.jpg",
+  },
+  {
+    name: "emerald",
+    image: "/emerald.png",
+  },
+  {
+    name: "exotic",
+    image: "/exotic.jpg",
+  },
+  {
+    name: "gingerzing",
+    image: "/gingerzing.jpg",
+  },
+  {
+    name: "jasmine",
+    image: "/jasmine.jpg",
+  },
+  {
+    name: "lushlemon",
+    image: "/lushlemon.jpg",
+  },
+  {
+    name: "lychee",
+    image: "/lychee.jpg",
+  },
+  {
+    name: "mangotango",
+    image: "/mangotango.jpg",
+  },
+];
+
+const ProductsArray2 = [
+  {
+    name: "orchid",
+    image: "/orchid.jpg",
+  },
+  {
+    name: "papaya",
+    image: "/papaya.jpg",
+  },
+  {
+    name: "passionfruit",
+    image: "/cipassionfruit.jpg",
+  },
+  {
+    name: "pineapple",
+    image: "/pineapple.jpg",
+  },
+  {
+    name: "rangoon",
+    image: "/rangoon.jpg",
+  },
+  {
+    name: "rubyred",
+    image: "/rubyred.jpg",
+  },
+  {
+    name: "starFruit",
+    image: "/starFruit.jpg",
+  },
+  {
+    name: "sunshine",
+    image: "/sunshine.jpg",
+  },
+  {
+    name: "sunshine",
+    image: "/sunshine.jpg",
+  },
+  {
+    name: "mangotango",
+    image: "/mangotango.jpg",
+  },
+];
 
 interface ParallaxProps {
-  children: string;
   baseVelocity: number;
+  products: Array<{
+    name: string;
+    image: string;
+  }>;
 }
 
-function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
+function ParallaxText({ products, baseVelocity = 100 }: ParallaxProps) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -66,16 +156,20 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
   return (
     <div className="parallax">
       <motion.div className="scroller" style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+        {products.map((product, index) => (
+          <span key={index}>
+            <div className="flex items-center capitalize">
+              <h3>{product.name.toLowerCase()}</h3>
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={58}
+                height={58}
+                className="w-[58px] h-[58px] rounded-full ml-2"
+              />
+            </div>
+          </span>
+        ))}
       </motion.div>
     </div>
   );
@@ -84,8 +178,11 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
 export default function ScrollVelocity() {
   return (
     <section>
-      <ParallaxText baseVelocity={-0.5}>Framer Motion</ParallaxText>
-      <ParallaxText baseVelocity={0.5}>Scroll velocity</ParallaxText>
+      <ParallaxText
+        baseVelocity={-0.5}
+        products={ProductsArray2}
+      ></ParallaxText>
+      <ParallaxText baseVelocity={0.5} products={ProductsArray1}></ParallaxText>
     </section>
   );
 }

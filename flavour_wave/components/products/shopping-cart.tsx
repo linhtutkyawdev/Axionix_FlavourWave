@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   DropdownMenu,
@@ -18,15 +18,17 @@ import useShoppingCartStore from "@/hook/use-shopping-cart-store";
 import { useRouter } from "next/navigation";
 import ShoppingCartItem from "./shopping-cart-item";
 import { getData } from "@/lib/local-storage";
+import usePreventHydration from "@/hook/use-prevent-hydration";
 
 const ShoppingCart = () => {
+  usePreventHydration();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [totalQuantity, setTotalQuantity] = useState<number>(0);
   const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
 
-  const data = getData("flavorWave_store") ?? [];
-
-  const totalQuantity = products.length
+  // const data = getData("flavorWave_store") ?? [];
+  const totalQu = products.length
     ? products.reduce((acc, curr) => {
         const quantity = curr.quantity;
 
@@ -35,6 +37,10 @@ const ShoppingCart = () => {
         return acc;
       }, 0)
     : 0;
+
+  useEffect(() => {
+    setTotalQuantity(totalQu);
+  }, [totalQu, products]);
 
   // total quantity price
   const totalPrice = parseFloat(
@@ -56,7 +62,7 @@ const ShoppingCart = () => {
           className="relative hidden md:block  p-1 bg-black text-white rounded-full"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          <ShoppingCartIcon className="w-8 h-8" />
+          <ShoppingCartIcon className="w-6 h-6" />
           <Badge className="p-1.5 py-0.5 absolute -top-3">
             {totalQuantity}
           </Badge>

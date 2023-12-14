@@ -47,7 +47,7 @@ const ProductIdPage = ({ params }: ProductIdPage) => {
       <ProductDetailsHero product={product} status={statusForHero} />
 
       <div className="my-24">
-        <h2 className="text-center text-3xl md:text-4xl mb-8 font-bold ">
+        <h2 className="text-center text-lg  md:text-2xl lg:text-3xl mb-8 font-bold ">
           Similar <span className="text-emerald-600">Products</span>
         </h2>
         <ProductsGrid
