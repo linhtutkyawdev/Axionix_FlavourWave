@@ -405,6 +405,9 @@ const initDashboardPageCharts = async () => {
         myChartData.update();
     });
 
+    $("#deliver-count")[0].innerHTML = (
+        await axios.get("/api/deliver/count")
+    ).data;
     var ctx = document.getElementById("CountryChart").getContext("2d");
 
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);

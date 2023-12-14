@@ -17,16 +17,17 @@ class PreorderFactory extends Factory
      * @return array<string, mixed>
      */
 
-     protected $model = Preorder::class;
+    protected $model = Preorder::class;
 
     public function definition(): array
     {
         return [
             'customer_id' => Customer::factory(),
-            'order_id' => $this->faker->randomNumber(5,true),
+            'order_id' => $this->faker->randomNumber(5, true),
+            'preorder_date' => $this->faker->date(),
             'location' => fake()->sentence(),
             'delivered_quantity' => 20,
-            'order_quantity'=> $this->faker->randomNumber(2,true)
+            'order_quantity' => $this->faker->randomNumber(2, true)
         ];
     }
 }

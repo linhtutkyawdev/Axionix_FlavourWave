@@ -62,6 +62,7 @@ Route::post('/factories', [FactoryController::class, 'store']);
 
 //logistics
 Route::post('/deliver', [LogisticsController::class, 'make']);
+Route::get('/deliver/count', [LogisticsController::class, 'getCount']);
 
 //receipe
 Route::post('/receipe/create', [ReceipesController::class, 'create']);
