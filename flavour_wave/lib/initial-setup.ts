@@ -18,7 +18,7 @@ export async function initialSetup(user: IUser) {
   } else {
     console.log(user);
 
-    return createCustomer({
+    return await createCustomer({
       customer_id: user.customer_id,
       email: user.email,
       imageUrl: user.imageUrl,
