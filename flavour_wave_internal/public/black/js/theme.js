@@ -257,80 +257,81 @@ const initDashboardPageCharts = async () => {
         },
     };
 
-    var ctx = document.getElementById("chartLinePurple").getContext("2d");
+    var ctx = document.getElementById("daily_sale_chart")?.getContext("2d");
+    if (ctx) {
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-    var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+        gradientStroke.addColorStop(1, "rgba(72,72,176,0.2)");
+        gradientStroke.addColorStop(0.2, "rgba(72,72,176,0.0)");
+        gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
 
-    gradientStroke.addColorStop(1, "rgba(72,72,176,0.2)");
-    gradientStroke.addColorStop(0.2, "rgba(72,72,176,0.0)");
-    gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+        var data = {
+            labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+            datasets: [
+                {
+                    label: "Data",
+                    fill: true,
+                    backgroundColor: gradientStroke,
+                    borderColor: "#d048b6",
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    pointBackgroundColor: "#d048b6",
+                    pointBorderColor: "rgba(255,255,255,0)",
+                    pointHoverBackgroundColor: "#d048b6",
+                    pointBorderWidth: 20,
+                    pointHoverRadius: 4,
+                    pointHoverBorderWidth: 15,
+                    pointRadius: 4,
+                    data: [80, 100, 70, 80, 120, 80],
+                },
+            ],
+        };
 
-    var data = {
-        labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
-        datasets: [
-            {
-                label: "Data",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: "#d048b6",
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: "#d048b6",
-                pointBorderColor: "rgba(255,255,255,0)",
-                pointHoverBackgroundColor: "#d048b6",
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [80, 100, 70, 80, 120, 80],
-            },
-        ],
-    };
+        var myChart = new Chart(ctx, {
+            type: "line",
+            data: data,
+            options: gradientChartOptionsConfigurationWithTooltipPurple,
+        });
+    }
 
-    var myChart = new Chart(ctx, {
-        type: "line",
-        data: data,
-        options: gradientChartOptionsConfigurationWithTooltipPurple,
-    });
+    var ctxGreen = document.getElementById("stock_chart")?.getContext("2d");
+    if (ctxGreen) {
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-    var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
+        gradientStroke.addColorStop(1, "rgba(66,134,121,0.15)");
+        gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
+        gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
 
-    var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+        var data = {
+            labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
+            datasets: [
+                {
+                    label: "Products in stocks",
+                    fill: true,
+                    backgroundColor: gradientStroke,
+                    borderColor: "#00d6b4",
+                    borderWidth: 2,
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    pointBackgroundColor: "#00d6b4",
+                    pointBorderColor: "rgba(255,255,255,0)",
+                    pointHoverBackgroundColor: "#00d6b4",
+                    pointBorderWidth: 20,
+                    pointHoverRadius: 4,
+                    pointHoverBorderWidth: 15,
+                    pointRadius: 4,
+                    data: [90, 27, 60, 12, 80],
+                },
+            ],
+        };
 
-    gradientStroke.addColorStop(1, "rgba(66,134,121,0.15)");
-    gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
-    gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
-
-    var data = {
-        labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: "#00d6b4",
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: "#00d6b4",
-                pointBorderColor: "rgba(255,255,255,0)",
-                pointHoverBackgroundColor: "#00d6b4",
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [90, 27, 60, 12, 80],
-            },
-        ],
-    };
-
-    var myChart = new Chart(ctxGreen, {
-        type: "line",
-        data: data,
-        options: gradientChartOptionsConfigurationWithTooltipGreen,
-    });
-
+        var myChart = new Chart(ctxGreen, {
+            type: "line",
+            data: data,
+            options: gradientChartOptionsConfigurationWithTooltipGreen,
+        });
+    }
     var chart_labels = [
         "JAN",
         "FEB",
@@ -345,70 +346,250 @@ const initDashboardPageCharts = async () => {
         "NOV",
         "DEC",
     ];
-    var chart_data = (await axios.get("/api/preorders")).data;
 
-    console.log(chart_data[1]);
-    var ctx = document.getElementById("chartBig1").getContext("2d");
+    var ctx = document.getElementById("monthly_sale_chart")?.getContext("2d");
+    if (ctx) {
+        var chart_data = (await axios.get("/api/preorders")).data;
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-    var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+        gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
+        gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
+        gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+        var config = {
+            type: "line",
+            data: {
+                labels: chart_labels,
+                datasets: [
+                    {
+                        label: "Total preorder count for the month",
+                        fill: true,
+                        backgroundColor: gradientStroke,
+                        borderColor: "#d346b1",
+                        borderWidth: 2,
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        pointBackgroundColor: "#d346b1",
+                        pointBorderColor: "rgba(255,255,255,0)",
+                        pointHoverBackgroundColor: "#d346b1",
+                        pointBorderWidth: 20,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 15,
+                        pointRadius: 4,
+                        data: chart_data[0].monthly_preorder_count,
+                    },
+                ],
+            },
+            options: gradientChartOptionsConfigurationWithTooltipPurple,
+        };
+        var myChartData = new Chart(ctx, config);
+        $("#product-1")[0].innerHTML = chart_data[0].product_name;
+        $("#product-2")[0].innerHTML = chart_data[1].product_name;
+        $("#product-3")[0].innerHTML = chart_data[2].product_name;
+        $("#product-4")[0].innerHTML = chart_data[3].product_name;
+        $("#product-5")[0].innerHTML = chart_data[4].product_name;
+        $("#0").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[0].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+        $("#1").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[1].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
 
-    gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
-    gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
-    gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
-    var config = {
-        type: "line",
-        data: {
-            labels: chart_labels,
-            datasets: [
-                {
-                    label: "My First dataset",
-                    fill: true,
-                    backgroundColor: gradientStroke,
-                    borderColor: "#d346b1",
-                    borderWidth: 2,
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    pointBackgroundColor: "#d346b1",
-                    pointBorderColor: "rgba(255,255,255,0)",
-                    pointHoverBackgroundColor: "#d346b1",
-                    pointBorderWidth: 20,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 15,
-                    pointRadius: 4,
-                    data: chart_data[0].monthly_preorder_count,
-                },
-            ],
-        },
-        options: gradientChartOptionsConfigurationWithTooltipPurple,
-    };
-    var myChartData = new Chart(ctx, config);
-    $("#product-1")[0].innerHTML = chart_data[0].product_name;
-    $("#product-2")[0].innerHTML = chart_data[1].product_name;
-    $("#product-3")[0].innerHTML = chart_data[2].product_name;
-    $("#0").click(function () {
-        var data = myChartData.config.data;
-        data.datasets[0].data = chart_data[0].monthly_preorder_count;
-        data.labels = chart_labels;
-        myChartData.update();
-    });
-    $("#1").click(function () {
-        var data = myChartData.config.data;
-        data.datasets[0].data = chart_data[1].monthly_preorder_count;
-        data.labels = chart_labels;
-        myChartData.update();
-    });
+        $("#2").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[2].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
 
-    $("#2").click(function () {
-        var data = myChartData.config.data;
-        data.datasets[0].data = chart_data[2].monthly_preorder_count;
-        data.labels = chart_labels;
-        myChartData.update();
-    });
+        $("#3").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[0].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#4").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[1].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+    }
+
+    var ctx = document
+        .getElementById("monthly_production_chart")
+        ?.getContext("2d");
+    if (ctx) {
+        var chart_data = (await axios.get("/api/preorders")).data;
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
+        gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
+        gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+        var config = {
+            type: "line",
+            data: {
+                labels: chart_labels,
+                datasets: [
+                    {
+                        label: "Total preorder count for the month",
+                        fill: true,
+                        backgroundColor: gradientStroke,
+                        borderColor: "#d346b1",
+                        borderWidth: 2,
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        pointBackgroundColor: "#d346b1",
+                        pointBorderColor: "rgba(255,255,255,0)",
+                        pointHoverBackgroundColor: "#d346b1",
+                        pointBorderWidth: 20,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 15,
+                        pointRadius: 4,
+                        data: chart_data[0].monthly_preorder_count,
+                    },
+                ],
+            },
+            options: gradientChartOptionsConfigurationWithTooltipPurple,
+        };
+        var myChartData = new Chart(ctx, config);
+        $("#product-1")[0].innerHTML = chart_data[0].product_name;
+        $("#product-2")[0].innerHTML = chart_data[1].product_name;
+        $("#product-3")[0].innerHTML = chart_data[2].product_name;
+        $("#product-4")[0].innerHTML = chart_data[3].product_name;
+        $("#product-5")[0].innerHTML = chart_data[4].product_name;
+        $("#0").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[0].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+        $("#1").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[1].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#2").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[2].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#3").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[0].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#4").click(function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = chart_data[1].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+    }
 
     $("#deliver-count")[0].innerHTML = (
         await axios.get("/api/deliver/count")
     ).data;
-    var ctx = document.getElementById("CountryChart").getContext("2d");
+
+    var ctx = document.getElementById("staff_chart")?.getContext("2d");
+    if (ctx) {
+        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
+        gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
+        gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+        var config = {
+            type: "line",
+            data: {
+                labels: chart_labels,
+                datasets: [
+                    {
+                        label: "Recruitment for the month",
+                        fill: true,
+                        backgroundColor: gradientStroke,
+                        borderColor: "#d346b1",
+                        borderWidth: 2,
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        pointBackgroundColor: "#d346b1",
+                        pointBorderColor: "rgba(255,255,255,0)",
+                        pointHoverBackgroundColor: "#d346b1",
+                        pointBorderWidth: 20,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 15,
+                        pointRadius: 4,
+                        data: (await axios.get("/api/preorders")).data[0]
+                            .monthly_preorder_count,
+                    },
+                ],
+            },
+            options: gradientChartOptionsConfigurationWithTooltipPurple,
+        };
+        var myChartData = new Chart(ctx, config);
+        $("#0").click(async function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = (
+                await axios.get("/api/preorders")
+            ).data[0].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#1").click(async function () {
+            var data = myChartData.config.data;
+            console.log("hello");
+            data.datasets[0].data = (
+                await axios.get("/api/preorders")
+            ).data[1].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#2").click(async function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = (
+                await axios.get("/api/preorders")
+            ).data[2].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#3").click(async function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = (
+                await axios.get("/api/preorders")
+            ).data[0].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+
+        $("#4").click(async function () {
+            var data = myChartData.config.data;
+            data.datasets[0].data = (
+                await axios.get("/api/preorders")
+            ).data[1].monthly_preorder_count;
+            data.labels = chart_labels;
+            myChartData.update();
+        });
+    }
+
+    $("#deliver-count")[0].innerHTML = (
+        await axios.get("/api/deliver/count")
+    ).data;
+
+    var ctx = document.getElementById("shipment_chart")?.getContext("2d");
 
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 

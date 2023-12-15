@@ -1,6 +1,6 @@
 <?php
 
-return  [
+return [
     'DEPARTMENTS' => [
         'FACTORY' => 'Factory',
         'SALE' => 'Sale',
