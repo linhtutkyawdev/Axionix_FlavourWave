@@ -93,7 +93,7 @@ const Navbar = ({
             />
           ) : (
             <SignInButton>
-              <Button className="bg-black text-white">
+              <Button size={"sm"}>
                 <LogIn className="w-5 h-5 mr-1" /> Sign in
               </Button>
             </SignInButton>

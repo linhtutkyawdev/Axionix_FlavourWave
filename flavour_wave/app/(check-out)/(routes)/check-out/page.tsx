@@ -16,7 +16,7 @@ import { useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import StripeCheckout from "@/components/check-out/stripe-checkout";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPreOrder } from "@/services/product.service";
 import { generateRandomString } from "@/lib/helper";
 import { toast } from "@/components/ui/use-toast";
@@ -42,6 +42,8 @@ const stripePromise = loadStripe(
 );
 
 const CheckOutPage = () => {
+  const queryClient = useQueryClient();
+
   usePreventHydration();
   const { user } = useUser();
   const router = useRouter();
@@ -76,8 +78,6 @@ const CheckOutPage = () => {
 
   const { mutate, status, error } = useMutation({
     mutationFn: () => {
-      console.log("mutate");
-
       return createPreOrder({
         location: address.userLocation,
         capacity: trackCapacity,
@@ -90,6 +90,11 @@ const CheckOutPage = () => {
         driver_nrc: driverNRC,
         is_urgent: driverNRC ? true : false,
         track_number: trackNumber,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["preOrders"],
       });
     },
   });

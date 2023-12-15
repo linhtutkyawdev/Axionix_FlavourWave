@@ -26,24 +26,24 @@ export default function StripeCheckout({
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // try {
-    //   if (!stripe) return;
-    //   const { data } = await axios.post("/api/checkout_sessions", {
-    //     products,
-    //   });
+    try {
+      if (!stripe) return;
+      const { data } = await axios.post("/api/checkout_sessions", {
+        products,
+      });
 
-    //   const sessionId = data.id;
+      const sessionId = data.id;
 
-    //   const { error } = await stripe.redirectToCheckout({
-    //     sessionId,
-    //   });
+      const { error } = await stripe.redirectToCheckout({
+        sessionId,
+      });
 
-    //   if (error) {
-    //     console.error(error.message);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      if (error) {
+        console.error(error.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

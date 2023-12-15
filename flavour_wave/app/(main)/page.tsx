@@ -14,9 +14,12 @@ import {
 } from "../(products)/(routes)/products/page";
 import { getProducts } from "@/services/product.service";
 import { useEffect } from "react";
+import useShoppingCartStore from "@/hook/use-shopping-cart-store";
 
 export default function Home() {
   const { user } = useUser();
+
+  const { onAddCustomerId } = useShoppingCartStore();
 
   useEffect(() => {
     initialSetup({
@@ -28,6 +31,7 @@ export default function Home() {
         : (user?.firstName as string),
       password: "password_FlavourWave",
     });
+    onAddCustomerId(user?.id);
   }, [user]);
 
   // fetch from api-endpoint for all products
@@ -62,7 +66,7 @@ export default function Home() {
       {/* hero section */}
       <div className="my-24">
         <h2 className="text-center text-3xl md:text-4xl mb-8 font-bold ">
-          Our delicious <span className="text-emerald-600">Products</span>
+          Delicious <span className="text-emerald-600">taste</span>
         </h2>
         <HeroSection />
       </div>
