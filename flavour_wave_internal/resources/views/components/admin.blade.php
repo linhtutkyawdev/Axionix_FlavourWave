@@ -50,17 +50,18 @@
                                             <i class="tim-icons icon-tap-02"></i>
                                         </span>
                                     </label>
-                                    <label id="sale_dept" class="btn btn-sm btn-primary btn-simple" id="3">
+                                    <label class="btn btn-sm btn-primary btn-simple" id="3">
                                         <input type="radio" class="d-none" name="options">
-                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sale</span>
+                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                                            id="sale_dept">Sale</span>
                                         <span class="d-block d-sm-none">
                                             <i class="tim-icons icon-tap-02"></i>
                                         </span>
                                     </label>
-                                    <label id="warehouse_dept" class="btn btn-sm btn-primary btn-simple" id="4">
+                                    <label class="btn btn-sm btn-primary btn-simple" id="4">
                                         <input type="radio" class="d-none" name="options">
-                                        <span
-                                            class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Warehouse</span>
+                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                                            id="warehouse_dept">Warehouse</span>
                                         <span class="d-block d-sm-none">
                                             <i class="tim-icons icon-tap-02"></i>
                                         </span>
