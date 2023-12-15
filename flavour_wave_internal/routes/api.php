@@ -35,37 +35,41 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // frontend
 
-    // customer
-    Route::get('/customers', [CustomerController::class, 'show']);
-    Route::post('customer/create', [CustomerController::class, 'createCustomer']);
-    Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
+// customer
+Route::get('customers', [CustomerController::class, 'show']);
+Route::get('customers/{id}', [CustomerController::class, 'show_one']);
+Route::post('customer/create', [CustomerController::class, 'createCustomer']);
+Route::post('customer/delete', [CustomerController::class, 'deleteCustomer']);
 
-    //  order
-    Route::get('customers/{id}/preorders', [OrderController::class, 'getPreorders']);
-    Route::post('preorders/create', [OrderController::class, 'createPreorder']);
-    Route::get('preorders/{id}', [OrderController::class, 'getPreOrder']);
-    Route::post('preorders/{preorder:order_id}/update', [OrderController::class, 'update']);
+//  order
+Route::get('customers/{id}/preorders', [OrderController::class, 'getPreorders']);
+Route::post('preorders/create', [OrderController::class, 'createPreorder']);
+Route::get('preorders/{id}', [OrderController::class, 'getPreOrder']);
+Route::post('preorders/{preorder:order_id}/update', [OrderController::class, 'update']);
 
-    // product
-    Route::get('/products', [ProductController::class, 'all']);
-    Route::post('/product/create', [ProductController::class, 'create']);
+Route::get('preorders', [OrderController::class, 'getPreordersCountFor12Months']);
 
-    //driver
-    Route::get('/drivers',[DriverController::class,'show']);
+// product
+Route::get('/products', [ProductController::class, 'all']);
+Route::post('/product/create', [ProductController::class, 'create']);
 
-    //ingredients
-    Route::get('/ingredients',[IngredientsController::class,'show']);
-    Route::post('/ingredient/create',[IngredientsController::class,'create']);
+//driver
+Route::get('/drivers', [DriverController::class, 'show']);
 
-    //factories
-    Route::post('/factories',[FactoryController::class,'store']);
+//ingredients
+Route::get('/ingredients', [IngredientsController::class, 'show']);
+Route::post('/ingredient/create', [IngredientsController::class, 'create']);
 
-    //logistics
-    Route::post('/deliver',[LogisticsController::class,'make']);
+//factories
+Route::post('/factories', [FactoryController::class, 'store']);
 
-    //receipe
-    Route::post('/receipe/create',[ReceipesController::class,'create']);
+//logistics
+Route::post('/deliver', [LogisticsController::class, 'make']);
+Route::get('/deliver/count', [LogisticsController::class, 'getCount']);
 
-    //warehouse
-    Route::post('/warehouse/create',[WarehouseController::class,'create']);
-    Route::post('order/chart', [PreorderCountController::class, 'preorderCountChart']);
+//receipe
+Route::post('/receipe/create', [ReceipesController::class, 'create']);
+
+//warehouse
+Route::post('/warehouse/create', [WarehouseController::class, 'create']);
+Route::post('order/chart', [PreorderCountController::class, 'preorderCountChart']);

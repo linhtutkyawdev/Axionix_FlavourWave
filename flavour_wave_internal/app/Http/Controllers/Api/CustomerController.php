@@ -13,35 +13,44 @@ use Illuminate\Validation\Rule;
 class CustomerController extends Controller
 {
     // get all customers' info
-    public function show(){
+    public function show()
+    {
         $customers = Customer::all();
         return response()->json([
             'customers' => $customers,
         ]);
     }
-
+    public function show_one($id)
+    {
+        $customers = Customer::where('customer_id', $id)->get();
+        return response()->json([
+            'customers' => $customers,
+        ]);
+    }
     // create customer account
-    public function createCustomer(CustomerRequest $request){
-        $cleanData = $request->validated();
-        Customer::create($cleanData);
+    public function createCustomer(CustomerRequest $request)
+    {
+        Customer::create($request);
         return response()->json([
             'message' => 'Your account has successfully been created'
         ]);
     }
 
     // edit customer account
-    public function editCustomer($id, Request $request){
+    public function editCustomer($id, Request $request)
+    {
         $data = $this->inputEditCustomerDetails($request);
         Customer::where('customer_id', $id)->update($data);
     }
 
     // delete customer account
-    public function deleteCustomer(Request $request){
-        $validator = Validator::make($request->all(),[
-            'customer_id' => ['required',Rule::exists('customers','customer_id')]
+    public function deleteCustomer(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'customer_id' => ['required', Rule::exists('customers', 'customer_id')]
         ]);
-        if($validator->fails()){
-            return response()->json(['error'=>$validator->errors()]);
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()]);
         }
 
         Customer::where('customer_id', $validator->validate())->delete();
@@ -51,7 +60,8 @@ class CustomerController extends Controller
     }
 
     // input customer details
-    private function inputCustomerDetails($request){
+    private function inputCustomerDetails($request)
+    {
         return [
             'customer_id' => $request->customer_id,
             'name' => $request->name,
@@ -62,7 +72,8 @@ class CustomerController extends Controller
     }
 
     // edit customer details
-    private function inputEditCustomerDetails($request){
+    private function inputEditCustomerDetails($request)
+    {
         return [
             'name' => $request->name,
             'imageUrl' => $request->imageUrl,
