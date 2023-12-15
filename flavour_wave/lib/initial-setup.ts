@@ -1,3 +1,5 @@
+import axiosInstance from "@/services/axiosInstance";
+
 export interface IUser {
   customer_id: string;
   email: string;
@@ -60,25 +62,17 @@ async function createCustomer({
   console.log(customer_id, email, imageUrl, name, password);
 
   try {
-    const res = await fetch(
+    const res = await axiosInstance.post(
       "https://flavourwave.up.railway.app/api/customer/create",
       {
-        method: "POST",
-        body: JSON.stringify({
-          customer_id,
-          name,
-          email,
-          image_url: imageUrl,
-          password,
-        }),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+        customer_id,
+        name,
+        email,
+        image_url: imageUrl,
+        password,
       }
     );
-    const data = await res.json();
-    if (res.ok) return data;
+    return res.data;
   } catch (e: any) {
     console.log(e);
   }
