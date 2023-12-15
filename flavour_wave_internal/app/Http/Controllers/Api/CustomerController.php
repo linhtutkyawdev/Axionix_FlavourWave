@@ -30,7 +30,7 @@ class CustomerController extends Controller
     // create customer account
     public function createCustomer(CustomerRequest $request)
     {
-        Customer::create($request);
+        Customer::create($request->validated());
         return response()->json([
             'message' => 'Your account has successfully been created'
         ]);
