@@ -18,6 +18,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import StripeCheckout from "@/components/check-out/stripe-checkout";
 import { useMutation } from "@tanstack/react-query";
 import { createPreOrder } from "@/services/product.service";
+import { generateRandomString } from "@/lib/helper";
+import { toast } from "@/components/ui/use-toast";
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 
@@ -28,7 +30,7 @@ export type CreatePreOrderType = {
   date?: Date;
   capacity?: string;
   track_number?: string;
-  productsId: Array<string>;
+  product_id: Array<string>;
   customer_id?: string;
   order_quantity: number;
   delivered_quantity: number;
@@ -81,8 +83,8 @@ const CheckOutPage = () => {
         capacity: trackCapacity,
         customer_id: user?.id,
         delivered_quantity: totalQuantity,
-        productsId: products.map((product) => product.id.toString()),
-        order_id: `${user?.id}-${new Date().toString()}`,
+        product_id: products.map((product) => product.id.toString()),
+        order_id: generateRandomString(7),
         order_quantity: totalQuantity,
         date: dateToPickUp,
         driver_nrc: driverNRC,
@@ -96,23 +98,16 @@ const CheckOutPage = () => {
     return router.push("/products");
   }
 
-  // function handleCheckout() {
-  //   const checkData = {
-  //     address,
-  //     driverNRC,
-  //     trackCapacity,
-  //     trackNumber,
-  //     dateToPickUp,
-  //     productsId: products.map((product) => product.id),
-  //     customer_id: user?.id,
-  //     totalQuantity,
-  //     totalPrice,
-  //   };
-
-  // }
-
   if (status === "error") {
-    console.log("error", error);
+    toast({
+      title: "Something when wrong when precessing",
+    });
+  }
+
+  if (status === "success") {
+    toast({
+      title: "Successfully checkout pre-order",
+    });
   }
 
   return (
