@@ -16,7 +16,7 @@ interface ProductIdPage {
   };
 }
 
-const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
+const PRODUCT_IMAGE_API_URL = "https://flavourwave.up.railway.app";
 
 const ProductIdPage = ({ params }: ProductIdPage) => {
   // fetch from api-endpoint for specific product
