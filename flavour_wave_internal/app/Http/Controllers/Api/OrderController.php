@@ -88,7 +88,8 @@ class OrderController extends Controller
     }
 
     // input updated details
-    private function updateOrderDetails($request){
+    private function updateOrderDetails($request)
+    {
         return [
             'customer_id' => $request->customer_id,
             'order_id' => $request->order_id,
@@ -104,7 +105,8 @@ class OrderController extends Controller
     }
 
     // input orders
-    private function inputOrder($request, $random){
+    private function inputOrder($request, $random)
+    {
         return [
             'customer_id' => $request->customer_id,
             'order_id' => $random,
