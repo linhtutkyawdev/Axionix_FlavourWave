@@ -8,13 +8,11 @@ import ProductsGrid from "@/components/products/product-grid";
 import { initialSetup } from "@/lib/initial-setup";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
-import {
-  APIProduct,
-  PRODUCT_IMAGE_API_URL,
-} from "../(products)/(routes)/products/page";
+import { APIProduct } from "../(products)/(routes)/products/page";
 import { getProducts } from "@/services/product.service";
 import { useEffect } from "react";
 import useShoppingCartStore from "@/hook/use-shopping-cart-store";
+const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
 
 export default function Home() {
   const { user } = useUser();
