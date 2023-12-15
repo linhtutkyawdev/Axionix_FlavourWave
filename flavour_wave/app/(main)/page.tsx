@@ -20,41 +20,39 @@ export default function Home() {
 
   const { onAddCustomerId, customer_id } = useShoppingCartStore();
 
+  useEffect(() => {
+    (async () => {
+      if (user) {
+        await initialSetup({
+          customer_id: user?.id as string,
+          email: user?.emailAddresses[0].emailAddress as string,
+          imageUrl: user?.imageUrl as string,
+          name: user?.lastName
+            ? `${user.firstName} ${user.lastName}`
+            : (user?.firstName as string),
+          password: "password_FlavourWave",
+        });
+        onAddCustomerId(user.id);
+      }
+    })();
+  }, [user]);
+
   // useEffect(() => {
   //   (async () => {
   //     if (user) {
   //       console.log(
-  //         await initialSetup({
-  //           customer_id: user?.id as string,
-  //           email: user?.emailAddresses[0].emailAddress as string,
-  //           imageUrl: user?.imageUrl as string,
-  //           name: user?.lastName
-  //             ? `${user.firstName} ${user.lastName}`
-  //             : (user?.firstName as string),
+  //         await axiosInstance.post("customer/create", {
+  //           customer_id: "user_2ZXjSFs5bpLmnp9HDqr2bLSdc7z",
+  //           email: "linhtutkyaw.dev@gmail.com",
+  //           image_url:
+  //             "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18yWlhqU0Y3bEZ1M0RmMjVCUUZTZ1hzdGx3NVoifQ",
+  //           name: "Lin Htut Kyaw",
   //           password: "password_FlavourWave",
   //         })
   //       );
-  //       onAddCustomerId(user?.id);
   //     }
   //   })();
   // }, [user]);
-
-  useEffect(() => {
-    (async () => {
-      if (user) {
-        console.log(
-          await axiosInstance.post("customer/create", {
-            customer_id: "user_2ZXjSFs5bpLmnp9HDqr2bLSdc7z",
-            email: "linhtutkyaw.dev@gmail.com",
-            image_url:
-              "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18yWlhqU0Y3bEZ1M0RmMjVCUUZTZ1hzdGx3NVoifQ",
-            name: "Lin Htut Kyaw",
-            password: "password_FlavourWave",
-          })
-        );
-      }
-    })();
-  }, [user]);
 
   // fetch from api-endpoint for all products
   const { data: products, status } = useQuery({

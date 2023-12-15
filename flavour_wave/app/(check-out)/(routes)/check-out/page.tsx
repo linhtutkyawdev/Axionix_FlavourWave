@@ -78,19 +78,22 @@ const CheckOutPage = () => {
 
   const { mutate, status, error } = useMutation({
     mutationFn: async () => {
-      return await createPreOrder({
-        location: address.userLocation,
-        capacity: trackCapacity,
-        customer_id: user?.id,
-        delivered_quantity: totalQuantity,
-        product_id: products.map((product) => product.id.toString()),
-        order_id: generateRandomString(7),
-        order_quantity: totalQuantity,
-        date: dateToPickUp,
-        driver_nrc: driverNRC,
-        is_urgent: driverNRC ? true : false,
-        track_number: trackNumber,
-      });
+      return (
+        user &&
+        (await createPreOrder({
+          location: address.userLocation,
+          capacity: trackCapacity,
+          customer_id: user.id,
+          delivered_quantity: totalQuantity,
+          product_id: products.map((product) => product.id.toString()),
+          order_id: generateRandomString(7),
+          order_quantity: totalQuantity,
+          date: dateToPickUp,
+          driver_nrc: driverNRC,
+          is_urgent: driverNRC ? true : false,
+          track_number: trackNumber,
+        }))
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
