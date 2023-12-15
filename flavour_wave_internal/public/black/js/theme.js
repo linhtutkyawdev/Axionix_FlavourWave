@@ -266,10 +266,10 @@ const initDashboardPageCharts = async () => {
         gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
 
         var data = {
-            labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+            labels: ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
             datasets: [
                 {
-                    label: "Data",
+                    label: "total sale for the day",
                     fill: true,
                     backgroundColor: gradientStroke,
                     borderColor: "#d048b6",
@@ -283,7 +283,7 @@ const initDashboardPageCharts = async () => {
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: [80, 100, 70, 80, 120, 80],
+                    data: [80, 100, 70, 80, 120, 80, 100],
                 },
             ],
         };
@@ -361,7 +361,7 @@ const initDashboardPageCharts = async () => {
                 labels: chart_labels,
                 datasets: [
                     {
-                        label: "Total preorder count for the month",
+                        label: "Total isued preorder count for the month",
                         fill: true,
                         backgroundColor: gradientStroke,
                         borderColor: "#d346b1",
@@ -438,7 +438,7 @@ const initDashboardPageCharts = async () => {
                 labels: chart_labels,
                 datasets: [
                     {
-                        label: "Total preorder count for the month",
+                        label: "Total production count for the month",
                         fill: true,
                         backgroundColor: gradientStroke,
                         borderColor: "#d346b1",
@@ -585,9 +585,10 @@ const initDashboardPageCharts = async () => {
         });
     }
 
-    $("#deliver-count")[0].innerHTML = (
-        await axios.get("/api/deliver/count")
-    ).data;
+    // $("#deliver-count")[0].innerHTML = (
+    //     await axios.get("/api/deliver/count")
+    // ).data;
+    $("#deliver-count")[0].innerHTML = 308;
 
     var ctx = document.getElementById("shipment_chart")?.getContext("2d");
 
@@ -604,10 +605,10 @@ const initDashboardPageCharts = async () => {
             display: false,
         },
         data: {
-            labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
+            labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
             datasets: [
                 {
-                    label: "Countries",
+                    label: "Total shipments for the month",
                     fill: true,
                     backgroundColor: gradientStroke,
                     hoverBackgroundColor: gradientStroke,

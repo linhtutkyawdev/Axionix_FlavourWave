@@ -21,7 +21,7 @@
                     <div class="card-header ">
                         <div class="row">
                             <div class="col-sm-6 text-left">
-                                <h5 class="card-category">Total Preorders</h5>
+                                <h5 class="card-category">Monthly Production</h5>
                                 <h2 class="card-title">Performance</h2>
                             </div>
                             <div class="col-sm-6">
@@ -50,30 +50,47 @@
                                             <i class="tim-icons icon-tap-02"></i>
                                         </span>
                                     </label>
+                                    <label class="btn btn-sm btn-primary btn-simple" id="3">
+                                        <input type="radio" class="d-none" name="options">
+                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                                            id="product-4">Product-4</span>
+                                        <span class="d-block d-sm-none">
+                                            <i class="tim-icons icon-tap-02"></i>
+                                        </span>
+                                    </label>
+                                    <label class="btn btn-sm btn-primary btn-simple" id="4">
+                                        <input type="radio" class="d-none" name="options">
+                                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                                            id="product-5">Product-5</span>
+                                        <span class="d-block d-sm-none">
+                                            <i class="tim-icons icon-tap-02"></i>
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="chart-area">
-                            <canvas id="chartBig1"></canvas>
+                            <canvas id="monthly_production_chart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-4">
                 <div class="card card-chart">
                     <div class="card-header">
                         <h5 class="card-category">Total Shipments</h5>
                         <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>
-                            <div id="deliver-count">0</div>
+                            <span id="deliver-count">...</span>
                         </h3>
                     </div>
                     <div class="card-body">
                         <div class="chart-area">
-                            <canvas id="chartLinePurple"></canvas>
+                            <canvas id="shipment_chart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -81,52 +98,41 @@
             <div class="col-lg-4">
                 <div class="card card-chart">
                     <div class="card-header">
-                        <h5 class="card-category">Daily Sales</h5>
-                        <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i> 3,500€</h3>
+                        <h5 class="card-category">Total Weekly Sale</h5>
+                        <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i>
+                            <span id="daily-sale">630 </span>
+                        </h3>
                     </div>
                     <div class="card-body">
                         <div class="chart-area">
-                            <canvas id="CountryChart"></canvas>
+                            <canvas id="daily_sale_chart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h5 class="card-category">Completed Tasks</h5>
-                        <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> 12,100K</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="chartLineGreen"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Jquery -->
-    <script src="{{ asset('black') }}/js/core/jquery.min.js"></script>
 
-    <!-- Bootstrap -->
-    <script src="{{ asset('black') }}/js/core/bootstrap.min.js"></script>
 
-    <!-- Chart JS -->
-    <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script>
+            <!-- Jquery -->
+            <script src="{{ asset('black') }}/js/core/jquery.min.js"></script>
 
-    <!-- Theme -->
-    <script src="{{ asset('black') }}/js/theme.js"></script>
+            <!-- Bootstrap -->
+            <script src="{{ asset('black') }}/js/core/bootstrap.min.js"></script>
 
-    <!-- Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <!-- Chart JS -->
+            <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            initDashboardPageCharts();
-        });
-    </script>
+            <!-- Theme -->
+            <script src="{{ asset('black') }}/js/theme.js"></script>
+
+            <!-- Axios -->
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    initDashboardPageCharts();
+                });
+            </script>
 </body>
 
 </html>

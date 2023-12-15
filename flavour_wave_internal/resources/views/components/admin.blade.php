@@ -97,9 +97,9 @@
             <div class="col-lg-4">
                 <div class="card card-chart">
                     <div class="card-header">
-                        <h5 class="card-category">Daily Sales</h5>
+                        <h5 class="card-category">Total Weekly Sale</h5>
                         <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info"></i>
-                            <span id="daily-sale">...</span>
+                            <span id="daily-sale">630 </span>
                         </h3>
                     </div>
                     <div class="card-body">
@@ -109,12 +109,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <!-- <div class="col-lg-4">
                 <div class="card card-chart">
-                    drop down to choose product
                     <div class="card-header">
                         <h5 class="card-category">In Stock</h5>
-                        <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> 12,100 boxes</h3>
+                        <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> 12,100</h3>
                     </div>
                     <div class="card-body">
                         <div class="chart-area">
@@ -122,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 

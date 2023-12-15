@@ -58,19 +58,19 @@ class OrderController extends Controller
                 'monthly_preorder_count' => [100, 200, 900, 400, 600, 500, 7000, 4900, 5900, 4000, 300, 1800],
             ],
             [
-                'product_name' => 'Product-2',
+                'product_name' => 'Golden Sunshine Tea',
                 'monthly_preorder_count' => [4900, 5900, 4000, 300, 1800, 100, 200, 900, 400, 600, 500, 7000]
             ],
             [
-                'product_name' => 'Product-3',
+                'product_name' => 'Mango Tango Delight',
                 'monthly_preorder_count' => [100, 200, 900, 4900, 400, 600, 500, 7000, 5900, 4000, 300, 1800]
             ],
             [
-                'product_name' => 'Product-4',
+                'product_name' => 'Rangoon Rosewater Elixir',
                 'monthly_preorder_count' => [100, 200, 900, 400, 5900, 4000, 300, 7000, 4900, 1800, 600, 500,]
             ],
             [
-                'product_name' => 'Product-5',
+                'product_name' => 'Emerald Green Chai',
                 'monthly_preorder_count' => [500, 7000, 4900, 5900, 1800, 400, 600, 4000, 100, 200, 900, 300]
             ],
         ]);
