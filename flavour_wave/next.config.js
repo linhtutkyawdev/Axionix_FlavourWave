@@ -8,7 +8,7 @@ const nextConfig = {
         pathname: "/img/*",
       },
       {
-        hostname: "localhost:8000",
+        hostname: "flavourwave.up.railway.app",
         port: "",
         pathname: "/storage/product-images/*",
       },

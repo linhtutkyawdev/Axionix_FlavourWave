@@ -12,7 +12,7 @@ import { APIProduct } from "../(products)/(routes)/products/page";
 import { getProducts } from "@/services/product.service";
 import { useEffect } from "react";
 import useShoppingCartStore from "@/hook/use-shopping-cart-store";
-const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
+const PRODUCT_IMAGE_API_URL = "https://flavourwave.up.railway.app";
 
 export default function Home() {
   const { user } = useUser();
@@ -34,7 +34,7 @@ export default function Home() {
 
   // fetch from api-endpoint for all products
   const { data: products, status } = useQuery({
-    queryKey: ["products", "all"],
+    queryKey: ["product", "all"],
     queryFn: async () => {
       const products: APIProduct[] = await getProducts();
 
