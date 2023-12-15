@@ -77,7 +77,7 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
           ) : (
             <Skeleton className="w-[100px] h-4 " />
           )}
-          {product && product?.rating ? (
+          {/* {product && product?.rating ? (
             <div className="flex items-center gap-x-1 mt-4">
               <div className="flex">
                 <Star className="fill-yellow-500 text-yellow-500" />
@@ -99,9 +99,9 @@ const ProductDetailsHero = ({ product, status }: ProductDetailsHeroProps) => {
             </div>
           ) : (
             <Skeleton className="w-[100px] h-4  mt-4 " />
-          )}
+          )} */}
           {product && product.description ? (
-            <p className="line-clamp-2 my-2 text-slate-700 text-lg  md:text-xl ">
+            <p className="line-clamp-2 my-2 text-slate-700 dark:text-slate-300 text-lg  md:text-xl ">
               {product?.description}
             </p>
           ) : (

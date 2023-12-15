@@ -7,7 +7,7 @@ interface ProductsDetailsHeaderProps {
 const ProductsDetailsHeader = ({ name }: ProductsDetailsHeaderProps) => {
   return (
     <div className="relative w-full h-[120px]">
-      <div className="absolute w-full h-full bg-white/80 z-10"></div>
+      <div className="absolute w-full h-full bg-white/80 dark:bg-neutral-800/80 z-10"></div>
       <Image
         src={"/banner.jpg"}
         alt="img"

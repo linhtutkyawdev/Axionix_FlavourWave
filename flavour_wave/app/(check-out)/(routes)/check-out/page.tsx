@@ -16,13 +16,34 @@ import { useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import StripeCheckout from "@/components/check-out/stripe-checkout";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createPreOrder } from "@/services/product.service";
+import { generateRandomString } from "@/lib/helper";
+import { toast } from "@/components/ui/use-toast";
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
+
+export type CreatePreOrderType = {
+  is_urgent?: boolean;
+  location?: string;
+  driver_nrc?: string;
+  date?: Date;
+  capacity?: string;
+  track_number?: string;
+  product_id: Array<string>;
+  customer_id?: string;
+  order_quantity: number;
+  delivered_quantity: number;
+  order_id: string;
+};
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
 const CheckOutPage = () => {
+  const queryClient = useQueryClient();
+
   usePreventHydration();
   const { user } = useUser();
   const router = useRouter();
@@ -30,10 +51,6 @@ const CheckOutPage = () => {
   const { products } = useShoppingCartStore();
   const { address, driverNRC, trackCapacity, trackNumber, dateToPickUp } =
     useCheckoutStore();
-
-  if (!products.length) {
-    return router.push("/products");
-  }
 
   // total quantity
   const totalQuantity = products.length
@@ -59,25 +76,48 @@ const CheckOutPage = () => {
     )
   ).toFixed(2);
 
-  function handleCheckout() {
-    const checkData = {
-      address,
-      driverNRC,
-      trackCapacity,
-      trackNumber,
-      dateToPickUp,
-      productsId: products.map((product) => product.id),
-      customer_id: user?.id,
-      totalQuantity,
-      totalPrice,
-    };
+  const { mutate, status, error } = useMutation({
+    mutationFn: () => {
+      return createPreOrder({
+        location: address.userLocation,
+        capacity: trackCapacity,
+        customer_id: user?.id,
+        delivered_quantity: totalQuantity,
+        product_id: products.map((product) => product.id.toString()),
+        order_id: generateRandomString(7),
+        order_quantity: totalQuantity,
+        date: dateToPickUp,
+        driver_nrc: driverNRC,
+        is_urgent: driverNRC ? true : false,
+        track_number: trackNumber,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["preOrders"],
+      });
+    },
+  });
 
-    console.log(checkData);
+  if (!products.length) {
+    return router.push("/products");
+  }
+
+  if (status === "error") {
+    toast({
+      title: "Something when wrong when precessing",
+    });
+  }
+
+  if (status === "success") {
+    toast({
+      title: "Successfully checkout pre-order",
+    });
   }
 
   return (
     <div className="flex items- justify-center w-full mt-10 md:px-10 lg:px-9 xl:px-20">
-      <div className="bg-neutral-200 p-4 px-6 w-[90%] md:w-[88%] mx-auto">
+      <div className="bg-neutral-200 dark:bg-neutral-700  p-4 px-6 w-[90%] md:w-[88%] mx-auto">
         <div className="flex items-center justify-between">
           <h2 className="text-xl md:text-2xl lg:text-3xl">Pre-order Summary</h2>
         </div>
@@ -148,7 +188,8 @@ const CheckOutPage = () => {
           <Elements stripe={stripePromise}>
             <StripeCheckout
               distance={address.distance}
-              handleCheckout={handleCheckout}
+              mutate={mutate}
+              status={status}
             />
           </Elements>
         </div>

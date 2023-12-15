@@ -16,15 +16,14 @@ export default async function handler(
     const { products } = req.body; // Assuming amount is provided in the request body
     const CURRENCY = "usd"; // Set your currency here
     const checkoutProducts = products as ShoppingCartItem[];
-    console.log(checkoutProducts);
 
     const lineItems = checkoutProducts.map((p) => {
       return {
         price_data: {
           currency: "usd",
           product_data: {
-            name: "name",
-            description: "name",
+            name: p.title,
+            description: `${p.title}'s description.`,
             images: [p.image],
           },
           unit_amount: formatAmountForStripe(p.price),

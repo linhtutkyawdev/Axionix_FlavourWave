@@ -1,32 +1,47 @@
-import axiosInstance from "@/services/axiosInstance";
-
 export interface IUser {
   customer_id: string;
   email: string;
   imageUrl: string;
   name: string;
+  password: string;
 }
 
-export async function useInitialSetup(user: IUser) {
-  if (!user.customer_id) return null;
+export async function initialSetup(user: IUser) {
+  if (!user) return;
 
   const customer = await getCustomer(user.customer_id);
+
   if (customer) {
     return customer;
+  } else {
+    console.log(user);
+
+    return createCustomer({
+      customer_id: user.customer_id,
+      email: user.email,
+      imageUrl: user.imageUrl,
+      name: user.name,
+      password: user.password,
+    });
   }
-
-  return await createCustomer({
-    customer_id: user.customer_id,
-    email: user.email,
-    imageUrl: user.imageUrl,
-    name: user.name,
-  });
 }
-
 async function getCustomer(customerID: string) {
   try {
-    return (await axiosInstance.get(`customer/${customerID}`)).data;
+    const res = await fetch("http://127.0.0.1:8000/api/customers", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (res.ok) {
+      return data.customers.find((c: IUser) => c.customer_id === customerID);
+    } else {
+      return null;
+    }
   } catch (e: any) {
+    console.log();
     return null;
   }
 }
@@ -36,22 +51,28 @@ async function createCustomer({
   email,
   imageUrl,
   name,
-}: {
-  customer_id: string;
-  name: string;
-  email: string;
-  imageUrl: string;
-}) {
+  password,
+}: IUser) {
+  console.log(customer_id, email, imageUrl, name, password);
+
   try {
-    return (
-      await axiosInstance.post("customer/create", {
+    const res = await fetch("http://127.0.0.1:8000/api/customer/create", {
+      method: "POST",
+      body: JSON.stringify({
         customer_id,
         name,
         email,
-        imageUrl,
-      })
-    ).data;
+        image_url: imageUrl,
+        password,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    if (res.ok) return data;
   } catch (e: any) {
-    return null;
+    console.log(e);
   }
 }

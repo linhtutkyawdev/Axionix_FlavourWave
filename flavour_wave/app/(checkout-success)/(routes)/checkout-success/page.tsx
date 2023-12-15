@@ -18,8 +18,8 @@ const CheckoutSuccessPage = () => {
   const [redirectTimer, setRedirectTimer] = useState(3); // Initial countdown value
 
   function handleClick() {
-    // onRest();
-    // router.push("/");
+    onRest();
+    router.push("/");
   }
 
   useEffect(() => {

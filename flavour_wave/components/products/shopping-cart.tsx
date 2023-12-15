@@ -10,22 +10,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CheckCircle, DollarSign, ShoppingCartIcon } from "lucide-react";
+import { CheckCircle, DollarSign, LogIn, ShoppingCartIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import useShoppingCartStore from "@/hook/use-shopping-cart-store";
 import { useRouter } from "next/navigation";
 import ShoppingCartItem from "./shopping-cart-item";
-import { getData } from "@/lib/local-storage";
 import usePreventHydration from "@/hook/use-prevent-hydration";
+import { SignInButton } from "@clerk/nextjs";
 
 const ShoppingCart = () => {
   usePreventHydration();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [totalQuantity, setTotalQuantity] = useState<number>(0);
-  const { products, onQuantityInc, onQuantityDec } = useShoppingCartStore();
+  const { products, customer_id } = useShoppingCartStore();
 
   // const data = getData("flavorWave_store") ?? [];
   const totalQu = products.length
@@ -77,7 +77,7 @@ const ShoppingCart = () => {
           </h3>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {totalQuantity > 0 && (
+        {totalQuantity > 0 && customer_id ? (
           <>
             <DropdownMenuItem>
               <Button
@@ -91,6 +91,14 @@ const ShoppingCart = () => {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </>
+        ) : (
+          !customer_id && (
+            <SignInButton>
+              <Button className=" w-full ">
+                <LogIn className="w-5 h-5 mr-1" /> Sign in
+              </Button>
+            </SignInButton>
+          )
         )}
 
         {products?.length ? (

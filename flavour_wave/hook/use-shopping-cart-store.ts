@@ -10,12 +10,14 @@ export interface ShoppingCartItem {
 
 type State = {
   products: ShoppingCartItem[];
+  customer_id?: string;
 };
 
 type Action = {
   onQuantityInc: (itemId: number) => void;
   onQuantityDec: (itemId: number) => void;
   onAddItem: (item: ShoppingCartItem) => void;
+  onAddCustomerId: (customer_id?: string) => void;
   onRemoveItem: (itemId: number) => void;
   onRest: () => void;
 };
@@ -32,11 +34,17 @@ const useShoppingCartStore = create<State & Action>(
     (set, get) => ({
       // initial store data
       products: [],
+      customer_id: "",
 
       // add new item
       onAddItem: (item: ShoppingCartItem) =>
         set((state) => ({
           products: [...state.products, item],
+        })),
+
+      onAddCustomerId: (customer_id?: string) =>
+        set(() => ({
+          customer_id,
         })),
 
       // remove item

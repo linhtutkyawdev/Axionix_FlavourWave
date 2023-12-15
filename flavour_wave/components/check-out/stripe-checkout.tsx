@@ -5,26 +5,29 @@ import { useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React from "react";
 import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface StripeCheckoutProps {
   distance: string;
-  handleCheckout: () => void;
+
+  mutate: () => void;
+  status: "error" | "idle" | "pending" | "success";
 }
 
 export default function StripeCheckout({
   distance,
-  handleCheckout,
+  mutate,
+  status,
 }: StripeCheckoutProps) {
   const stripe = useStripe();
   const { products } = useShoppingCartStore();
-  console.log(products);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       if (!stripe) return;
-
       const { data } = await axios.post("/api/checkout_sessions", {
         products,
       });
@@ -46,13 +49,22 @@ export default function StripeCheckout({
   return (
     <form onSubmit={onSubmit}>
       <Button
+        disabled={status === "pending" ? true : false}
         type="submit"
-        disabled={distance === "" ? true : false}
-        onClick={handleCheckout}
+        onClick={() => mutate()}
         size={"lg"}
-        className="text-base md:text-lg my-4"
+        className={cn(
+          "text-base md:text-lg my-4",
+          distance === "" ? "hidden" : "block"
+        )}
       >
-        Confirm pre-order
+        {status === "pending" ? (
+          <p className="flex items-center gap-1">
+            Checking... <Loader2 className="animate-spin w-5 h-5" />
+          </p>
+        ) : (
+          <p>Confirm pre-order</p>
+        )}
       </Button>
     </form>
   );
