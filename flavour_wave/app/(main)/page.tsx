@@ -20,16 +20,20 @@ export default function Home() {
   const { onAddCustomerId } = useShoppingCartStore();
 
   useEffect(() => {
-    initialSetup({
-      customer_id: user?.id as string,
-      email: user?.emailAddresses[0].emailAddress as string,
-      imageUrl: user?.imageUrl as string,
-      name: user?.lastName
-        ? `${user.firstName} ${user.lastName}`
-        : (user?.firstName as string),
-      password: "password_FlavourWave",
-    });
-    onAddCustomerId(user?.id);
+    if (user) {
+      console.log(
+        initialSetup({
+          customer_id: user?.id as string,
+          email: user?.emailAddresses[0].emailAddress as string,
+          imageUrl: user?.imageUrl as string,
+          name: user?.lastName
+            ? `${user.firstName} ${user.lastName}`
+            : (user?.firstName as string),
+          password: "password_FlavourWave",
+        })
+      );
+      onAddCustomerId(user?.id);
+    }
   }, [user]);
 
   // fetch from api-endpoint for all products
