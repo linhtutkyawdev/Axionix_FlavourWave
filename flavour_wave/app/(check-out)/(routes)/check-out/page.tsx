@@ -77,8 +77,8 @@ const CheckOutPage = () => {
   ).toFixed(2);
 
   const { mutate, status, error } = useMutation({
-    mutationFn: () => {
-      return createPreOrder({
+    mutationFn: async () => {
+      return await createPreOrder({
         location: address.userLocation,
         capacity: trackCapacity,
         customer_id: user?.id,
