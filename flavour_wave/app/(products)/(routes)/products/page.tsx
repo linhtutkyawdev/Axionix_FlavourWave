@@ -7,7 +7,7 @@ import { IProduct } from "@/components/products/product-card";
 import { SearchProduct } from "@/components/products/search-product";
 import { getProducts } from "@/services/product.service";
 
-export const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
+const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
 
 export type APIProduct = {
   id: number;

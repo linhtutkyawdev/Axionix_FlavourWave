@@ -7,7 +7,7 @@ import ProductsGrid from "@/components/products/product-grid";
 import { useQuery } from "@tanstack/react-query";
 
 import React from "react";
-import { APIProduct, PRODUCT_IMAGE_API_URL } from "../page";
+import { APIProduct } from "../page";
 import { getProducts } from "@/services/product.service";
 
 interface ProductIdPage {
@@ -15,6 +15,8 @@ interface ProductIdPage {
     productId: string;
   };
 }
+
+const PRODUCT_IMAGE_API_URL = "http://0.0.0.0:8000";
 
 const ProductIdPage = ({ params }: ProductIdPage) => {
   // fetch from api-endpoint for specific product
