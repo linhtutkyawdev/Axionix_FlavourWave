@@ -34,6 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // frontend
+//a
 
 // customer
 Route::get('customers', [CustomerController::class, 'show']);
