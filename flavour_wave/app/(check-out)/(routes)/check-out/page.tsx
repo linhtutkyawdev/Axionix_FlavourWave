@@ -35,7 +35,7 @@ export type CreatePreOrderType = {
   order_quantity: number;
   delivered_quantity?: number;
   order_id: string;
-  totalPrice: number;
+  total_price: number;
 };
 
 const stripePromise = loadStripe(
@@ -92,7 +92,9 @@ const CheckOutPage = () => {
           driver_nrc: driverNRC,
           is_urgent: driverNRC ? true : false,
           truck_number: truckNumber,
-          totalPrice: Number.parseFloat(totalPrice),
+          total_price:
+            Number.parseFloat(totalPrice) +
+            parseInt(address.distance, 10) * 1.5,
         }))
       );
     },
