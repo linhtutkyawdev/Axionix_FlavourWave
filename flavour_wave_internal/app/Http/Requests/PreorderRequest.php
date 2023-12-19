@@ -29,7 +29,6 @@ class PreorderRequest extends FormRequest
             'order_id' => 'required',
             'location' => 'required',
             'order_quantity' => 'required',
-            'preorder_date' => 'required',
             'is_urgent' => 'required',
             'capacity' => '',
             'track_number' => '',

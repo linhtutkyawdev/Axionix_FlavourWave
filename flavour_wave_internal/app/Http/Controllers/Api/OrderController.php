@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\PreorderRequest;
 use App\Models\Preorder;
 use App\Models\Product;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -41,7 +42,6 @@ class OrderController extends Controller
                 'driver_nrc',
                 'date',
                 'delivered_quantity',
-                'preorder_date'
             ];
 
             $preorderData = [];
@@ -52,6 +52,7 @@ class OrderController extends Controller
                 }
             }
 
+            $preorderData["preorder_date"] = Carbon::now();
             Preorder::create($preorderData);
             foreach ($pId as $id) {
                 Product::find($id)->orders()->attach($request->order_id, [

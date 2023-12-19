@@ -33,7 +33,6 @@ export type CreatePreOrderType = {
   product_id: Array<number>;
   customer_id?: string;
   order_quantity: number;
-  preorder_date: Date;
   delivered_quantity?: number;
   order_id: string;
   total_price: number;
@@ -89,7 +88,6 @@ const CheckOutPage = () => {
           product_id: products.map((product) => product.id + 0),
           order_id: generateRandomString(7),
           order_quantity: totalQuantity,
-          preorder_date: new Date(),
           date: dateToPickUp,
           driver_nrc: driverNRC,
           is_urgent: driverNRC ? true : false,
