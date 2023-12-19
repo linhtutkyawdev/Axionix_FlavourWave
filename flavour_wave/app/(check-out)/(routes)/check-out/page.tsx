@@ -29,7 +29,7 @@ export type CreatePreOrderType = {
   driver_nrc?: string;
   date?: Date;
   capacity?: string;
-  track_number?: string;
+  truck_number?: string;
   product_id: Array<string>;
   customer_id?: string;
   order_quantity: number;
@@ -91,7 +91,7 @@ const CheckOutPage = () => {
           date: dateToPickUp,
           driver_nrc: driverNRC,
           is_urgent: driverNRC ? true : false,
-          track_number: trackNumber,
+          truck_number: trackNumber,
         }))
       );
     },
