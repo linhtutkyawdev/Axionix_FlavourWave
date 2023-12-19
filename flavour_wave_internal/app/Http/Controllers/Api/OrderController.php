@@ -28,10 +28,36 @@ class OrderController extends Controller
     {
         $pId = request('product_id');
         if ($pId) {
-            $preorderCleanData = $request->validated();
-            Preorder::create($preorderCleanData);
+            $cleanData = $request->validated();
+
+            $keysForPreorder = [
+                'customer_id',
+                'order_id',
+                'location',
+                'order_quantity',
+                'is_urgent',
+                'capacity',
+                'truck_number',
+                'driver_nrc',
+                'date',
+                'delivered_quantity'
+            ];
+
+            $preorderData = [];
+
+            foreach ($keysForPreorder as $key) {
+                if (isset($cleanData[$key])) {
+                    $preorderData[$key] = $cleanData[$key];
+                }
+            }
+
+            Preorder::create($preorderData);
             foreach ($pId as $id) {
-                Product::find($id)->orders()->attach($request->order_id);
+                Product::find($id)->orders()->attach($request->order_id, [
+                    'product_id' => $id,
+                    'order_quantity' => $request->order_quantity,
+                    'total_price' => $request->total_price,
+                ]);
             }
             return response()->json([
                 'message' => 'create preorder is successful.'

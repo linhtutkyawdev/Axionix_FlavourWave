@@ -25,7 +25,18 @@ class PreorderRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'customer_id' => 'required',
+            'order_id' => 'required',
+            'location' => 'required',
+            'order_quantity' => 'required',
+            'is_urgent' => 'required',
+            'capacity' => '',
+            'track_number' => '',
+            'driver_nrc' => '',
+            'date' => '',
+            'delivered_quantity' => '',
+            'product_id' => 'required',
+            'total_price' => 'required',
         ];
     }
 
