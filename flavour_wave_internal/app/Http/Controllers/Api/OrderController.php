@@ -40,7 +40,8 @@ class OrderController extends Controller
                 'truck_number',
                 'driver_nrc',
                 'date',
-                'delivered_quantity'
+                'delivered_quantity',
+                'preorder_date'
             ];
 
             $preorderData = [];
