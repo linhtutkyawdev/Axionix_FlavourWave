@@ -35,6 +35,8 @@
 <x-backpack::menu-item title="Users" icon="la la-question" :link="backpack_url('user')" class=" text-secondary" />
 <x-backpack::menu-item title="Preorders" icon="la la-question" :link="backpack_url('preorder')"
     class=" text-secondary" />
+<x-backpack::menu-item title="Preorders Details" icon="la la-question" :link="backpack_url('preorder-detail')"
+    class=" text-secondary" />
 <x-backpack::menu-item title="Products" icon="la la-question" :link="backpack_url('product')" class=" text-secondary" />
 <x-backpack::menu-item title="Drivers" icon="la la-question" :link="backpack_url('driver')" class=" text-secondary" />
 </div>

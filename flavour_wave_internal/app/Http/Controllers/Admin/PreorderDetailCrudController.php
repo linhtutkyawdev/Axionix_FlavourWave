@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\PreorderRequest;
+use App\Http\Requests\PreorderDetailRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use App\Models\Preorder;
 
 /**
- * Class PreorderCrudController
+ * Class PreorderDetailCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class PreorderCrudController extends CrudController
+class PreorderDetailCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -27,9 +26,9 @@ class PreorderCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(Preorder::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/preorder');
-        CRUD::setEntityNameStrings('preorder', 'preorders');
+        CRUD::setModel(\App\Models\PreorderDetail::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/preorder-detail');
+        CRUD::setEntityNameStrings('preorder detail', 'preorder details');
     }
 
     /**
@@ -41,8 +40,6 @@ class PreorderCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
-        CRUD::addButtonFromView('line', 'accept_preorder', 'accept', 'beginning');
-        CRUD::orderButtons('line', ['accept_preorder', 'show', 'update', 'delete']);
 
         /**
          * Columns can be defined using the fluent syntax:
@@ -58,7 +55,7 @@ class PreorderCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(PreorderRequest::class);
+        CRUD::setValidation(PreorderDetailRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
@@ -76,10 +73,5 @@ class PreorderCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-    }
-
-    public function accept(string $id)
-    {
-        Preorder::where('id', $id)->update(['status' => 'success']);
     }
 }

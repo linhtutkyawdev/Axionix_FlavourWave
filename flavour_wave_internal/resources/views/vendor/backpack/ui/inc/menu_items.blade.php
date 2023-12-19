@@ -1,6 +1,6 @@
 {{-- This file is used for menu items by any Backpack v6 theme --}}
 <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{
-        trans('backpack::base.dashboard') }}</a></li>
+                trans('backpack::base.dashboard') }}</a></li>
 
 
 @switch(backpack_user()->department)
@@ -22,14 +22,13 @@
 <x-backpack::menu-item title="Drivers" icon="la la-cog" :link="backpack_url('driver')" />
 <x-backpack::menu-item title="Logisics" icon="la la-cog" :link="backpack_url('logisic')" />
 <x-backpack::menu-item title="Orders" icon="la la-cog" :link="backpack_url('order')" />
-<x-backpack::menu-item title="Preorder products" icon="la la-cog" :link="backpack_url('preorder-product')" />
 @break
 
 @case('SALE')
 <x-backpack::menu-item title="Users" icon="la la-user" :link="backpack_url('user')" />
 <x-backpack::menu-item title="Preorders" icon="la la-cog" :link="backpack_url('preorder')" />
+<x-backpack::menu-item title="Preorder details" icon="la la-cog" :link="backpack_url('preorder-detail')" />
 <x-backpack::menu-item title="Products" icon="la la-cog" :link="backpack_url('product')" />
-<x-backpack::menu-item title="Preorder products" icon="la la-cog" :link="backpack_url('preorder-product')" />
 <x-backpack::menu-item title="Drivers" icon="la la-cog" :link="backpack_url('driver')" />
 @break
 

@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Route;
 // Routes you generate using Backpack\Generators will be placed here.
 
 Route::group([
-    'prefix'     => config('backpack.base.route_prefix', 'admin'),
+    'prefix' => config('backpack.base.route_prefix', 'admin'),
     'middleware' => array_merge(
         (array) config('backpack.base.web_middleware', 'web'),
         (array) config('backpack.base.middleware_key', 'admin')
     ),
-    'namespace'  => 'App\Http\Controllers\Admin',
+    'namespace' => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
+    Route::get('preorder/{id}/accept', 'PreorderCrudController@accept');
     Route::crud('user', 'UserCrudController');
     Route::crud('product', 'ProductCrudController');
     Route::crud('driver', 'DriverCrudController');
@@ -27,4 +28,5 @@ Route::group([
     Route::crud('order', 'OrderCrudController');
     Route::crud('preorder-product', 'PreorderProductCrudController');
     Route::crud('warehouse', 'WarehouseCrudController');
+    Route::crud('preorder-detail', 'PreorderDetailCrudController');
 }); // this should be the absolute last line of this file
