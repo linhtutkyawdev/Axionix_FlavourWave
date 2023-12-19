@@ -2,9 +2,9 @@ import { create } from "zustand";
 
 type State = {
   driverNRC?: string;
-  trackNumber?: string;
+  truckNumber?: string;
   dateToPickUp?: Date;
-  trackCapacity?: string;
+  truckCapacity?: string;
   address: {
     distance: string;
     userLocation: string;
@@ -30,8 +30,8 @@ const useCheckoutStore = create<State & Action>((set) => ({
   },
   dateToPickUp: new Date(),
   driverNRC: "",
-  trackCapacity: "",
-  trackNumber: "",
+  truckCapacity: "",
+  truckNumber: "",
 
   onUpdateState: (newState: Partial<State>) =>
     set((state) => ({ ...state, ...newState })),

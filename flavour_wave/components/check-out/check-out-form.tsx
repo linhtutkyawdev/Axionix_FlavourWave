@@ -28,10 +28,10 @@ const CheckOutForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="trackNumber">Track No.</label>
+        <label htmlFor="truckNumber">truck No.</label>
         <input
-          id="trackNumber"
-          onChange={(e) => onUpdateState({ trackNumber: e.target.value })}
+          id="truckNumber"
+          onChange={(e) => onUpdateState({ truckNumber: e.target.value })}
           className={cn(
             "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           )}
@@ -42,7 +42,7 @@ const CheckOutForm = () => {
         <label htmlFor="capacity">Capacity</label>
         <input
           id="capacity"
-          onChange={(e) => onUpdateState({ trackCapacity: e.target.value })}
+          onChange={(e) => onUpdateState({ truckCapacity: e.target.value })}
           className={cn(
             "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           )}

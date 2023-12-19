@@ -33,8 +33,9 @@ export type CreatePreOrderType = {
   product_id: Array<number>;
   customer_id?: string;
   order_quantity: number;
-  delivered_quantity: number;
+  delivered_quantity?: number;
   order_id: string;
+  totalPrice: number;
 };
 
 const stripePromise = loadStripe(
@@ -49,7 +50,7 @@ const CheckOutPage = () => {
   const router = useRouter();
   const [isCheck, setIsCheck] = useState<boolean>(false);
   const { products } = useShoppingCartStore();
-  const { address, driverNRC, trackCapacity, trackNumber, dateToPickUp } =
+  const { address, driverNRC, truckCapacity, truckNumber, dateToPickUp } =
     useCheckoutStore();
 
   // total quantity
@@ -82,16 +83,16 @@ const CheckOutPage = () => {
         user &&
         (await createPreOrder({
           location: address.userLocation,
-          capacity: trackCapacity,
+          capacity: truckCapacity,
           customer_id: user.id,
-          delivered_quantity: totalQuantity,
           product_id: products.map((product) => product.id + 0),
           order_id: generateRandomString(7),
           order_quantity: totalQuantity,
           date: dateToPickUp,
           driver_nrc: driverNRC,
           is_urgent: driverNRC ? true : false,
-          truck_number: trackNumber,
+          truck_number: truckNumber,
+          totalPrice: Number.parseFloat(totalPrice),
         }))
       );
     },
