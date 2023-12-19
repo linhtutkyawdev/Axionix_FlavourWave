@@ -81,5 +81,9 @@ class PreorderCrudController extends CrudController
     public function accept(string $id)
     {
         Preorder::where('id', $id)->update(['status' => 'success']);
+        echo '
+        <script>
+            window.location="/preorder";
+        </script>';
     }
 }
