@@ -30,7 +30,7 @@ export type CreatePreOrderType = {
   date?: Date;
   capacity?: string;
   truck_number?: string;
-  product_id: Array<string>;
+  product_id: Array<number>;
   customer_id?: string;
   order_quantity: number;
   delivered_quantity: number;
@@ -85,7 +85,7 @@ const CheckOutPage = () => {
           capacity: trackCapacity,
           customer_id: user.id,
           delivered_quantity: totalQuantity,
-          product_id: products.map((product) => product.id.toString()),
+          product_id: products.map((product) => product.id),
           order_id: generateRandomString(7),
           order_quantity: totalQuantity,
           date: dateToPickUp,
