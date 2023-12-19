@@ -85,7 +85,7 @@ const CheckOutPage = () => {
           capacity: trackCapacity,
           customer_id: user.id,
           delivered_quantity: totalQuantity,
-          product_id: products.map((product) => product.id),
+          product_id: products.map((product) => product.id + 0),
           order_id: generateRandomString(7),
           order_quantity: totalQuantity,
           date: dateToPickUp,
