@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         // RawM_Purchase::factory(5)->create();
         // Driver::factory(5)->create();
         // Ingredient::factory(5)->create();
-        Logistic::factory(5)->create();
+        // Logistic::factory(5)->create();
         // Receipe::factory(5)->create();
         // Warehouse::factory(5)->create();
         // Product::factory(5)->create();
