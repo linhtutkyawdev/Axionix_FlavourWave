@@ -92,9 +92,7 @@ const CheckOutPage = () => {
           driver_nrc: driverNRC,
           is_urgent: driverNRC ? true : false,
           truck_number: truckNumber,
-          total_price:
-            Number.parseFloat(totalPrice) +
-            parseInt(address.distance, 10) * 1.5,
+          total_price: Number.parseFloat(totalPrice),
         }))
       );
     },
@@ -187,7 +185,7 @@ const CheckOutPage = () => {
           <div className="w-full flex items-center gap-x-4">
             <h3 className="text-lg md:text-xl font-semibold">Total Price:</h3>
             <h3 className="text-lg md:text-xl font-semibold flex items-center gap-1">
-              <DollarSign /> {totalPrice + parseInt(address.distance, 10) * 1.5}
+              <DollarSign /> {totalPrice}
             </h3>
           </div>
 
