@@ -6,7 +6,6 @@ use App\Http\Requests\PreorderRequest;
 use App\Models\Preorder;
 use App\Models\Product;
 use Carbon\Carbon;
-// use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
@@ -35,12 +34,12 @@ class OrderController extends Controller
                 'customer_id',
                 'order_id',
                 'location',
-                'order_quantity',
+                'total_price',
                 'is_urgent',
-                'capacity',
                 'truck_number',
-                'driver_nrc',
                 'date',
+                'capacity',
+                'driver_nrc',
                 'delivered_quantity',
             ];
 
@@ -58,7 +57,8 @@ class OrderController extends Controller
                 Product::find($id)->orders()->attach($request->order_id, [
                     'product_id' => $id,
                     'order_quantity' => $request->order_quantity,
-                    'total_price' => $request->total_price,
+                    'delivered_quantity' => $request->delivered_quantity,
+                    'preorder_date'
                 ]);
             }
             return response()->json([

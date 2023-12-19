@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,15 +15,13 @@ return new class extends Migration
             $table->string('customer_id');
             $table->string('order_id')->unique();
             $table->text('location');
-            $table->integer('order_quantity');
-            $table->timestamp('preorder_date');
-            $table->boolean('is_urgent')->nullable();
+            $table->integer('total_price');
+            $table->boolean('is_urgent')->default(false);
             $table->string('truck_number')->nullable();
             $table->string('date')->nullable();
             $table->integer('capacity')->nullable();
             $table->string('driver_nrc')->nullable();
             $table->string('status')->default('pending');
-            $table->integer('delivered_quantity')->default(0);
             $table->text('cancel_reason')->nullable();
             $table->timestamps();
         });
