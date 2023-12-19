@@ -37,17 +37,24 @@ const Banner = () => {
             </Button>
             <div className="mt-3">
               <h2>Reviews</h2>
-              <div className="my-2 flex ">
+              <div className="my-2 flex gap-2">
                 <Avatar>
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
+                    src="https://avatars.githubusercontent.com/u/128688572?v=4"
+                    alt="@linhtutkyawdev"
                   />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>LHK</AvatarFallback>
                 </Avatar>
                 <Avatar>
                   <AvatarImage
                     src="https://avatars.githubusercontent.com/u/134714087?v=4"
+                    alt="@shadcn"
+                  />
+                  <AvatarFallback>AKM</AvatarFallback>
+                </Avatar>
+                <Avatar>
+                  <AvatarImage
+                    src="https://github.com/shadcn.png"
                     alt="@shadcn"
                   />
                   <AvatarFallback>CN</AvatarFallback>
