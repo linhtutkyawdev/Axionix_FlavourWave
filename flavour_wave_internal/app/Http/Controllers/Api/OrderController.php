@@ -51,14 +51,13 @@ class OrderController extends Controller
                 }
             }
 
-            $preorderData["preorder_date"] = Carbon::now();
             Preorder::create($preorderData);
             foreach ($pId as $id) {
                 Product::find($id)->orders()->attach($request->order_id, [
                     'product_id' => $id,
                     'order_quantity' => $request->order_quantity,
                     'delivered_quantity' => $request->delivered_quantity,
-                    'preorder_date'
+                    'preorder_date' => Carbon::now(),
                 ]);
             }
             return response()->json([
