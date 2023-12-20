@@ -111,7 +111,6 @@
             </div>
             <div class="col-lg-4">
                 <div class="card card-chart">
-                    drop down to choose product
                     <div class="card-header">
                         <h5 class="card-category">In Stock</h5>
                         <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> 12,100 boxes</h3>

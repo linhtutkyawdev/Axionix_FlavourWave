@@ -9,10 +9,7 @@ export interface IUser {
 }
 
 export async function initialSetup(user: IUser) {
-  const customer = await getCustomer(user.customer_id);
-
-  console.log("CUS:" + customer);
-
+  const customer = (await getCustomer(user.customer_id))?.customers[0];
   if (customer) {
     return customer;
   } else {
