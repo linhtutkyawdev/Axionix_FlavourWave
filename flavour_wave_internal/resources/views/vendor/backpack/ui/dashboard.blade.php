@@ -13,6 +13,7 @@
     @switch(backpack_user()->department)
     @case('ADMIN')
     <x-backpack::menu-item title="Users" icon="la la-question" :link="backpack_url('user')" class=" text-secondary" />
+    <x-backpack::menu-item title="Logout" icon="la la-logout" :link="backpack_url('logout')" class=" text-secondary" />
 </div>
 <x-admin />
 @break
@@ -20,6 +21,7 @@
 @case('FACTORY')
 <x-backpack::menu-item title="Users" icon="la la-question" :link="backpack_url('user')" class=" text-secondary" />
 <x-backpack::menu-item title="Products" icon="la la-question" :link="backpack_url('product')" class=" text-secondary" />
+<x-backpack::menu-item title="Logout" icon="la la-logout" :link="backpack_url('logout')" class=" text-secondary" />
 </div>
 <x-factory />
 @break
@@ -27,6 +29,7 @@
 @case('LOGISTIC')
 <x-backpack::menu-item title="Users" icon="la la-question" :link="backpack_url('user')" class=" text-secondary" />
 <x-backpack::menu-item title="Drivers" icon="la la-question" :link="backpack_url('driver')" class=" text-secondary" />
+<x-backpack::menu-item title="Logout" icon="la la-logout" :link="backpack_url('logout')" class=" text-secondary" />
 </div>
 <x-logistic />
 @break
@@ -39,13 +42,15 @@
     class=" text-secondary" />
 <x-backpack::menu-item title="Products" icon="la la-question" :link="backpack_url('product')" class=" text-secondary" />
 <x-backpack::menu-item title="Drivers" icon="la la-question" :link="backpack_url('driver')" class=" text-secondary" />
+<x-backpack::menu-item title="Logout" icon="la la-logout" :link="backpack_url('logout')" class=" text-secondary" />
 </div>
 <x-sale />
 @break
 
 @case('WAREHOUSE')
 <x-backpack::menu-item title="Users" icon="la la-question" :link="backpack_url('user')" class=" text-secondary" />
-<x-backpack::menu-item title="Drivers" icon="la la-question" :link="backpack_url('driver')" class=" text-secondary" />>
+<x-backpack::menu-item title="Drivers" icon="la la-question" :link="backpack_url('driver')" class=" text-secondary" />
+<x-backpack::menu-item title="Logout" icon="la la-logout" :link="backpack_url('logout')" class=" text-secondary" />
 </div>
 <x-warehouse />
 @break
